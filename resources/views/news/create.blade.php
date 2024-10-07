@@ -1,6 +1,15 @@
 @extends('layout.main')
 @section('content')
 
+<style>
+    .custom-option {
+        background-color: #fff;
+        /* or any other color you prefer */
+        color: #333;
+        /* or any other text color you prefer */
+    }
+</style>
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -12,7 +21,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Create Berita</li>
+                        <li class="breadcrumb-item active">{{ $pagetitle }}</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -35,29 +44,44 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form>
+                            <form style="align-content: center;">
                                 <div class="card-body">
+                                    <div class="form-group mb-3">
+                                        <div class="form-group-prepend">
+                                            <label for="image">Upload</label>
+                                        </div>
+                                        <div class="custom-file">
+                                            <input type="file" name="image" class="custom-file-input" id="image">
+                                            <label class="custom-file-label" for="image">Choose file</label>
+                                        </div>
+                                        @error('image')
+                                        <small>{{ $message }}</small>
+                                        @enderror
+                                    </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Title</label>
-                                        <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="name">
+                                        <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="title">
                                         @error('title')
                                         <small>{{ $message }}</small>
                                         @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputPassword1">Isi Berita</label>
-                                        <textarea name="content" id="content"></textarea>
+                                        <textarea name="content" id="editor" class="form-control"></textarea>
                                         @error('content')
                                         <small>{{ $message }}</small>
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="category_id">Category:</label>
-                                        <select id="category_id" name="category_id">
+                                        <div class="form-group-prepend">
+                                            <label for="category_id">Category:</label>
+                                        </div>
+                                        <select class="btn btn-primary dropdown-toggle " id="category_id" name="category_id">
                                             @foreach($categories as $d)
-                                            <option value="{{ $d->id }}">{{ $d->name }}</option>
+                                            <option class="dropdown-item custom-option" value="{{ $d->id }}">{{ $d->name }}</option>
                                             @endforeach
                                         </select><br><br>
+
                                         @error('category_id')
                                         <small>{{ $message }}</small>
                                         @enderror
@@ -76,5 +100,6 @@
     </section>
     <!-- /.content -->
 </div>
+
 
 @endsection

@@ -20,12 +20,12 @@ class AuthController extends Controller
     public function proses_login(Request $request)
     {
         $request->validate([
-            'email' => 'required',
+            'name' => 'required',
             'password' => 'required'
         ]);
 
         $data = [
-            'email' => $request->email,
+            'name' => $request->name,
             'password' => $request->password,
         ];
 
@@ -34,7 +34,7 @@ class AuthController extends Controller
         } else {
             // return redirect()->route('login')->with('error');
             // return redirect()->route('dashboard');
-            Session::flash('error', 'Email atau password salah');
+            Session::flash('error', 'name atau password salah');
             return redirect()->back()->withInput();
         }
     }

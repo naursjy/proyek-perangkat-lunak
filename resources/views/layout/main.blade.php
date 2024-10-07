@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AdminLTE 3 | Dashboard</title>
 
+
+    <!-- //favicon -->
+    <link rel="shortcut icon" href="{{ 'asset(favicon/icon.png)' }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('favicon/icon.png') }}" type="image/x-icon">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
@@ -26,6 +30,11 @@
     <link rel="stylesheet" href="{{ asset('lte/plugins/daterangepicker/daterangepicker.css') }}">
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('lte/plugins/summernote/summernote-bs4.min.css') }}">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpdmOHSUnXTr9Q4iUds+Wl5NzVs+sm2X/VzV5SglNPhCegnar4TQ69K4GT+3n5OZXdTqkq==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- ckeditor -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.3.1/classic/ckeditor.js"></script>
+    <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.1.0/ckeditor5.css">
     @yield('css')
 </head>
 
@@ -215,7 +224,9 @@
 
                         <li class="nav-item">
                             <a href="{{ route('dashboard') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
+                                <!-- <i class="fa fa-home" aria-hidden="true"></i> -->
+                                <i class="fas fa-clipboard-list"></i>
+                                <!-- <i class="nav-icon fas fa-th"></i> -->
                                 <p>
                                     Dashboard
                                     <!-- <span class="right badge badge-danger">New</span> -->
@@ -224,7 +235,9 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
+                                <!-- <i class="fa fa-user"></i> -->
+                                <i class="fas fa-user"></i>
+                                <!-- <i class="nav-icon fas fa-th"></i> -->
                                 <p>
                                     User
                                     <!-- <span class="right badge badge-danger">New</span> -->
@@ -232,28 +245,31 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('logout') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Logout
-                                    <!-- <span class="right badge badge-danger">New</span> -->
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="{{ route('category.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="fas fa-list-alt"></i>
+                                <!-- <i class="nav-icon fas fa-th"></i> -->
                                 <p>
-                                    category
+                                    Kategori
                                     <!-- <span class="right badge badge-danger">New</span> -->
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('news.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="fas fa-newspaper"></i>
+                                <!-- <i class="nav-icon fas fa-th"></i> -->
                                 <p>
                                     News
+                                    <!-- <span class="right badge badge-danger">New</span> -->
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('logout') }}" class="nav-link">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <!-- <i class="nav-icon fas fa-th"></i> -->
+                                <p>
+                                    Logout
                                     <!-- <span class="right badge badge-danger">New</span> -->
                                 </p>
                             </a>
@@ -318,7 +334,49 @@
     <script src="{{ asset ('lte/dist/js/demo.js') }}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{{ asset ('lte/dist/js/pages/dashboard.js') }}"></script>
+    <!-- ckeditor -->
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'), {
+                // Konfigurasi lainnya
+                readOnly: true
+            })
+            .catch(error => {
+                console.error(error);
+            })
+            .then(editor => {
+                window.editor = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 
+    <!-- javascrip -->
+    <script>
+        const inputFile = document.getElementById('image');
+        const fileLabel = document.querySelector('.custom-file-label');
+
+        inputFile.addEventListener('change', (e) => {
+            const fileName = e.target.files[0].name;
+            fileLabel.textContent = fileName;
+        });
+    </script>
+
+    <script>
+        // Function to preview image
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                var output = document.getElementById('preview-image');
+                output.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        // Add event listener to the image input
+        document.getElementById('image').addEventListener('change', previewImage);
+    </script>
     @yield('scripts')
 </body>
 

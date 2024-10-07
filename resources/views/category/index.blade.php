@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Dashboard</h1>
+                    <h1 class="m-0">{{ $pagetitle }}</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Data User Admin</li>
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                        <li class="breadcrumb-item active">{{ $pagetitle }}</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -53,6 +53,7 @@
                                         <th>No</th>
                                         <th>Kategory</th>
                                         <th>slug</th>
+                                        <th>action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -61,6 +62,10 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $d->name }}</td>
                                         <td>{{ $d->slug }}</td>
+                                        <td colspan="2">
+                                            <a href="{{ route ('category.edit', ['id' => $d->id]) }}" class="btn btn-primary custom-btn"><i class="fas fa-pen"></i> Edit</a>
+
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>

@@ -29,14 +29,14 @@
                 <form action="{{ route('proses-login') }}" method="post">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="email" name="email" class="form-control" placeholder="Email">
+                        <input type="name" name="name" class="form-control" placeholder="name">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
                             </div>
                         </div>
                     </div>
-                    @error('email')
+                    @error('name')
                     <small>{{ $message }}</small>
                     @enderror
                     <div class="input-group mb-3">

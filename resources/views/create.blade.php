@@ -38,7 +38,7 @@
                             <form>
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Profile Photo</label>
+                                        <label for="image">Profile Photo</label>
                                         <input type="file" name="image" class="form-control" id="exampleInputEmail1" placeholder="chose image">
                                         @error('image')
                                         <small>{{ $message }}</small>

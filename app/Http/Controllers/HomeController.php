@@ -40,6 +40,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $data = new User;
+        $pagetitle = 'Users';
 
         if ($request->get('search')) {
             $data = User::where('name', 'like', '%' . $request->get('search') . '%')
@@ -48,7 +49,7 @@ class HomeController extends Controller
 
         $data = $data->get();
 
-        return view('index', compact('data', 'request'));
+        return view('index', compact('data', 'request', 'pagetitle'));
     }
 
     public function create()

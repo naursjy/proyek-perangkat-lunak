@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Dashboard</h1>
+                    <h1 class="m-0">Data Admin</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Data User Admin</li>
+                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                        <li class="breadcrumb-item active">{{ $pagetitle }}</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -52,8 +52,8 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Photo</th>
-                                        <th>NIK</th>
-                                        <th>Nama</th>
+                                        <th>NIDN</th>
+                                        <th>Nama Pengelola</th>
                                         <th>Email</th>
                                         <th>Action</th>
                                     </tr>

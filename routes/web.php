@@ -56,16 +56,29 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 });
 Route::prefix('category')->group(function () {
     Route::get('/index', [CategoryController::class, 'index'])->name('category.index');
+
     Route::get('/create', [CategoryController::class, 'create'])->name('category.create');
     Route::post('/store', [CategoryController::class, 'store'])->name('category.store');
-    // Route::get('/index', 'CategoryController@index')->name('category.index');
+
+    //route edit
+    Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+    Route::match(['get', 'PUT'], '/ubah/{id}', [CategoryController::class, 'ubah'])->name('category.ubah');
+    //route delete
     // Add more routes here...
 });
 
 Route::prefix('news')->group(function () {
+    Route::get('/pagetitle', 'NewsController@pagetitle')->name('news.pagetitle');
+
     Route::get('/index', [NewsController::class, 'index'])->name('news.index');
+    //route create
     Route::get('/create', [NewsController::class, 'create'])->name('news.create');
     Route::post('/store', [NewsController::class, 'store'])->name('news.store');
-    // Route::get('/index', 'CategoryController@index')->name('category.index');
-    // Add more routes here...
+    //route edit
+    Route::get('/edit/{id}', [NewsController::class, 'edit'])->name('news.edit');
+    Route::put('/update/{id}', [NewsController::class, 'update'])->name('news.update');
+    //route delete
+    Route::get('/delete/{id}', [NewsController::class, 'delete'])->name('news.delete');
+    //route detail data
+    Route::get('/read/{id}', [NewsController::class, 'read'])->name('news.read');
 });
