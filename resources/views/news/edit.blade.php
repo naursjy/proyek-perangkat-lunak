@@ -66,6 +66,13 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
+                                        <label for="exampleInputEmail1">Tanggal</label>
+                                        <input type="date" name="date" class="form-control" id="title" placeholder="Enter title" value="{{ $news->date }}">
+                                        @error('date')
+                                        <small>{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
                                         <label for="exampleInputEmail1">Konten</label>
                                         <textarea name="content" class="form-control" id="editor">{{ $news->content }}</textarea>
                                         @error('content')

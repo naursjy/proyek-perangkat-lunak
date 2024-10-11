@@ -12,7 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('m_news', function (Blueprint $table) {
-            $table->date('date')->after('id')->nullable();
+            $table->dropColumn('user_id');
+        });
+        Schema::table('m_news', function (Blueprint $table) {
+            // $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
+            // $table->foreign('user_id', 'm_news_user_id_foreign')->references('id')->on('users');
         });
     }
 

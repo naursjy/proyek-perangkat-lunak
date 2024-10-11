@@ -5,6 +5,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DataTableController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\ViewsController;
+use Illuminate\Routing\ViewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +23,11 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('home');
 // }); proses-login
+
+//views user halaman utama
+Route::get('/tampilan', [ViewsController::class, 'tampilan'])->name('tampilan');
+
+
 
 //proses login
 Route::get('/login', [AuthController::class, 'index'])->name('login');

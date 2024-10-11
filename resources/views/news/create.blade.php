@@ -40,7 +40,7 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Kategory Adding</h3>
+                                <h3 class="card-title">Up Bertia Terbaru</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
@@ -62,6 +62,13 @@
                                         <label for="exampleInputEmail1">Title</label>
                                         <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="title">
                                         @error('title')
+                                        <small>{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Tanggal Pembuatan</label>
+                                        <input type="date" name="date" class="form-control" id="exampleInputEmail1" placeholder="date">
+                                        @error('date')
                                         <small>{{ $message }}</small>
                                         @enderror
                                     </div>

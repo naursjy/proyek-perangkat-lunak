@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 class HomeController extends Controller
 {
 
+
     public function __construct()
     {
         //atau menggunakan role

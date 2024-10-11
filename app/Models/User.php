@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(M_ktp::class);
     }
+
+    public function news()
+    {
+        return $this->hasMany(M_news::class, 'user_id');
+    }
 }

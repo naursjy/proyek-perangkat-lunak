@@ -88,6 +88,8 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Titile</th>
+                                        <th>Tanggal</th>
+                                        <th>Pembuat</th>
                                         <th>Gambar</th>
                                         <th>Kategory</th>
                                         <th class="col-md-3">ISI</th>
@@ -99,6 +101,8 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $d->title }}</td>
+                                        <td>{{ $d->date }}</td>
+                                        <td>{{ optional($d->user)->name }}</td>
                                         <td><img src="{{ asset('storage/photo-news/'.$d->image) }}" alt="" width="100"></td>
                                         <td>{{ $d->category->name }}</td>
                                         <td id="news-content">{!! Str::words($d->content, 20) !!}</td>

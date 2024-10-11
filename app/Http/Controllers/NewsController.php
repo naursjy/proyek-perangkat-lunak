@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\M_categories;
 use App\Models\M_news;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -19,7 +21,10 @@ class NewsController extends Controller
 
     public function index()
     {
-        $news = M_news::all();
+
+        $news = M_news::where('user_id', Auth::id())
+            ->orWhereNull('user_id')
+            ->get();
         $pagetitle = 'Berita Terkini';
         return view('news.index', compact('news', 'pagetitle'));
     }
@@ -37,6 +42,7 @@ class NewsController extends Controller
             'image' => 'required|mimes:png,jpg,jpeg|max:2048',
             'title' => 'required',
             'content' => 'required',
+            'date' => 'required',
             'category_id' => 'required', // add this
         ]);
 
@@ -50,11 +56,13 @@ class NewsController extends Controller
 
         Storage::disk('public')->put($path, file_get_contents($image));
 
-
+        // $user = auth()->user();
         $data['title']       = $request->title;
         $data['content']     = $request->content;
         $data['category_id'] = $request->category_id;
         $data['image']       = $filename;
+        $data['date']        = date('Y-m-d', strtotime($request->date));
+        $data['user_id']     = Auth::user()->id;
 
         M_news::create($data);
 
@@ -76,6 +84,7 @@ class NewsController extends Controller
             'image' => 'nullable|mimes:png,jpg,jpeg|max:2048',
             'title' => 'required',
             'content' => 'required',
+            'date' => 'required',
             'category_id' => 'required', // add this
         ]);
         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
@@ -83,6 +92,8 @@ class NewsController extends Controller
         $data['title'] = $request->title;
         $data['content'] = $request->input('content');
         $data['category_id'] = $request->category_id;
+        $data['date']        = date('Y-m-d', strtotime($request->date));
+        $data['user_id']     = Auth::user()->id;
 
         $image = $request->file('image');
         if ($image) {
