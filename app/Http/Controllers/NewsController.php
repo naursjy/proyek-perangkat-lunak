@@ -19,21 +19,47 @@ class NewsController extends Controller
     //     return view('berita_terkini', compact('pagetitle'));
     // }
 
-    public function index()
+    public function index(Request $request)
     {
-
+        // $data = new M_news();
+        $user = Auth::user();
         $news = M_news::where('user_id', Auth::id())
             ->orWhereNull('user_id')
             ->get();
+        // if ($request->get('search')) {
+        //     $data = M_news::where('title', 'like', '%' . $request->get('search') . '%');
+        // }
         $pagetitle = 'Berita Terkini';
-        return view('news.index', compact('news', 'pagetitle'));
+        // $data = $data->get();
+        return view('news.index', compact('news', 'pagetitle', 'user'));
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $pagetitle = 'Berita Terkini';
+        $user = Auth::user();
+
+        $news = M_news::where(function ($query) use ($search) {
+            $query->where('title', 'like', '%' . $search . '%')
+                ->orWhere('content', 'like', '%' . $search . '%');
+        })
+            ->orWhereHas('category', function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->orWhereHas('user', function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->get();
+        return view('news.index', compact('news', 'search', 'pagetitle', 'user'));
     }
 
     public function create()
     {
+        $user = Auth::user();
         $categories = M_categories::all();
         $pagetitle = 'Tambah Data Berita';
-        return view('news.create', compact('categories', 'pagetitle'));
+        return view('news.create', compact('categories', 'pagetitle', 'user'));
     }
 
     public function store(Request $request)
@@ -63,6 +89,7 @@ class NewsController extends Controller
         $data['image']       = $filename;
         $data['date']        = date('Y-m-d', strtotime($request->date));
         $data['user_id']     = Auth::user()->id;
+        $user = Auth::user();
 
         M_news::create($data);
 
@@ -71,10 +98,11 @@ class NewsController extends Controller
 
     public function edit(Request $request, $id)
     {
+        $user = Auth::user();
         $news = M_news::findOrFail($id);
         $categories = M_categories::all();
         $pagetitle = 'Edit Data Berita';
-        return view('news.edit', compact('news', 'categories', 'pagetitle'));
+        return view('news.edit', compact('news', 'categories', 'pagetitle', 'user'));
     }
 
     public function update(Request $request,  $id)
@@ -120,9 +148,10 @@ class NewsController extends Controller
     }
     public function read(Request $request, $id)
     {
+        $user = Auth::user();
         $data = M_news::find($id);
         $categories = M_categories::all();
         $pagetitle = 'Detail Data Berita';
-        return view('news.read', compact('data', 'categories', 'pagetitle'));
+        return view('news.read', compact('data', 'categories', 'pagetitle', 'user'));
     }
 }

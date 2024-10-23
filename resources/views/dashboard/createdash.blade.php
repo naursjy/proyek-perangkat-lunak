@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Adding Data</h1>
+                    <h1 class="m-0">Dashborad Data</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">User</li>
+                        <li class="breadcrumb-item active">Dashboard</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -23,7 +23,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <form action="{{ route('store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('dash.buat') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <!-- left column -->
@@ -31,37 +31,42 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Quick Example</h3>
+                                <h3 class="card-title">Dashboard View</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
                             <form>
                                 <div class="card-body">
-                                    <div class="form-group">
-                                        <label for="image">Profile Photo</label>
-                                        <input type="file" name="image" class="form-control" id="exampleInputEmail1" placeholder="chose image">
+                                    <div class="form-group mb-3">
+                                        <div class="form-group-prepend">
+                                            <label for="image">Logo</label>
+                                        </div>
+                                        <div class="custom-file">
+                                            <input type="file" name="image" class="custom-file-input" value="{{ old('image') }}" id="image">
+                                            <label class="custom-file-label" for="image">Choose file</label>
+                                        </div>
                                         @error('image')
                                         <small>{{ $message }}</small>
                                         @enderror
                                     </div>
+                                    <!-- <div class="form-group">
+                                        <label for="image">Logo</label>
+                                        <input type="file" name="image" class="form-control" id="exampleInputEmail1" placeholder="chose image">
+                                        @error('image')
+                                        <small>{{ $message }}</small>
+                                        @enderror
+                                    </div> -->
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Email</label>
-                                        <input type="email" name="email" class="form-control" id="exampleInputEmail1" value="{{ old('email') }}" placeholder="Enter email">
-                                        @error('email')
+                                        <label for="exampleInputEmail1">Judul</label>
+                                        <input type="title" name="title" class="form-control" id="exampleInputEmail1" value="{{ old('title') }}" placeholder="Enter Title">
+                                        @error('title')
                                         <small>{{ $message }}</small>
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Nama</label>
-                                        <input type="text" name="name" class="form-control" id="exampleInputEmail1" value="{{ old('name') }}" placeholder="Enter Name">
-                                        @error('nama')
-                                        <small>{{ $message }}</small>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Password</label>
-                                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                                        @error('password')
+                                        <label for="exampleInputEmail1">Instansi</label>
+                                        <input type="instansi" name="instansi" class="form-control" id="exampleInputEmail1" value="{{ old('instansi') }}" placeholder="Enter Instansis">
+                                        @error('instansi')
                                         <small>{{ $message }}</small>
                                         @enderror
                                     </div>

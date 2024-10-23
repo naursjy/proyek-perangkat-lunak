@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\m_dashboard;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
@@ -27,22 +29,12 @@ class HomeController extends Controller
         //jika dibuat seperti ini tidak akan bisa
         // $this->middleware(['role:admin|write', 'permission:view_dashboard']);
     }
-    public function dashboard()
-    {
-        // dd(auth()->user()->getRoleNames());
-
-        // if (auth()->user()->can('view_dashboard')) {
-
-        return view('dashboard');
-        // }
-        return abort(403);
-    }
 
     public function index(Request $request)
     {
         $data = new User;
         $pagetitle = 'Users';
-
+        $user = Auth::user();
         if ($request->get('search')) {
             $data = User::where('name', 'like', '%' . $request->get('search') . '%')
                 ->orWhere('email', 'like', '%' . $request->get('search') . '%');
@@ -50,12 +42,13 @@ class HomeController extends Controller
 
         $data = $data->get();
 
-        return view('index', compact('data', 'request', 'pagetitle'));
+        return view('index', compact('data', 'request', 'pagetitle', 'user'));
     }
 
     public function create()
     {
-        return view('create');
+        $user = Auth::user();
+        return view('create', compact('user'));
     }
 
     public function store(Request $request)
@@ -73,6 +66,7 @@ class HomeController extends Controller
         $image = $request->file('image');
         $filename = date('Y-m-d') . $image->getClientOriginalName();
         $path = 'photo-user/' . $filename;
+        $user = Auth::user();
 
         Storage::disk('public')->put($path, file_get_contents($image));
 
@@ -85,14 +79,15 @@ class HomeController extends Controller
 
         User::create($data);
 
-        return redirect()->route('index');
+        return redirect()->route('index', compact('user'));
     }
 
     public function update(Request $request, $id)
     {
         $data = User::find($id);
+        $user = Auth::user();
 
-        return view('update', compact('data'));
+        return view('update', compact('data', 'user'));
     }
 
     public function edit(Request $request, $id)
@@ -110,6 +105,7 @@ class HomeController extends Controller
 
         $data['email']      = $request->email;
         $data['name']       = $request->name;
+        $user = Auth::user();
 
 
         if ($request->password) {
@@ -134,21 +130,23 @@ class HomeController extends Controller
         }
         $find->update($data);
 
-        return redirect()->route('index');
+        return redirect()->route('index', compact('user'));
     }
 
     public function delete(Request $request, $id)
     {
+        $user = Auth::user();
         $data = User::find($id);
         if ($data) {
             $data->delete();
         }
-        return redirect()->route('index');
+        return redirect()->route('index', compact('user'));
     }
     public function detail(Request $request, $id)
     {
+        $user = Auth::user();
         $data = User::find($id);
 
-        return view('detail', compact('data'));
+        return view('detail', compact('data', 'user'));
     }
 }

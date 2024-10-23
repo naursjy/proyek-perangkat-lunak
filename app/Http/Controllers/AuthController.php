@@ -30,7 +30,7 @@ class AuthController extends Controller
         ];
 
         if (Auth::attempt($data)) {
-            return redirect()->route('dashboard');
+            return redirect()->route('dash.dashboard');
         } else {
             // return redirect()->route('login')->with('error');
             // return redirect()->route('dashboard');

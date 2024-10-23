@@ -1,6 +1,38 @@
 @extends('layout.views')
 @section('isi')
 
+<style>
+    .berita-aside {
+        background-color: #f7f7f7;
+        padding: 20px;
+        border: 1px solid #ddd;
+        margin-top: 20px;
+    }
+
+    .berita-aside h3 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .berita-aside ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .berita-aside li {
+        margin-bottom: 10px;
+    }
+
+    .berita-aside a {
+        text-decoration: none;
+        color: #337ab7;
+    }
+
+    .berita-aside a:hover {
+        color: #23527c;
+    }
+</style>
 
 <!-- Hero Section -->
 <section id="hero" class="hero section dark-background">
@@ -8,20 +40,23 @@
     <div class="container">
         <div class="row gy-4">
             <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center" data-aos="zoom-out">
-                <h1>Pusat Penelitian dan Pengabdian Masyarakat</h1>
-                <p>Politeknik Balekambang Jepara</p>
+                @foreach($dash as $d)
+                <h1>{{ $d->title }}</h1>
+                <p>{{ $d->instansi }}</p>
                 <div class="d-flex">
                     <a href="#about" class="btn-get-started">Publikasi</a>
                     <!-- <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a> -->
                 </div>
             </div>
             <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="200">
-                <img src="{{ asset ('mte/assets/img/hero-img.png') }}" class="img-fluid animated" alt="">
+                <img src="{{ asset('storage/photo-dash/'.$d->image) }}" class="img-fluid animated" alt="">
             </div>
+            @endforeach
         </div>
     </div>
 
 </section><!-- /Hero Section -->
+
 
 <!-- Clients Section -->
 <section id="clients" class="clients section light-background">
@@ -67,14 +102,14 @@
                 }
             </script>
             <div class="swiper-wrapper align-items-center">
-                <div class="swiper-slide"><img src="assets/img/clients/client-1.png" class="img-fluid" alt=""></div>
-                <div class="swiper-slide"><img src="assets/img/clients/client-2.png" class="img-fluid" alt=""></div>
-                <div class="swiper-slide"><img src="assets/img/clients/client-3.png" class="img-fluid" alt=""></div>
-                <div class="swiper-slide"><img src="assets/img/clients/client-4.png" class="img-fluid" alt=""></div>
-                <div class="swiper-slide"><img src="assets/img/clients/client-5.png" class="img-fluid" alt=""></div>
-                <div class="swiper-slide"><img src="assets/img/clients/client-6.png" class="img-fluid" alt=""></div>
-                <div class="swiper-slide"><img src="assets/img/clients/client-7.png" class="img-fluid" alt=""></div>
-                <div class="swiper-slide"><img src="assets/img/clients/client-8.png" class="img-fluid" alt=""></div>
+                <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/balekambang.jpg') }}" class="img-fluid" alt=""></div>
+                <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/polibang.png') }}" class="img-fluid" alt=""></div>
+                <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/ponpes.jpg') }}" class="img-fluid" alt=""></div> -->
+                <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-4.png') }}" class="img-fluid" alt=""></div> -->
+                <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-5.png') }}" class="img-fluid" alt=""></div> -->
+                <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-6.png') }}" class="img-fluid" alt=""></div> -->
+                <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-7.png') }}" class="img-fluid" alt=""></div> -->
+                <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-8.png') }}" class="img-fluid" alt=""></div> -->
             </div>
         </div>
 
@@ -87,13 +122,11 @@
 
     <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
-        <h2>About Us</h2>
+        <h2>Penelitian dan Pengabdian Masyarakat</h2>
     </div><!-- End Section Title -->
 
     <div class="container">
-
-        <div class="row gy-4">
-
+        <div class="row gy-3">
             <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
@@ -105,17 +138,42 @@
                     <li><i class="bi bi-check2-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo</span></li>
                 </ul>
             </div>
-
             <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                <p>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
-                <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+                <!-- <div class="sidebar">
+                    <div class="col-lg-5" data-aos="fade-up" data-aos-delay="200">
+                        <aside class="berita-aside">
+                            <h3>Berita Terbaru</h3>
+                            <ul>
+                                <li><a href="#">Berita 1</a></li>
+                                <li><a href="#">Berita 2</a></li>
+                                <li><a href="#">Berita 3</a></li>
+                                <li><a href="#">Berita 4</a></li>
+                                <li><a href="#">Berita 5</a></li>
+                            </ul>
+                        </aside>
+                    </div>
+                </div> -->
+                <!-- <p>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p> -->
+                <strong>Baca Lebih Banyak Mengenai Kami</strong> <br>
+                <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a> <br>
+                <div><br></div>
+                <!-- <a href="#" class="read-more"><span>Jurnal</span><i class="bi bi-arrow-right"></i></a> -->
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                    <!-- <p>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p> -->
+                    <!-- <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a> <br> -->
+                    <strong>Jurnal Penelitian dan Pengabdian</strong>
+                    <a href="#" class="read-more"><span>Jurnal</span><i class="bi bi-arrow-right"></i></a>
+                </div>
             </div>
+
 
         </div>
 
     </div>
 
 </section><!-- /About Section -->
+
+
 
 <!-- Why Us Section -->
 <section id="why-us" class="section why-us light-background" data-builder="section">
@@ -165,7 +223,7 @@
             </div>
 
             <div class="col-lg-5 order-1 order-lg-2 why-us-img">
-                <img src="assets/img/why-us.png" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="100">
+                <img src="{{ asset('mte/assets/img/why-us.png') }}" class="img-fluid" alt="" data-aos="zoom-in" data-aos-delay="100">
             </div>
         </div>
 
@@ -428,7 +486,7 @@
     <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
         <h2>Team</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <p>Pengelola</p>
     </div><!-- End Section Title -->
 
     <div class="container">
@@ -509,186 +567,7 @@
 
 </section><!-- /Team Section -->
 
-<!-- Pricing Section -->
-<section id="pricing" class="pricing section light-background">
 
-    <!-- Section Title -->
-    <div class="container section-title" data-aos="fade-up">
-        <h2>Pricing</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-    </div><!-- End Section Title -->
-
-    <div class="container">
-
-        <div class="row gy-4">
-
-            <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="100">
-                <div class="pricing-item">
-                    <h3>Free Plan</h3>
-                    <h4><sup>$</sup>0<span> / month</span></h4>
-                    <ul>
-                        <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
-                        <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
-                        <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
-                        <li class="na"><i class="bi bi-x"></i> <span>Pharetra massa massa ultricies</span></li>
-                        <li class="na"><i class="bi bi-x"></i> <span>Massa ultricies mi quis hendrerit</span></li>
-                    </ul>
-                    <a href="#" class="buy-btn">Buy Now</a>
-                </div>
-            </div><!-- End Pricing Item -->
-
-            <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="200">
-                <div class="pricing-item featured">
-                    <h3>Business Plan</h3>
-                    <h4><sup>$</sup>29<span> / month</span></h4>
-                    <ul>
-                        <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
-                        <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
-                        <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
-                        <li><i class="bi bi-check"></i> <span>Pharetra massa massa ultricies</span></li>
-                        <li><i class="bi bi-check"></i> <span>Massa ultricies mi quis hendrerit</span></li>
-                    </ul>
-                    <a href="#" class="buy-btn">Buy Now</a>
-                </div>
-            </div><!-- End Pricing Item -->
-
-            <div class="col-lg-4" data-aos="zoom-in" data-aos-delay="300">
-                <div class="pricing-item">
-                    <h3>Developer Plan</h3>
-                    <h4><sup>$</sup>49<span> / month</span></h4>
-                    <ul>
-                        <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
-                        <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
-                        <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
-                        <li><i class="bi bi-check"></i> <span>Pharetra massa massa ultricies</span></li>
-                        <li><i class="bi bi-check"></i> <span>Massa ultricies mi quis hendrerit</span></li>
-                    </ul>
-                    <a href="#" class="buy-btn">Buy Now</a>
-                </div>
-            </div><!-- End Pricing Item -->
-
-        </div>
-
-    </div>
-
-</section><!-- /Pricing Section -->
-
-<!-- Testimonials Section -->
-<section id="testimonials" class="testimonials section">
-
-    <!-- Section Title -->
-    <div class="container section-title" data-aos="fade-up">
-        <h2>Testimonials</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-    </div><!-- End Section Title -->
-
-    <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="swiper init-swiper">
-            <script type="application/json" class="swiper-config">
-                {
-                    "loop": true,
-                    "speed": 600,
-                    "autoplay": {
-                        "delay": 5000
-                    },
-                    "slidesPerView": "auto",
-                    "pagination": {
-                        "el": ".swiper-pagination",
-                        "type": "bullets",
-                        "clickable": true
-                    }
-                }
-            </script>
-            <div class="swiper-wrapper">
-
-                <div class="swiper-slide">
-                    <div class="testimonial-item">
-                        <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                        <h3>Saul Goodman</h3>
-                        <h4>Ceo &amp; Founder</h4>
-                        <div class="stars">
-                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
-                        <p>
-                            <i class="bi bi-quote quote-icon-left"></i>
-                            <span>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.</span>
-                            <i class="bi bi-quote quote-icon-right"></i>
-                        </p>
-                    </div>
-                </div><!-- End testimonial item -->
-
-                <div class="swiper-slide">
-                    <div class="testimonial-item">
-                        <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                        <h3>Sara Wilsson</h3>
-                        <h4>Designer</h4>
-                        <div class="stars">
-                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
-                        <p>
-                            <i class="bi bi-quote quote-icon-left"></i>
-                            <span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.</span>
-                            <i class="bi bi-quote quote-icon-right"></i>
-                        </p>
-                    </div>
-                </div><!-- End testimonial item -->
-
-                <div class="swiper-slide">
-                    <div class="testimonial-item">
-                        <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                        <h3>Jena Karlis</h3>
-                        <h4>Store Owner</h4>
-                        <div class="stars">
-                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
-                        <p>
-                            <i class="bi bi-quote quote-icon-left"></i>
-                            <span>Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.</span>
-                            <i class="bi bi-quote quote-icon-right"></i>
-                        </p>
-                    </div>
-                </div><!-- End testimonial item -->
-
-                <div class="swiper-slide">
-                    <div class="testimonial-item">
-                        <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-                        <h3>Matt Brandon</h3>
-                        <h4>Freelancer</h4>
-                        <div class="stars">
-                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
-                        <p>
-                            <i class="bi bi-quote quote-icon-left"></i>
-                            <span>Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.</span>
-                            <i class="bi bi-quote quote-icon-right"></i>
-                        </p>
-                    </div>
-                </div><!-- End testimonial item -->
-
-                <div class="swiper-slide">
-                    <div class="testimonial-item">
-                        <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                        <h3>John Larson</h3>
-                        <h4>Entrepreneur</h4>
-                        <div class="stars">
-                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
-                        <p>
-                            <i class="bi bi-quote quote-icon-left"></i>
-                            <span>Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.</span>
-                            <i class="bi bi-quote quote-icon-right"></i>
-                        </p>
-                    </div>
-                </div><!-- End testimonial item -->
-
-            </div>
-            <div class="swiper-pagination"></div>
-        </div>
-
-    </div>
-
-</section><!-- /Testimonials Section -->
 
 <!-- Faq 2 Section -->
 <section id="faq-2" class="faq-2 section light-background">

@@ -47,7 +47,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('dash.dashboard') }}">Home</a></li>
                         <li class="breadcrumb-item active">{{ $pagetitle }}</li>
                     </ol>
                 </div><!-- /.col -->
@@ -68,12 +68,11 @@
                             <h3 class="card-title">Berita UKM Jurnalistik POLIBANG</h3>
 
                             <div class="card-tools">
-                                <form action="{{ route('news.index') }}" method="get">
+                                <form action="{{ route('news.search') }}" method="get">
                                     <div class="input-group input-group-sm" style="width: 150px;">
                                         <input type="text" name="search" class="form-control float-right" placeholder="Search">
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-default">
-
                                                 <i class="fas fa-search"></i>
                                             </button>
 

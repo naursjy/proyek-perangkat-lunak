@@ -11,7 +11,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('dash.dashboard') }}">Home</a></li>
                         <li class="breadcrumb-item active">{{ $pagetitle }}</li>
                     </ol>
                 </div><!-- /.col -->
@@ -62,7 +62,7 @@
                                     @foreach ($data as $d)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td><img src="{{ asset('storage/photo-user/'.$d->image) }}" alt="" width="100"></td>
+                                        <td><img src="{{ asset('storage/photo-user/'. $d->image) }}" alt="" width="100"></td>
                                         <td>{{ $d->ktp->nik ?? '' }}</td>
                                         <td>{{ $d->name }}</td>
                                         <td>{{ $d->email }}</td>

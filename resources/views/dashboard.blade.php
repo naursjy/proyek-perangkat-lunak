@@ -10,7 +10,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('dash.dashboard') }}">Home</a></li>
                         <li class="breadcrumb-item active">Dashboard</li>
                     </ol>
                 </div><!-- /.col -->
@@ -23,12 +23,13 @@
     <section class="content">
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
-            @can('view_dashboard')
+            <!-- @can('view_dashboard') -->
             <div class="row">
                 <div class="col-12">
+                    <a href="{{ route('dash.create_dash') }}" class="btn btn-primary mb-2">Tambah</a>
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Responsive Hover Table</h3>
+                            <h3 class="card-title">Dashboard Views</h3>
 
                             <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 150px;">
@@ -47,41 +48,25 @@
                             <table class="table table-hover text-nowrap">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>User</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                        <th>Reason</th>
+                                        <th>No</th>
+                                        <th>Image</th>
+                                        <th>judul</th>
+                                        <th>Instansi</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>183</td>
-                                        <td>John Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="tag tag-success">Approved</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>219</td>
-                                        <td>Alexander Pierce</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="tag tag-warning">Pending</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>657</td>
-                                        <td>Bob Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="tag tag-primary">Approved</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>175</td>
-                                        <td>Mike Doe</td>
-                                        <td>11-7-2014</td>
-                                        <td><span class="tag tag-danger">Denied</span></td>
-                                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                                        @foreach ($dash as $d)
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td><img src="{{ asset('storage/photo-dash/'.$d->image) }}" alt="" width="100"></td>
+                                        <td>{{ $d->title }}</td>
+                                        <td><span class="tag tag-primary">{{ $d->instansi }}</span></td>
+                                        <td><a href="{{ route('dash.edit_dash' , ['id' => $d->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i>Edit</a>
+                                            <a href="#" class="btn btn-info"><i class="fas fa-eye"></i>Detail</a>
+                                            <a data-toggle="modal" data-target="#modal-hapus" href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i>Delete</a>
+                                        </td>
+                                        @endforeach
                                     </tr>
                                 </tbody>
                             </table>

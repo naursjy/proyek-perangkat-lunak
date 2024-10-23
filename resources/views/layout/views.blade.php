@@ -9,8 +9,8 @@
     <meta name="keywords" content="">
 
     <!-- Favicons -->
-    <link href="{{ asset ('mte/assets/img/favicon.png') }}" rel="icon">
-    <link href="{{ asset ('mte/assets/img/favicon.png') }}" rel="apple-touch-icon">
+    <!-- <link href="{{ asset ('mte/assets/img/favicon.png') }}" rel="icon"> -->
+    <!-- <link href="{{ asset ('mte/assets/img/favicon.png') }}" rel="apple-touch-icon"> -->
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -42,7 +42,7 @@
     <header id="header" class="header d-flex align-items-center fixed-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
-            <a href="index.html" class="logo d-flex align-items-center me-auto">
+            <a href="{{ route('tampilan') }}" class="logo d-flex align-items-center me-auto">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
                 <h1 class="sitename">P2M</h1>
@@ -53,7 +53,7 @@
                     <li><a href="#hero" class="active">Beranda</a></li>
                     <li class="dropdown"><a href="#"><span>Seputar P2M</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
-                            <li><a href="#">Berita</a></li>
+                            <li><a href="{{ route('tampilan.berita') }}">Berita</a></li>
                             <li><a href="#">Agenda</a></li>
                             <li><a href="#">Panduan</a></li>
                         </ul>
@@ -164,7 +164,7 @@
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Preloader -->
-    <div id="preloader"></div>
+    <!-- <div id="preloader"></div> -->
 
     <!-- Vendor JS Files -->
     <script src="{{  asset('mte/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

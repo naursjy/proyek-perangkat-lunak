@@ -42,9 +42,9 @@
     <div class="wrapper">
 
         <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
+        <!-- <div class="preloader flex-column justify-content-center align-items-center">
             <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-        </div>
+        </div> -->
 
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -188,7 +188,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
-                <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <img src="{{ asset ('lte/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">AdminLTE 3</span>
             </a>
 
@@ -197,10 +197,12 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                        @if($user->image)
+                        <img src="{{ asset('storage/photo-user/'.$user->image) }}" class="img-circle elevation-2" alt="User Image">
+                        @endif
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">Alexander Pierce</a>
+                        <a href="{{ route('dash.dashboard') }}" class="d-block">{{ $user->name }}</a>
                     </div>
                 </div>
 
@@ -221,9 +223,9 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-
+                        <li class="nav-header">Main View</li>
                         <li class="nav-item">
-                            <a href="{{ route('dashboard') }}" class="nav-link">
+                            <a href="{{ route('dash.dashboard') }}" class="nav-link">
                                 <!-- <i class="fa fa-home" aria-hidden="true"></i> -->
                                 <i class="fas fa-clipboard-list"></i>
                                 <!-- <i class="nav-icon fas fa-th"></i> -->
@@ -244,12 +246,13 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-header">Seputar P2M</li>
                         <li class="nav-item">
                             <a href="{{ route('category.index') }}" class="nav-link">
                                 <i class="fas fa-list-alt"></i>
                                 <!-- <i class="nav-icon fas fa-th"></i> -->
                                 <p>
-                                    Kategori
+                                    Kategori Berita
                                     <!-- <span class="right badge badge-danger">New</span> -->
                                 </p>
                             </a>
@@ -259,11 +262,33 @@
                                 <i class="fas fa-newspaper"></i>
                                 <!-- <i class="nav-icon fas fa-th"></i> -->
                                 <p>
-                                    News
+                                    Berita
                                     <!-- <span class="right badge badge-danger">New</span> -->
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('news.index') }}" class="nav-link">
+                                <i class="fas fa-calendar-week"></i>
+                                <!-- <i class="nav-icon fas fa-th"></i> -->
+                                <p>
+                                    Agenda
+                                    <!-- <span class="right badge badge-danger">New</span> -->
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('panduan.index') }}" class="nav-link">
+                                <!-- <i class="fas fa-newspaper"></i> -->
+                                <i class="fas fa-book-reader"></i>
+                                <!-- <i class="nav-icon fas fa-th"></i> -->
+                                <p>
+                                    Panduan
+                                    <!-- <span class="right badge badge-danger">New</span> -->
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-header">Akun</li>
                         <li class="nav-item">
                             <a href="{{ route('logout') }}" class="nav-link">
                                 <i class="fas fa-sign-out-alt"></i>

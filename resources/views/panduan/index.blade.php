@@ -26,13 +26,13 @@
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="col-12">
-                    <a href="{{ route('category.create') }}" class="btn btn-primary mb-2">Tambah</a>
+                    <a href="{{ route('panduan.create') }}" class="btn btn-primary mb-2">Tambah</a>
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Data Username Admin</h3>
 
                             <div class="card-tools">
-                                <form action="{{ route('category.index') }}" method="get">
+                                <form action="" method="get">
                                     <div class="input-group input-group-sm" style="width: 150px;">
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-default">
@@ -51,20 +51,19 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Kategory</th>
-                                        <th>slug</th>
+                                        <th>File PDF</th>
                                         <th>action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($categories as $d)
+                                    @foreach ($pands as $d)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $d->name }}</td>
-                                        <td>{{ $d->slug }}</td>
+                                        <td>{{ $d->original_name }}</td>
                                         <td colspan="2">
-                                            <a href="{{ route ('category.edit', ['id' => $d->id]) }}" class="btn btn-primary custom-btn"><i class="fas fa-pen"></i> Edit</a>
-
+                                            <!-- <a href="{{ $d->google_drive_link }}" class="btn btn-secondary custom-btn" target="_blank"><i class="fas fa-eye"></i> Buka di Google Drive</a> -->
+                                            <a href="{{ route('panduan.view', ['id' => $d->id]) }}" class="btn btn-info">View</a>
+                                            <a href="{{ asset('uplouds/' . $d->original_name) }}" class="btn btn-primary custom-btn"><i class="fas fa-download"></i> Download</a>
                                         </td>
                                     </tr>
                                     @endforeach
