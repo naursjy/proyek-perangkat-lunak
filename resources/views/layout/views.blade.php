@@ -45,20 +45,20 @@
             <a href="{{ route('tampilan') }}" class="logo d-flex align-items-center me-auto">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
-                <h1 class="sitename">P2M</h1>
+                <h1 class="sitename">P3M</h1>
             </a>
 
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="#hero" class="active">Beranda</a></li>
+                    <li><a href="{{ route('tampilan') }}" class="{{ request()->routeIs('tampilan') ? 'active' : '' }}">Beranda</a></li>
                     <li class="dropdown"><a href="#"><span>Seputar P2M</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
-                            <li><a href="{{ route('tampilan.berita') }}">Berita</a></li>
+                            <li><a href="{{ route('tampilan.berita') }}" class="{{ request()->routeIs('tampilan.berita') ? 'active' : '' }}">Berita</a></li>
                             <li><a href="#">Agenda</a></li>
                             <li><a href="#">Panduan</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown"><a href="#"><span>Tentang</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                    <li class="dropdown"><a href="#"><span>Sekilas P3M</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
                             <li><a href="#">Visi Misi</a></li>
                             <li><a href="#">Struktur Organisasi</a></li>
@@ -71,7 +71,7 @@
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
-            <a class="btn-getstarted" href="#about">Get Started</a>
+            <a class="btn-getstarted" href="{{ route('login') }}">Login</a>
 
         </div>
     </header>

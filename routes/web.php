@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
 //     return view([ViewsController::class, 'tampilan'], 'tampilan.index');
-// });
+// }); 
 
 //views user halaman utama
 Route::get('/', [ViewsController::class, 'tampilan'])->name('tampilan');

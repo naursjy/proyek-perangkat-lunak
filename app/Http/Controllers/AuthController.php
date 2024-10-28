@@ -43,8 +43,9 @@ class AuthController extends Controller
     {
         // dd('oke');
         Auth::logout();
-        return redirect()->route('login')->with('success', 'kamu berhasil');
+        return redirect()->route('tampilan');
     }
+    // ->with('success', 'kamu berhasil')
 
     public function register()
     {
