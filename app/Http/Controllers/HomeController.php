@@ -140,7 +140,7 @@ class HomeController extends Controller
         if ($data) {
             $data->delete();
         }
-        return redirect()->route('index', compact('user'));
+        return redirect()->route('index', compact('user'))->with('success', 'Data berhasil dihapus!');
     }
     public function detail(Request $request, $id)
     {

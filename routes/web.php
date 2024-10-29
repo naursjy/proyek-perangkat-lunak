@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PanduanController;
+use App\Http\Controllers\PengelolaController;
 use App\Http\Controllers\ViewsController;
 use Illuminate\Routing\ViewController;
 use Illuminate\Support\Facades\Route;
@@ -110,5 +111,20 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         // Route::get('/download/{id}', [PanduanController::class, 'download'])->name('panduan.download');
         // Route::get('/index', [PanduanController::class, 'index'])->name('panduan.index');
         // Route::get('/index', [PanduanController::class, 'index'])->name('panduan.index');
+    });
+
+    //pengelola p3m
+    Route::prefix('pengelola')->group(function () {
+        Route::get('/index', [PengelolaController::class, 'index'])->name('pengelola.index');
+        Route::get('/create', [PengelolaController::class, 'create'])->name('pengelola.create');
+        Route::post('/store', [PengelolaController::class, 'store'])->name('pengelola.store');
+        Route::get('/edit/{id}', [PengelolaController::class, 'edit'])->name('pengelola.edit');
+        Route::put('/update/{id}', [PengelolaController::class, 'update'])->name('pengelola.update');
+        Route::get('/delete/{id}', [PengelolaController::class, 'delete'])->name('pengelola.delete')->withoutMiddleware('auth');
+        // //route edit
+        // Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+        // Route::match(['get', 'PUT'], '/ubah/{id}', [CategoryController::class, 'ubah'])->name('category.ubah');
+        //route delete
+        // Add more routes here...
     });
 });

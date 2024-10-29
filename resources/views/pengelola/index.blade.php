@@ -69,20 +69,26 @@
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="col-12">
-                    <a href="{{ route('news.create') }}" class="btn btn-primary mb-2"><i class="fas fa-plus"></i> Tambah</a>
+                    <a href="{{ route('pengelola.create') }}" class="btn btn-primary mb-2"><i class="fas fa-plus"></i> Tambah</a>
+                    @if(session('success'))
+                    <div class="alert alert-success" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ session('success') }}
+                    </div>
+                    @endif
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Berita P3M POLIBANG</h3>
-
+                            <h3 class="card-title">Pengelola P3M POLIBANG</h3>
                             <div class="card-tools">
-                                <form action="{{ route('news.search') }}" method="get">
+                                <form action="{{ route('pengelola.index') }}" method="get">
                                     <div class="input-group input-group-sm" style="width: 150px;">
-                                        <input type="text" name="search" class="form-control float-right" placeholder="Search">
+                                        <input type="text" name="search" class="form-control float-right" placeholder="Search" value="{{ $request->get('search') }}">
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-default">
                                                 <i class="fas fa-search"></i>
                                             </button>
-
                                         </div>
                                     </div>
                                 </form>
@@ -93,31 +99,27 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Titile</th>
-                                        <th>Tanggal</th>
-                                        <th>Pembuat</th>
+                                        <th>Nama</th>
+                                        <th>NIDN</th>
                                         <th colspan="2">Gambar</th>
-                                        <th>Kategory</th>
-                                        <th class="col-md-3">ISI</th>
+                                        <th>Jabatan</th>
+                                        <th>Email</th>
                                         <th colspan="3">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($news as $d)
+                                    @foreach ($pengelola as $d)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $d->title }}</td>
-                                        <td>{{ $d->date }}</td>
-                                        <td>{{ optional($d->user)->name }}</td>
-                                        <td colspan="2"><img src="{{ asset('storage/photo-news/'.$d->image) }}" alt="" width="100"></td>
-                                        <td>{{ $d->category->name }}</td>
-                                        <td id="news-content">{!! Str::words($d->content, 20) !!}</td>
+                                        <td>{{ $d->nama_pengelola }}</td>
+                                        <td>{{ $d->NIDN }}</td>
+                                        <td colspan="2"><img src="{{ asset('storage/photo-pengelola/'. $d->image) }}" alt="" width="100"></td>
+                                        <td>{{ $d->jabatan_pengelola }}</td>
+                                        <td>{{ $d->email_pengelola }}</td>
                                         <td colspan="3">
-                                            <a href="{{ route ('news.read', ['id' => $d->id]) }}" class="btn btn-info custom-btn"><i class="fas fa-eye"></i>Detail</a>
-                                            <a href="{{ route ('news.edit', ['id' => $d->id]) }}" class="btn btn-primary custom-btn"><i class="fas fa-pen"></i>edit</a>
-                                            <a href="{{ route ('news.delete', ['id' => $d->id]) }}" class="btn btn-danger custom-btn"><i class="fas fa-trash"></i>hapus</a>
+                                            <a href="{{ route ('pengelola.edit', ['id' => $d->id]) }}" class="btn btn-primary custom-btn"><i class="fas fa-pen"> </i>edit</a>
+                                            <a href="{{ route ('pengelola.delete', ['id' => $d->id]) }}" class="btn btn-danger custom-btn"><i class="fas fa-trash"> </i>delete</a>
                                         </td>
-
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -130,61 +132,6 @@
         </div>
         <!-- /.card-body -->
     </section>
-
-    <!-- <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">DataTable with minimal features & hover style</h3>
-                        </div>
-
-                        <div class="card-body">
-                            <table id="example2" class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Titile</th>
-                                        <th>Tanggal</th>
-                                        <th>Pembuat</th>
-                                        <th colspan="2">Gambar</th>
-                                        <th>Kategory</th>
-                                        <th class="col-md-3">ISI</th>
-                                        <th colspan="3">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($news as $d)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $d->title }}</td>
-                                        <td>{{ $d->date }}</td>
-                                        <td>{{ optional($d->user)->name }}</td>
-                                        <td colspan="2"><img src="{{ asset('storage/photo-news/'.$d->image) }}" alt="" width="100"></td>
-                                        <td>{{ $d->category->name }}</td>
-                                        <td id="news-content">{!! Str::words($d->content, 20) !!}</td>
-                                        <td colspan="3">
-                                            <a href="{{ route ('news.read', ['id' => $d->id]) }}" class="btn btn-info custom-btn"><i class="fas fa-eye"></i>Detail</a>
-                                            <a href="{{ route ('news.edit', ['id' => $d->id]) }}" class="btn btn-primary custom-btn"><i class="fas fa-pen"></i>edit</a>
-                                            <a href="{{ route ('news.delete', ['id' => $d->id]) }}" class="btn btn-danger custom-btn"><i class="fas fa-trash"></i>hapus</a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section> -->
-    <!-- /.content -->
 </div>
 
 
@@ -227,6 +174,10 @@
             "autoWidth": false,
             "responsive": true,
         });
+        setTimeout(function() {
+            console.log("Hiding alert");
+            $('.alert').fadeOut('slow');
+        }, 5000); // 5000 ms = 5 detik
     });
 </script>
 @endsection

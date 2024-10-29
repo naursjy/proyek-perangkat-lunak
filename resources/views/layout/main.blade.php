@@ -169,23 +169,12 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-header">Dokumentasi</li>
+                        <li class="nav-header">Pengelola</li>
                         <li class="nav-item">
-                            <a href="{{ route('category.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-map-pin"></i>
-                                <!-- <i class="fas fa-map-pin"></i> -->
-                                <!-- <i class="nav-icon fas fa-th"></i> -->
+                            <a href="{{ route('pengelola.index') }}" class="nav-link">
+                                <i class="nav-icon fas fa-users"></i>
                                 <p>
-                                    Pengabdian
-                                    <!-- <span class="right badge badge-danger">New</span> -->
-                                </p>
-                            </a>
-                            <a href="{{ route('category.index') }}" class="nav-link">
-                                <!-- <i class="nav-icon fas fa-list-alt"></i> -->
-                                <i class="nav-icon fas fa-map-pin"></i>
-                                <!-- <i class="nav-icon fas fa-th"></i> -->
-                                <p>
-                                    Penelitian
+                                    Struktur Organisasi
                                     <!-- <span class="right badge badge-danger">New</span> -->
                                 </p>
                             </a>

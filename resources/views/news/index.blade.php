@@ -70,10 +70,17 @@
             <div class="row">
                 <div class="col-12">
                     <a href="{{ route('news.create') }}" class="btn btn-primary mb-2"><i class="fas fa-plus"></i> Tambah</a>
+                    @if(session('success'))
+                    <div class="alert alert-success" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ session('success') }}
+                    </div>
+                    @endif
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Berita P3M POLIBANG</h3>
-
                             <div class="card-tools">
                                 <form action="{{ route('news.search') }}" method="get">
                                     <div class="input-group input-group-sm" style="width: 150px;">

@@ -25,6 +25,7 @@ class NewsController extends Controller
         $user = Auth::user();
         $news = M_news::where('user_id', Auth::id())
             ->orWhereNull('user_id')
+            ->orderBy('created_at', 'desc')
             ->get();
         // if ($request->get('search')) {
         //     $data = M_news::where('title', 'like', '%' . $request->get('search') . '%');
@@ -144,7 +145,7 @@ class NewsController extends Controller
         if ($news) {
             $news->delete();
         }
-        return redirect()->route('news.index');
+        return redirect()->route('news.index')->with('success', 'Data berhasil dihapus!');
     }
     public function read(Request $request, $id)
     {

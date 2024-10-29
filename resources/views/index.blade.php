@@ -27,15 +27,21 @@
             <div class="row">
                 <div class="col-12">
                     <a href="{{ route('create') }}" class="btn btn-primary mb-2">Tambah</a>
+                    @if(session('success'))
+                    <div class="alert alert-success" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ session('success') }}
+                    </div>
+                    @endif
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Data Username Admin</h3>
-
                             <div class="card-tools">
                                 <form action="{{ route('index') }}" method="get">
                                     <div class="input-group input-group-sm" style="width: 150px;">
                                         <input type="text" name="search" class="form-control float-right" placeholder="Search" value="{{ $request->get('search') }}">
-
                                         <div class="input-group-append">
                                             <button type="submit" class="btn btn-default">
                                                 <i class="fas fa-search"></i>
@@ -68,51 +74,18 @@
                                         <td>{{ $d->email }}</td>
                                         <td><a href="{{ route ('update' , ['id' => $d->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i>Edit</a>
                                             <a href="{{ route ('detail' , ['id' => $d->id]) }}" class="btn btn-info"><i class="fas fa-eye"></i>Detail</a>
-                                            <a data-toggle="modal" data-target="#modal-hapus" href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i>Delete</a>
+                                            <a href="{{ route ('delete' , ['id' => $d->id]) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i>Delete</a>
                                         </td>
                                     </tr>
-                                    <div class="modal fade" id="modal-hapus">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content bg-danger">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title">Informasi !</h4>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Anda yakin ingin menghapus data ini? <b>{{ $d->name }}</b></p>
-                                                </div>
-                                                <div class="modal-footer justify-content-between">
-
-                                                    <form action="{{ route('delete', ['id' => $d->id]) }}" method="post">
-                                                        @csrf
-                                                        @method('Delete')
-                                                        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-outline-dark">Iya, Saya Yakin</button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            <!-- /.modal-content -->
-                                        </div>
-                                        <!-- /.modal-dialog -->
-                                    </div>
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
-                        <!-- /.card-body -->
                     </div>
-                    <!-- /.card -->
                 </div>
             </div>
-            <!-- /.row -->
-            <!-- Main row -->
-
-            <!-- /.row (main row) -->
-        </div><!-- /.container-fluid -->
+        </div>
     </section>
-    <!-- /.content -->
 </div>
 
 @endsection
