@@ -214,7 +214,7 @@
                             <small>{{ optional($d->user)->name }}</small>
                             <h5 class="card-title mt-3">{{ $d->title }}</h5>
                             <p class="card-text">{{ Str::words(strip_tags($d->content), 10) }}</p>
-                            <a href="#" class="btn btn-outline-warning" style="text-align: center; margin: 0 auto;">Selengkapnya</a>
+                            <a href="{{ route('tampilan.detail', ['id' => $d->id]) }}" class="btn btn-outline-warning" style="text-align: center; margin: 0 auto;">Detail..</a>
 
                         </div>
                     </div>

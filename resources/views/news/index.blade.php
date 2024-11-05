@@ -118,7 +118,7 @@
                                         <td>{{ optional($d->user)->name }}</td>
                                         <td colspan="2"><img src="{{ asset('storage/photo-news/'.$d->image) }}" alt="" width="100"></td>
                                         <td>{{ $d->category->name }}</td>
-                                        <td id="news-content">{!! Str::words($d->content, 20) !!}</td>
+                                        <td id="compose-textarea">{!! Str::words($d->content, 20) !!}</td>
                                         <td colspan="3">
                                             <a href="{{ route ('news.read', ['id' => $d->id]) }}" class="btn btn-info custom-btn"><i class="fas fa-eye"></i>Detail</a>
                                             <a href="{{ route ('news.edit', ['id' => $d->id]) }}" class="btn btn-primary custom-btn"><i class="fas fa-pen"></i>edit</a>

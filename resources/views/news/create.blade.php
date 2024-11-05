@@ -1,6 +1,7 @@
 @extends('layout.main')
 @section('content')
 
+<link rel="stylesheet" href="{{ asset('lte/../../plugins/summernote/summernote-bs4.min.css') }}">
 <style>
     .custom-option {
         background-color: #fff;
@@ -36,7 +37,7 @@
                 @csrf
                 <div class="row">
                     <!-- left column -->
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
@@ -72,8 +73,10 @@
                                         <small>{{ $message }}</small>
                                         @enderror
                                     </div>
+
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Isi Berita</label>
+                                        <label for="textarea">Isi Berita</label>
+                                        <!-- <textarea name="content" id="compose-textarea" class="form-control" style="height: 300px"></textarea> -->
                                         <textarea name="content" id="editor" class="form-control"></textarea>
                                         @error('content')
                                         <small>{{ $message }}</small>
@@ -107,6 +110,12 @@
     </section>
     <!-- /.content -->
 </div>
-
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{ asset('lte/../../plugins/summernote/summernote-bs4.min.js') }}"></script>
+<script>
+    $(function() {
+        //Add text editor
+        $('#compose-textarea').summernote()
+    })
+</script>
 @endsection

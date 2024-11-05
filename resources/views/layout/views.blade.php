@@ -16,6 +16,7 @@
     <link href="https://fonts.googleapis.com" rel="preconnect">
     <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!-- Vendor CSS Files -->
     <link href="{{ asset('mte/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -44,7 +45,7 @@
 
             <a href="{{ route('tampilan') }}" class="logo d-flex align-items-center me-auto">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
-                <!-- <img src="assets/img/logo.png" alt=""> -->
+                <!-- <img src="{{ asset('mte/assets/img/logo.png') }}" alt=""> -->
                 <h1 class="sitename">P3M</h1>
             </a>
 
@@ -61,12 +62,12 @@
                     <li class="dropdown"><a href="#"><span>Sekilas P3M</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
                             <li><a href="#">Visi Misi</a></li>
-                            <li><a href="#">Struktur Organisasi</a></li>
+                            <li><a href="{{ route('tampilan.struktur') }}">Struktur Organisasi</a></li>
                         </ul>
                     </li>
-                    <li><a href="#about">HKI</a></li>
-                    <li><a href="#services">Jurnal</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <!-- <li><a href="#about">HKI</a></li> -->
+                    <li><a href="https://www.polibang.ac.id/maktab">Jurnal</a></li>
+                    <!-- <li><a href="#contact">Contact</a></li> -->
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
@@ -103,13 +104,13 @@
             <div class="row gy-4">
                 <div class="col-lg-4 col-md-6 footer-about">
                     <a href="index.html" class="d-flex align-items-center">
-                        <span class="sitename">Arsha</span>
+                        <span class="sitename">P3M</span>
                     </a>
                     <div class="footer-contact pt-3">
-                        <p>A108 Adam Street</p>
-                        <p>New York, NY 535022</p>
-                        <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-                        <p><strong>Email:</strong> <span>info@example.com</span></p>
+                        <p>Politeknik Balekambang Jepara</p>
+                        <p>Gemiring, Nalumsari, Jepara</p>
+                        <p class="mt-3"><strong>Phone:</strong> <span>+62 3301 90210</span></p>
+                        <p><strong>Email:</strong> <span>p3mpolibang@gmail.com</span></p>
                     </div>
                 </div>
 
@@ -148,13 +149,13 @@
         </div>
 
         <div class="container copyright text-center mt-4">
-            <p>© <span>Copyright</span> <strong class="px-1 sitename">Arsha</strong> <span>All Rights Reserved</span></p>
+            <p>© <span>Copyright</span> <strong class="px-1 sitename">P3M POLIBANG</strong> <span>All Rights Reserved</span></p>
             <div class="credits">
                 <!-- All the links in the footer should remain intact. -->
                 <!-- You can delete the links only if you've purchased the pro version. -->
                 <!-- Licensing information: https://bootstrapmade.com/license/ -->
                 <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
             </div>
         </div>
 

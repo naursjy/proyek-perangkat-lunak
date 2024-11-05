@@ -1,5 +1,6 @@
 @extends('layout.views')
 @section('isi')
+<!-- <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" /> -->
 
 <style>
     .berita-aside {
@@ -32,10 +33,35 @@
     .berita-aside a:hover {
         color: #23527c;
     }
+
+    .item {
+        cursor: pointer;
+        padding: 10px;
+        border: 1px solid #ddd;
+        margin: 5px;
+        text-align: center;
+    }
+
+    .item.active {
+        background-color: #337ab7;
+        /* Ganti dengan warna yang diinginkan */
+        color: white;
+        /* Ganti dengan warna teks yang diinginkan */
+    }
+
+    .card-body img {
+        width: 100%;
+        /* Atur lebar gambar agar sesuai dengan lebar kontainer */
+        height: 150px;
+        /* Tentukan tinggi gambar agar sama untuk semua gambar */
+        object-fit: cover;
+        /* Memastikan gambar mengisi area yang ditentukan tanpa merusak rasio aspek */
+    }
 </style>
 
 <!-- Hero Section -->
 <section id="hero" class="hero section dark-background">
+    <!-- <img src="{{ asset('mte/assets/img/polibang.png') }}" alt=""> -->
 
     <div class="container">
         <div class="row gy-4">
@@ -173,10 +199,7 @@
 
 </section><!-- /About Section -->
 
-
-
-<!-- Why Us Section -->
-<section id="why-us" class="section why-us light-background" data-builder="section">
+<!-- <section id="why-us" class="section why-us light-background" data-builder="section">
 
     <div class="container-fluid">
 
@@ -200,7 +223,7 @@
                             <p>Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.</p>
                         </div>
                         <i class="faq-toggle bi bi-chevron-right"></i>
-                    </div><!-- End Faq item-->
+                    </div>
 
                     <div class="faq-item">
                         <h3><span>02</span> Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque?</h3>
@@ -208,7 +231,7 @@
                             <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
                         </div>
                         <i class="faq-toggle bi bi-chevron-right"></i>
-                    </div><!-- End Faq item-->
+                    </div>
 
                     <div class="faq-item">
                         <h3><span>03</span> Dolor sit amet consectetur adipiscing elit pellentesque?</h3>
@@ -216,7 +239,7 @@
                             <p>Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis</p>
                         </div>
                         <i class="faq-toggle bi bi-chevron-right"></i>
-                    </div><!-- End Faq item-->
+                    </div>
 
                 </div>
 
@@ -229,72 +252,33 @@
 
     </div>
 
-</section><!-- /Why Us Section -->
+</section> -->
+<section id="call-to-action" class="call-to-action section dark-background">
 
-<!-- Skills Section -->
-<section id="skills" class="skills section">
+    <img src="{{ asset('mte/assets/img/polibang.png') }}" alt="">
 
-    <div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="container">
 
-        <div class="row">
-
-            <div class="col-lg-6 d-flex align-items-center">
-                <img src="assets/img/skills.png" class="img-fluid" alt="">
+        <div class="row" data-aos="zoom-in" data-aos-delay="100">
+            <div class="col-xl-9 text-center text-xl-start">
+                <h3>Call To Action</h3>
+                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
             </div>
-
-            <div class="col-lg-6 pt-4 pt-lg-0 content">
-
-                <h3>Voluptatem dignissimos provident quasi corporis voluptas</h3>
-                <p class="fst-italic">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-
-                <div class="skills-content skills-animation">
-
-                    <div class="progress">
-                        <span class="skill"><span>HTML</span> <i class="val">100%</i></span>
-                        <div class="progress-bar-wrap">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div><!-- End Skills Item -->
-
-                    <div class="progress">
-                        <span class="skill"><span>CSS</span> <i class="val">90%</i></span>
-                        <div class="progress-bar-wrap">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div><!-- End Skills Item -->
-
-                    <div class="progress">
-                        <span class="skill"><span>JavaScript</span> <i class="val">75%</i></span>
-                        <div class="progress-bar-wrap">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div><!-- End Skills Item -->
-
-                    <div class="progress">
-                        <span class="skill"><span>Photoshop</span> <i class="val">55%</i></span>
-                        <div class="progress-bar-wrap">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div><!-- End Skills Item -->
-
-                </div>
-
+            <div class="col-xl-3 cta-btn-container text-center">
+                <a class="cta-btn align-middle" href="#">Call To Action</a>
             </div>
         </div>
 
     </div>
 
-</section><!-- /Skills Section -->
-
+</section><!-- /Call To Action Section -->
 <!-- Services Section -->
 <section id="services" class="services section light-background">
 
     <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
-        <h2>Services</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <h2>Agenda</h2>
+        <p>Agenda Terbaru Kegiatan Penelitian dan Pengabdian Kepada Masyarakat</p>
     </div><!-- End Section Title -->
 
     <div class="container">
@@ -306,6 +290,7 @@
                     <div class="icon"><i class="bi bi-activity icon"></i></div>
                     <h4><a href="" class="stretched-link">Lorem Ipsum</a></h4>
                     <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+                    <p href="" class="" style="text-align: center;">Selengkapnya</p>
                 </div>
             </div><!-- End Service Item -->
 
@@ -340,227 +325,117 @@
 </section><!-- /Services Section -->
 
 <!-- Call To Action Section -->
-<section id="call-to-action" class="call-to-action section dark-background">
 
-    <img src="assets/img/cta-bg.jpg" alt="">
 
-    <div class="container">
-
-        <div class="row" data-aos="zoom-in" data-aos-delay="100">
-            <div class="col-xl-9 text-center text-xl-start">
-                <h3>Call To Action</h3>
-                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            </div>
-            <div class="col-xl-3 cta-btn-container text-center">
-                <a class="cta-btn align-middle" href="#">Call To Action</a>
-            </div>
-        </div>
-
-    </div>
-
-</section><!-- /Call To Action Section -->
-
-<!-- Portfolio Section -->
+<!-- Berita Section -->
 <section id="portfolio" class="portfolio section">
 
     <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
-        <h2>Portfolio</h2>
+        <h2>BERITA P3M</h2>
         <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
     </div><!-- End Section Title -->
 
     <div class="container">
+        <div class="row gy-5">
+            @foreach($berita->take(3) as $d)
+            <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="cards">
+                    <div class="card-body">
+                        <img src="{{ asset('storage/photo-news/'.$d->image) }}" class="img-fluid animated" style="border-radius: 10px;" alt="">
 
-        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+                        <h5 class="card-title mt-3">{{ $d->title }}</h5>
+                        <hr>
+                        <small><i class="fas fa-calendar-week"></i> {{ $d->date }}</small> <br>
+                        <!-- <small class="mt-4" style="font-style: italic;">{{ optional($d->user)->name }}</small> -->
+                        <p class="card-text">{!! Str::words(strip_tags($d->content), 10) !!}</p>
+                        <a href="{{ route('tampilan.detail', ['id' => $d->id]) }}" class="btn btn-outline-warning" style="text-align: center; margin: 0 auto;">Detail...</a>
+                    </div>
+                </div>
+            </div>
+
+            @endforeach
+            <div class="text-center mt-4" data-aos="zoom-in" data-aos-delay="100">
+                <a href="{{ route('tampilan.berita') }}" class="">Selengkapnya -></a> <!-- Ganti dengan route yang sesuai -->
+            </div>
+        </div>
+        <!-- <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
 
             <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-                <li data-filter="*" class="filter-active">All</li>
-                <li data-filter=".filter-app">App</li>
-                <li data-filter=".filter-product">Card</li>
-                <li data-filter=".filter-branding">Web</li>
-            </ul><!-- End Portfolio Filters -->
+                @foreach($categories as $c)
+
+                <li data-filter=".{{ $c->filter_class }}" class="item">{{ $c->name }}</li>
+                @endforeach
+            </ul>
 
             <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
 
                 <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                    <img src="assets/img/masonry-portfolio/masonry-portfolio-1.jpg" class="img-fluid" alt="">
+                    <img src="{{ asset('mte/assets/img/masonry-portfolio/masonry-portfolio-1.jpg') }}" class="img-fluid" alt="">
                     <div class="portfolio-info">
                         <h4>App 1</h4>
                         <p>Lorem ipsum, dolor sit</p>
-                        <a href="assets/img/masonry-portfolio/masonry-portfolio-1.jpg" title="App 1" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                        <a href="{{ asset('mte/assets/img/masonry-portfolio/masonry-portfolio-1.jpg') }}" title="App 1" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                         <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                     </div>
-                </div><!-- End Portfolio Item -->
+                </div>
 
                 <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-                    <img src="assets/img/masonry-portfolio/masonry-portfolio-2.jpg" class="img-fluid" alt="">
+                    <img src="{{ asset('mte/assets/img/masonry-portfolio/masonry-portfolio-2.jpg') }}" class="img-fluid" alt="">
                     <div class="portfolio-info">
                         <h4>Product 1</h4>
                         <p>Lorem ipsum, dolor sit</p>
-                        <a href="assets/img/masonry-portfolio/masonry-portfolio-2.jpg" title="Product 1" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                        <a href="{{ asset('assets/img/masonry-portfolio/masonry-portfolio-2.jpg') }}" title="Product 1" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                         <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                     </div>
-                </div><!-- End Portfolio Item -->
+                </div>
 
                 <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/masonry-portfolio/masonry-portfolio-3.jpg" class="img-fluid" alt="">
+                    <img src="{{ asset('mte/assets/img/masonry-portfolio/masonry-portfolio-3.jpg') }}" class="img-fluid" alt="">
                     <div class="portfolio-info">
                         <h4>Branding 1</h4>
                         <p>Lorem ipsum, dolor sit</p>
-                        <a href="assets/img/masonry-portfolio/masonry-portfolio-3.jpg" title="Branding 1" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                        <a href="{{ asset('mte/assets/img/masonry-portfolio/masonry-portfolio-3.jpg') }}" title="Branding 1" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                         <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
                     </div>
-                </div><!-- End Portfolio Item -->
+                </div>
+            </div>
 
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                    <img src="assets/img/masonry-portfolio/masonry-portfolio-4.jpg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>App 2</h4>
-                        <p>Lorem ipsum, dolor sit</p>
-                        <a href="assets/img/masonry-portfolio/masonry-portfolio-4.jpg" title="App 2" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                        <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-                    <img src="assets/img/masonry-portfolio/masonry-portfolio-5.jpg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>Product 2</h4>
-                        <p>Lorem ipsum, dolor sit</p>
-                        <a href="assets/img/masonry-portfolio/masonry-portfolio-5.jpg" title="Product 2" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                        <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/masonry-portfolio/masonry-portfolio-6.jpg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>Branding 2</h4>
-                        <p>Lorem ipsum, dolor sit</p>
-                        <a href="assets/img/masonry-portfolio/masonry-portfolio-6.jpg" title="Branding 2" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                        <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-                    <img src="assets/img/masonry-portfolio/masonry-portfolio-7.jpg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>App 3</h4>
-                        <p>Lorem ipsum, dolor sit</p>
-                        <a href="assets/img/masonry-portfolio/masonry-portfolio-7.jpg" title="App 3" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                        <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-                    <img src="assets/img/masonry-portfolio/masonry-portfolio-8.jpg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>Product 3</h4>
-                        <p>Lorem ipsum, dolor sit</p>
-                        <a href="assets/img/masonry-portfolio/masonry-portfolio-8.jpg" title="Product 3" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                        <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-
-                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-                    <img src="assets/img/masonry-portfolio/masonry-portfolio-9.jpg" class="img-fluid" alt="">
-                    <div class="portfolio-info">
-                        <h4>Branding 3</h4>
-                        <p>Lorem ipsum, dolor sit</p>
-                        <a href="assets/img/masonry-portfolio/masonry-portfolio-9.jpg" title="Branding 2" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                        <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                    </div>
-                </div><!-- End Portfolio Item -->
-
-            </div><!-- End Portfolio Container -->
-
-        </div>
-
+        </div> -->
     </div>
 
-</section><!-- /Portfolio Section -->
+</section><!-- /Berita Section -->
 
 <!-- Team Section -->
-<section id="team" class="team section">
+<section id="team" class="team section dark-background">
 
     <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
-        <h2>Team</h2>
-        <p>Pengelola</p>
+        <h2>Team P3M</h2>
+        <p>Pengelola Pusat Penelitian dan Pengabdian Masyarakat</p>
     </div><!-- End Section Title -->
 
     <div class="container">
 
         <div class="row gy-4">
-
+            @foreach($pengelola as $d)
             <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
                 <div class="team-member d-flex align-items-start">
-                    <div class="pic"><img src="assets/img/team/team-1.jpg" class="img-fluid" alt=""></div>
+                    <div class="pic"><img src="{{ asset('storage/photo-pengelola/'.$d->image) }}" class="img-fluid" alt=""></div>
                     <div class="member-info">
-                        <h4>Walter White</h4>
-                        <span>Chief Executive Officer</span>
-                        <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
+                        <h4>{{ $d->nama_pengelola }}</h4>
+                        <span>{{ $d->jabatan_pengelola }}</span>
+                        <p>{{ $d->NIDN }}</p>
                         <div class="social">
-                            <a href=""><i class="bi bi-twitter-x"></i></a>
-                            <a href=""><i class="bi bi-facebook"></i></a>
-                            <a href=""><i class="bi bi-instagram"></i></a>
-                            <a href=""> <i class="bi bi-linkedin"></i> </a>
+                            <a href="mailto:{{ $d->email_pengelola }}"><i class="bi bi-envelope"></i></i></a>
                         </div>
                     </div>
                 </div>
-            </div><!-- End Team Member -->
-
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                <div class="team-member d-flex align-items-start">
-                    <div class="pic"><img src="assets/img/team/team-2.jpg" class="img-fluid" alt=""></div>
-                    <div class="member-info">
-                        <h4>Sarah Jhonson</h4>
-                        <span>Product Manager</span>
-                        <p>Aut maiores voluptates amet et quis praesentium qui senda para</p>
-                        <div class="social">
-                            <a href=""><i class="bi bi-twitter-x"></i></a>
-                            <a href=""><i class="bi bi-facebook"></i></a>
-                            <a href=""><i class="bi bi-instagram"></i></a>
-                            <a href=""> <i class="bi bi-linkedin"></i> </a>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- End Team Member -->
-
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
-                <div class="team-member d-flex align-items-start">
-                    <div class="pic"><img src="assets/img/team/team-3.jpg" class="img-fluid" alt=""></div>
-                    <div class="member-info">
-                        <h4>William Anderson</h4>
-                        <span>CTO</span>
-                        <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
-                        <div class="social">
-                            <a href=""><i class="bi bi-twitter-x"></i></a>
-                            <a href=""><i class="bi bi-facebook"></i></a>
-                            <a href=""><i class="bi bi-instagram"></i></a>
-                            <a href=""> <i class="bi bi-linkedin"></i> </a>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- End Team Member -->
-
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
-                <div class="team-member d-flex align-items-start">
-                    <div class="pic"><img src="assets/img/team/team-4.jpg" class="img-fluid" alt=""></div>
-                    <div class="member-info">
-                        <h4>Amanda Jepson</h4>
-                        <span>Accountant</span>
-                        <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p>
-                        <div class="social">
-                            <a href=""><i class="bi bi-twitter-x"></i></a>
-                            <a href=""><i class="bi bi-facebook"></i></a>
-                            <a href=""><i class="bi bi-instagram"></i></a>
-                            <a href=""> <i class="bi bi-linkedin"></i> </a>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- End Team Member -->
-
+            </div>
+            @endforeach
+            <div class="text-center mt-4" data-aos="zoom-in" data-aos-delay="100">
+                <a href="" class="">Selengkapnya -></a>
+            </div>
         </div>
 
     </div>
@@ -570,13 +445,13 @@
 
 
 <!-- Faq 2 Section -->
-<section id="faq-2" class="faq-2 section light-background">
+<!-- <section id="faq-2" class="faq-2 section light-background">
 
-    <!-- Section Title -->
+
     <div class="container section-title" data-aos="fade-up">
         <h2>Frequently Asked Questions</h2>
         <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
-    </div><!-- End Section Title -->
+    </div>
 
     <div class="container">
 
@@ -593,7 +468,7 @@
                             <p>Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.</p>
                         </div>
                         <i class="faq-toggle bi bi-chevron-right"></i>
-                    </div><!-- End Faq item-->
+                    </div>
 
                     <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
                         <i class="faq-icon bi bi-question-circle"></i>
@@ -602,7 +477,7 @@
                             <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
                         </div>
                         <i class="faq-toggle bi bi-chevron-right"></i>
-                    </div><!-- End Faq item-->
+                    </div>
 
                     <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
                         <i class="faq-icon bi bi-question-circle"></i>
@@ -611,7 +486,7 @@
                             <p>Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis</p>
                         </div>
                         <i class="faq-toggle bi bi-chevron-right"></i>
-                    </div><!-- End Faq item-->
+                    </div>
 
                     <div class="faq-item" data-aos="fade-up" data-aos-delay="500">
                         <i class="faq-icon bi bi-question-circle"></i>
@@ -620,7 +495,7 @@
                             <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
                         </div>
                         <i class="faq-toggle bi bi-chevron-right"></i>
-                    </div><!-- End Faq item-->
+                    </div>
 
                     <div class="faq-item" data-aos="fade-up" data-aos-delay="600">
                         <i class="faq-icon bi bi-question-circle"></i>
@@ -629,7 +504,7 @@
                             <p>Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in</p>
                         </div>
                         <i class="faq-toggle bi bi-chevron-right"></i>
-                    </div><!-- End Faq item-->
+                    </div>
 
                 </div>
 
@@ -639,7 +514,7 @@
 
     </div>
 
-</section><!-- /Faq 2 Section -->
+</section> -->
 
 <!-- Contact Section -->
 <section id="contact" class="contact section">
@@ -727,3 +602,15 @@
 
 </section><!-- /Contact Section -->
 @endsection
+
+<script>
+    document.querySelectorAll('.item').forEach(item => {
+        item.addEventListener('click', () => {
+            // Hapus class 'active' dari semua item
+            document.querySelectorAll('.item').forEach(i => i.classList.remove('active'));
+
+            // Tambahkan class 'active' pada item yang diklik
+            item.classList.add('active');
+        });
+    });
+</script>

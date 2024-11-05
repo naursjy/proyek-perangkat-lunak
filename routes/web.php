@@ -30,6 +30,9 @@ use Illuminate\Support\Facades\Route;
 //views user halaman utama
 Route::get('/', [ViewsController::class, 'tampilan'])->name('tampilan');
 Route::get('/berita', [ViewsController::class, 'berita'])->name('tampilan.berita');
+Route::get('/tampilan/deber/detail/{id}', [ViewsController::class, 'show'])->name('tampilan.detail');
+Route::get('/struktur', [ViewsController::class, 'struktur'])->name('tampilan.struktur');
+
 //proses login
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/proses-login', [AuthController::class, 'proses_login'])->name('proses-login');
