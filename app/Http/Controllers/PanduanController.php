@@ -91,7 +91,7 @@ class PanduanController extends Controller
         $panduan = m_panduan::findOrFail($id);
 
         // Tentukan path file yang akan diunduh
-        $filePath = storage_path('app/uploads' . $panduan->generated_name); // Sesuaikan dengan lokasi penyimpanan file Anda
+        $filePath = public_path('uplouds/' . $panduan->generated_name); // Sesuaikan dengan lokasi penyimpanan file Anda
         // dd($filePath);
         Log::info("File path: " . $filePath);
         if (!file_exists($filePath)) {

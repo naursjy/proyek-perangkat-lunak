@@ -32,6 +32,7 @@ Route::get('/', [ViewsController::class, 'tampilan'])->name('tampilan');
 Route::get('/berita', [ViewsController::class, 'berita'])->name('tampilan.berita');
 Route::get('/tampilan/deber/detail/{id}', [ViewsController::class, 'show'])->name('tampilan.detail');
 Route::get('/struktur', [ViewsController::class, 'struktur'])->name('tampilan.struktur');
+Route::get('/panduanp3m', [ViewsController::class, 'panduan'])->name('tampilan.panduan');
 
 //proses login
 Route::get('/login', [AuthController::class, 'index'])->name('login');
@@ -106,10 +107,15 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::get('/create', [PanduanController::class, 'create'])->name('panduan.create');
         Route::post('/store', [PanduanController::class, 'store'])->name('panduan.store');
         Route::get('/view/{id}', [PanduanController::class, 'view'])->name('panduan.view');
-        Route::get('/download/{filename}', function ($filename) {
-            $path = storage_path('app/uploads/' . $filename);
-            return response()->download($path);
-        })->name('panduan.download');
+        Route::get('/download/{id}', [PanduanController::class, 'download'])->name('panduan.download');
+        // Route::get('/view/{id}', [PanduanController::class, 'view'])->name('panduan.view');
+
+        // Route::get('/download/{generated_name}', function ($filename) {
+        //     $path = public_path('uplouds/' . $filename);
+        //     // dd($path);
+        //     return response()->download($path);
+        // })->name('panduan.download');
+
         // Route::get('/download/{id}', [PanduanController::class, 'download'])->name('panduan.download')->withoutMiddleware('auth');
         // Route::get('/download/{id}', [PanduanController::class, 'download'])->name('panduan.download');
         // Route::get('/index', [PanduanController::class, 'index'])->name('panduan.index');

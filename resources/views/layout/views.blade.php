@@ -45,7 +45,7 @@
 
             <a href="{{ route('tampilan') }}" class="logo d-flex align-items-center me-auto">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
-                <!-- <img src="{{ asset('mte/assets/img/logo.png') }}" alt=""> -->
+                <img src="{{ asset('mte/assets/img/Logo_Politbang.png') }}" alt="">
                 <h1 class="sitename">P3M</h1>
             </a>
 
@@ -56,7 +56,7 @@
                         <ul>
                             <li><a href="{{ route('tampilan.berita') }}" class="{{ request()->routeIs('tampilan.berita') ? 'active' : '' }}">Berita</a></li>
                             <li><a href="#">Agenda</a></li>
-                            <li><a href="#">Panduan</a></li>
+                            <li><a href="{{ route('tampilan.panduan') }}">Panduan</a></li>
                         </ul>
                     </li>
                     <li class="dropdown"><a href="#"><span>Sekilas P3M</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>

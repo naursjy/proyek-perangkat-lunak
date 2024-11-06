@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\M_categories;
 use App\Models\m_dashboard;
 use App\Models\M_news;
+use App\Models\m_panduan;
 use App\Models\M_Pengelola;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\View\View as ViewView;
 
@@ -52,5 +54,13 @@ class ViewsController extends Controller
         $pengelola = M_Pengelola::all();
         // $categories = M_categories::all();
         return view('tampilan.struktur',  compact('pengelola'));
+    }
+
+    public function panduan(Request $request)
+    {
+        $user = Auth::user();
+        $pands = m_panduan::get();
+        $pagetitle = 'Panduan P3M';
+        return view('tampilan.panduan', compact('pands', 'pagetitle', 'user'));
     }
 }
