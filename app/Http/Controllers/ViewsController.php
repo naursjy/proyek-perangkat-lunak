@@ -9,6 +9,7 @@ use App\Models\m_panduan;
 use App\Models\M_Pengelola;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
 use Illuminate\View\View as ViewView;
 
@@ -59,8 +60,25 @@ class ViewsController extends Controller
     public function panduan(Request $request)
     {
         $user = Auth::user();
-        $pands = m_panduan::get();
+        $panduan = m_panduan::all();
         $pagetitle = 'Panduan P3M';
-        return view('tampilan.panduan', compact('pands', 'pagetitle', 'user'));
+        return view('tampilan.panduan', compact('panduan', 'pagetitle', 'user'));
+    }
+
+    public function unduh($id)
+    {
+        // Temukan file berdasarkan ID
+        Log::info("Download attempt for ID: " . $id);
+        $panduan = m_panduan::findOrFail($id);
+
+        // Tentukan path file yang akan diunduh
+        $filePath = public_path('uplouds/' . $panduan->generated_name); // Sesuaikan dengan lokasi penyimpanan file Anda
+        // dd($filePath);
+        Log::info("File path: " . $filePath);
+        if (!file_exists($filePath)) {
+            return redirect()->back()->with('error', 'File tidak ditemukan: ' . $filePath);
+        }
+        Log::info("File found, preparing to download.");
+        return response()->download($filePath, $panduan->original_name);
     }
 }

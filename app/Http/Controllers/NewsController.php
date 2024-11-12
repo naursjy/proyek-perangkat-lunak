@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use DOMDocument;
 
 class NewsController extends Controller
 {
@@ -83,9 +84,41 @@ class NewsController extends Controller
 
         Storage::disk('public')->put($path, file_get_contents($image));
 
+        $htmlContent = $request->input('content');
+
+        $dom = new \DOMDocument();
+        @$dom->loadHTML($htmlContent);
+        $images = $dom->getElementsByTagName('img');
+
+        foreach ($images as $img) {
+            if ($img instanceof \DOMElement) {
+                $src = $img->getAttribute('src'); // Mengambil atribut src
+
+                // Cek jika src adalah base64
+                if (strpos($src, 'data:image') === 0) {
+                    list($type, $data) = explode(';', $src);
+                    list(, $data) = explode(',', $data);
+                    $data = base64_decode($data);
+
+                    // Dapatkan ekstensi gambar
+                    $extension = explode('/', $type)[1];
+                    $filename = date('d-m-Y-H-i-s') . '-' . uniqid() . '.' . $extension;
+                    $path = 'photo-news/' . $filename;
+
+                    // Simpan gambar ke storage
+                    Storage::disk('public')->put($path, $data);
+
+                    // Ganti src dengan path yang baru
+                    $img->setAttribute('src', Storage::url($path));
+                }
+            }
+        }
+
+
         // $user = auth()->user();
+        $data = [];
         $data['title']       = $request->title;
-        $data['content']     = $request->content;
+        $data['content']     = $dom->saveHTML();
         $data['category_id'] = $request->category_id;
         $data['image']       = $filename;
         $data['date']        = date('Y-m-d', strtotime($request->date));

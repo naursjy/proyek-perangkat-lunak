@@ -76,17 +76,20 @@
                             <tr>
                                 <th scope="col">No</th>
                                 <th scope="col">Panduan</th>
-                                <th scope="col">Action</th>
+                                <th scope="col">Get</th>
                                 <!-- <th scope="col">Handle</th> -->
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
+                            @foreach ($panduan as $d)
                             <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <!-- <td>@mdo</td> -->
+                                <th scope="row">{{ $loop->iteration }}</th>
+                                <td>{{ $d->original_name }}</td>
+                                <td>
+                                    <a href="{{ asset('uplouds/' . $d->original_name) }}"><i class="fas fa-download"></i> Download</a>
+                                </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

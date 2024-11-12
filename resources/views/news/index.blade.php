@@ -1,6 +1,8 @@
 @extends('layout.main')
 @section('css')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap4.css">
 <link rel="stylesheet" href="{{ asset('lte/../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('lte/../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ asset('lte/../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
@@ -22,12 +24,19 @@
         text-overflow: ellipsis;
     } */
     table {
+        border-collapse: collapse;
         table-layout: fixed;
         width: 100%;
     }
 
     .custom-btn {
         border-radius: 50px;
+    }
+
+    table th,
+    table td {
+        border: 1px black;
+        /* Menambahkan border pada sel */
     }
 
     table td {
@@ -95,16 +104,16 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="card-body table-responsive">
-                            <table id="example2" class="table table-bordered table-hover">
+                        <div class="card-body table-responsive p-0">
+                            <table id="example2" class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
-                                        <th>Titile</th>
-                                        <th>Tanggal</th>
-                                        <th>Pembuat</th>
+                                        <th>#</th>
+                                        <th colspan="2">Title</th>
+                                        <th colspan="2">Tanggal</th>
+                                        <th colspan="2">Pembuat</th>
                                         <th colspan="2">Gambar</th>
-                                        <th>Kategory</th>
+                                        <th colspan="2">Kategory</th>
                                         <th class="col-md-3">ISI</th>
                                         <th colspan="3">Action</th>
                                     </tr>
@@ -113,16 +122,18 @@
                                     @foreach ($news as $d)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $d->title }}</td>
-                                        <td>{{ $d->date }}</td>
-                                        <td>{{ optional($d->user)->name }}</td>
+                                        <td colspan="2">{{ $d->title }}</td>
+                                        <td colspan="2">{{ $d->date }}</td>
+                                        <td colspan="2">{{ optional($d->user)->name }}</td>
                                         <td colspan="2"><img src="{{ asset('storage/photo-news/'.$d->image) }}" alt="" width="100"></td>
-                                        <td>{{ $d->category->name }}</td>
+                                        <td colspan="2">{{ $d->category->name }}</td>
                                         <td id="compose-textarea">{!! Str::words($d->content, 20) !!}</td>
                                         <td colspan="3">
-                                            <a href="{{ route ('news.read', ['id' => $d->id]) }}" class="btn btn-info custom-btn"><i class="fas fa-eye"></i>Detail</a>
-                                            <a href="{{ route ('news.edit', ['id' => $d->id]) }}" class="btn btn-primary custom-btn"><i class="fas fa-pen"></i>edit</a>
-                                            <a href="{{ route ('news.delete', ['id' => $d->id]) }}" class="btn btn-danger custom-btn"><i class="fas fa-trash"></i>hapus</a>
+                                            <div class="btn-group" role="group">
+                                                <a href="{{ route ('news.read', ['id' => $d->id]) }}" class="btn btn-info text-white"><i class="fas fa-eye white"></i></a>
+                                                <a href="{{ route ('news.edit', ['id' => $d->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                                                <a href="{{ route ('news.delete', ['id' => $d->id]) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                            </div>
                                         </td>
 
                                     </tr>
@@ -135,63 +146,9 @@
                 </div>
             </div>
         </div>
+
         <!-- /.card-body -->
     </section>
-
-    <!-- <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">DataTable with minimal features & hover style</h3>
-                        </div>
-
-                        <div class="card-body">
-                            <table id="example2" class="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Titile</th>
-                                        <th>Tanggal</th>
-                                        <th>Pembuat</th>
-                                        <th colspan="2">Gambar</th>
-                                        <th>Kategory</th>
-                                        <th class="col-md-3">ISI</th>
-                                        <th colspan="3">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($news as $d)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $d->title }}</td>
-                                        <td>{{ $d->date }}</td>
-                                        <td>{{ optional($d->user)->name }}</td>
-                                        <td colspan="2"><img src="{{ asset('storage/photo-news/'.$d->image) }}" alt="" width="100"></td>
-                                        <td>{{ $d->category->name }}</td>
-                                        <td id="news-content">{!! Str::words($d->content, 20) !!}</td>
-                                        <td colspan="3">
-                                            <a href="{{ route ('news.read', ['id' => $d->id]) }}" class="btn btn-info custom-btn"><i class="fas fa-eye"></i>Detail</a>
-                                            <a href="{{ route ('news.edit', ['id' => $d->id]) }}" class="btn btn-primary custom-btn"><i class="fas fa-pen"></i>edit</a>
-                                            <a href="{{ route ('news.delete', ['id' => $d->id]) }}" class="btn btn-danger custom-btn"><i class="fas fa-trash"></i>hapus</a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section> -->
-    <!-- /.content -->
 </div>
 
 
@@ -202,7 +159,22 @@
 <script src="{{ asset('lte/../../plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
 <script src="{{ asset('lte/../../plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
 <script src="{{ asset('lte/../../plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-<script>
+<script src="{{ asset('lte/../../plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('lte/../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('lte/../../plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('lte/../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('lte/../../plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('lte/../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('lte/../../plugins/jszip/jszip.min.js') }}"></script>
+<script src="{{ asset('lte/../../plugins/pdfmake/pdfmake.min.js') }}"></script>
+<script src="{{ asset('lte/../../plugins/pdfmake/vfs_fonts.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+<script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap4.js"></script>
+
+<!-- <script>
     $(document).ready(function() {
         $('#example').DataTable();
         $('#example2').DataTable({
@@ -215,14 +187,19 @@
             "responsive": true,
         });
     });
-</script>
+</script> -->
 
 <script>
+    new DataTable('#example');
     $(function() {
         $("#example1").DataTable({
-            "responsive": true,
+            "paging": true,
             "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
             "autoWidth": false,
+            "responsive": true,
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
         }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         $('#example2').DataTable({

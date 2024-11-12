@@ -136,4 +136,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         //route delete
         // Add more routes here...
     });
+
+    //tentang p3m
+
 });

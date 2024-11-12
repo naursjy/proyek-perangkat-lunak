@@ -1,7 +1,13 @@
 @extends('layout.main')
 @section('content')
 
+
+<!-- Bootstrap Color Picker -->
+<link rel="stylesheet" href="{{ asset('lte/../../plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
 <link rel="stylesheet" href="{{ asset('lte/../../plugins/summernote/summernote-bs4.min.css') }}">
+<!-- daterange picker -->
+<link rel="stylesheet" href="{{ asset('lte/../../plugins/daterangepicker/daterangepicker.css') }}">
+<!-- <link rel="stylesheet" href="{{ asset('path/to/bootstrap-datetimepicker.css') }}"> -->
 <style>
     .custom-option {
         background-color: #fff;
@@ -66,38 +72,33 @@
                                         <small>{{ $message }}</small>
                                         @enderror
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group ">
                                         <label for="exampleInputEmail1">Tanggal Pembuatan</label>
-                                        <input type="date" name="date" class="form-control" id="exampleInputEmail1" placeholder="date">
+                                        <input type="date" name="date" class="form-control" id="exampleInputEmail1" placeholder="date" style="width: 150px;">
                                         @error('date')
                                         <small>{{ $message }}</small>
                                         @enderror
                                     </div>
-
                                     <div class="form-group">
                                         <label for="textarea">Isi Berita</label>
                                         <!-- <textarea name="content" id="compose-textarea" class="form-control" style="height: 300px"></textarea> -->
-                                        <textarea name="content" id="editor" class="form-control"></textarea>
+                                        <textarea name="content" id="compose-textarea" class="form-control"></textarea>
                                         @error('content')
                                         <small>{{ $message }}</small>
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <div class="form-group-prepend">
-                                            <label for="category_id">Category:</label>
-                                        </div>
-                                        <select class="btn btn-primary dropdown-toggle " id="category_id" name="category_id">
+                                        <label for="category_id">Kategori : </label>
+                                        <select class="custom-select form-control-border" id="exampleSelectBorder" name="category_id">
                                             @foreach($categories as $d)
-                                            <option class="dropdown-item custom-option" value="{{ $d->id }}">{{ $d->name }}</option>
+                                            <option value="{{ $d->id }}">{{ $d->name }}</option>
                                             @endforeach
-                                        </select><br><br>
-
+                                        </select> <br><br>
                                         @error('category_id')
                                         <small>{{ $message }}</small>
                                         @enderror
                                     </div>
                                 </div>
-
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
@@ -112,10 +113,34 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{{ asset('lte/../../plugins/summernote/summernote-bs4.min.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+<!-- date-range-picker -->
+<script src="{{ asset('lte/../../plugins/daterangepicker/daterangepicker.js') }}"></script>
+<!-- bootstrap color picker -->
+<script src="{{ asset('lte/../../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="path/to/moment.js"></script>
+<script src="path/to/bootstrap-datetimepicker.js"></script>
 <script>
     $(function() {
         //Add text editor
         $('#compose-textarea').summernote()
     })
 </script>
+
+
+<script>
+    $('#summernote').summernote({
+        placeholder: 'Hello Bootstrap 5',
+        tabsize: 2,
+        height: 100
+    });
+
+    $('#reservationdate').datetimepicker({
+        format: 'L'
+    });
+</script>
+
 @endsection
