@@ -163,12 +163,23 @@
         /* Memastikan gambar mengisi area yang ditentukan tanpa merusak rasio aspek */
     }
 </style>
+<div class="page-title mt-5" data-aos="fade">
+    <div class="container">
+        <nav class="breadcrumbs mt-5">
+            <ol>
+                <li><a href="#">Home</a></li>
+                <li class="current">{{ $pagetitle }}</li>
+            </ol>
+        </nav>
+        <h1>{{ $pagetitle }}</h1>
+        <small>Politeknik Balekambang Jepara</small>
+    </div>
+</div><!-- End Page Title -->
 <section id="team" class="team section">
     <div class="container">
-        <!-- Section Title -->
         <div class="container section-title mt-5" data-aos="fade-up">
             <h2>Berita P3M POLIBANG</h2>
-        </div><!-- End Section Title -->
+        </div>
         <div class="content-wrapper mt-1 p-1">
             <!-- <ul class="cards">
             <li class="cards__item">

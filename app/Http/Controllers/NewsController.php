@@ -23,17 +23,30 @@ class NewsController extends Controller
     public function index(Request $request)
     {
         // $data = new M_news();
+        $pagetitle = 'Berita Terkini';
         $user = Auth::user();
-        $news = M_news::where('user_id', Auth::id())
+        $data = M_news::where('user_id', Auth::id())
             ->orWhereNull('user_id')
             ->orderBy('created_at', 'desc')
             ->get();
-        // if ($request->get('search')) {
-        //     $data = M_news::where('title', 'like', '%' . $request->get('search') . '%');
-        // }
-        $pagetitle = 'Berita Terkini';
-        // $data = $data->get();
-        return view('news.index', compact('news', 'pagetitle', 'user'));
+        if ($request->get('search')) {
+            $data = M_news::where('title', 'like', '%' . $request->get('search') . '%');
+        }
+
+        return view('news.index', compact('pagetitle', 'data', 'request', 'user'));
+
+        // // $data = new M_news();
+        // $user = Auth::user();
+        // $news = M_news::where('user_id', Auth::id())
+        //     ->orWhereNull('user_id')
+        //     ->orderBy('created_at', 'desc')
+        //     ->get();
+        // // if ($request->get('search')) {
+        // //     $data = M_news::where('title', 'like', '%' . $request->get('search') . '%');
+        // // }
+        // $pagetitle = 'Berita Terkini';
+        // // $data = $data->get();
+        // return view('news.index', compact('news', 'pagetitle', 'user'));
     }
 
     public function search(Request $request)
@@ -156,6 +169,37 @@ class NewsController extends Controller
         $data['category_id'] = $request->category_id;
         $data['date']        = date('Y-m-d', strtotime($request->date));
         $data['user_id']     = Auth::user()->id;
+
+        // $htmlContent = $request->input('content');
+
+        // $dom = new \DOMDocument();
+        // @$dom->loadHTML($htmlContent);
+        // $images = $dom->getElementsByTagName('img');
+
+        // foreach ($images as $img) {
+        //     if ($img instanceof \DOMElement) {
+        //         $src = $img->getAttribute('src'); // Mengambil atribut src
+
+        //         // Cek jika src adalah base64
+        //         if (strpos($src, 'data:image') === 0) {
+        //             list($type, $data) = explode(';', $src);
+        //             list(, $data) = explode(',', $data);
+        //             $data = base64_decode($data);
+
+        //             // Dapatkan ekstensi gambar
+        //             $extension = explode('/', $type)[1];
+        //             $filename = date('d-m-Y-H-i-s') . '-' . uniqid() . '.' . $extension;
+        //             $path = 'photo-news/' . $filename;
+
+        //             // Simpan gambar ke storage
+        //             Storage::disk('public')->put($path, $data);
+
+        //             // Ganti src dengan path yang baru
+        //             $img->setAttribute('src', Storage::url($path));
+        //         }
+        //     }
+        // }
+
 
         $image = $request->file('image');
         if ($image) {

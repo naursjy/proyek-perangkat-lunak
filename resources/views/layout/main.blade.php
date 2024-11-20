@@ -34,6 +34,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpdmOHSUnXTr9Q4iUds+Wl5NzVs+sm2X/VzV5SglNPhCegnar4TQ69K4GT+3n5OZXdTqkq==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- ckeditor -->
     <script src="https://cdn.ckeditor.com/ckeditor5/35.3.1/classic/ckeditor.js"></script>
+    <!-- <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script> -->
+    <!-- <script src="//cdn.ckeditor.com/4.22.1/basic/ckeditor.js"></script> -->
     <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.1.0/ckeditor5.css">
 
     <!-- include libraries(jQuery, bootstrap) -->
@@ -193,6 +195,16 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('tentang.index') }}" class="nav-link">
+                                <!-- <i class="nav-icon fas fa-users"></i> -->
+                                <i class="nav-icon fas fa-address-card"></i>
+                                <p>
+                                    Tentang P3M
+                                    <!-- <span class="right badge badge-danger">New</span> -->
+                                </p>
+                            </a>
+                        </li>
                         <li class="nav-header">Akun</li>
                         <li class="nav-item">
                             <a href="{{ route('logout') }}" class="nav-link">
@@ -270,7 +282,7 @@
         ClassicEditor
             .create(document.querySelector('#editor'), {
                 // Konfigurasi lainnya
-                readOnly: true
+                // readOnly: true
             })
             .catch(error => {
                 console.error(error);
@@ -297,6 +309,7 @@
 
     <script>
         // Function to preview image
+
         function previewImage(event) {
             var reader = new FileReader();
             reader.onload = function() {

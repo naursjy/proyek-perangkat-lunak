@@ -154,15 +154,13 @@
     <div class="container">
         <div class="row gy-3">
             <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
+                @foreach($tentang as $bout)
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                    magna aliqua.
+                    {!! Str::words(strip_tags($bout->ourbout), 30) !!}
                 </p>
                 <ul>
-                    <li><i class="bi bi-check2-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
-                    <li><i class="bi bi-check2-circle"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
-                    <li><i class="bi bi-check2-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo</span></li>
-                </ul>
+                    <!-- <li><i class="bi bi-check2-circle"></i> <span>{{ nl2br(e(Str::words($bout->misi, 10))) }}</span></li> -->
+                    @endforeach
             </div>
             <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
                 <!-- <div class="sidebar">
@@ -517,13 +515,11 @@
 </section> -->
 
 <!-- Contact Section -->
-<section id="contact" class="contact section">
-
-    <!-- Section Title -->
+<!-- <section id="contact" class="contact section">
     <div class="container section-title" data-aos="fade-up">
         <h2>Contact</h2>
         <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-    </div><!-- End Section Title -->
+    </div>
 
     <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -538,7 +534,7 @@
                             <h3>Address</h3>
                             <p>A108 Adam Street, New York, NY 535022</p>
                         </div>
-                    </div><!-- End Info Item -->
+                    </div>
 
                     <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
                         <i class="bi bi-telephone flex-shrink-0"></i>
@@ -546,7 +542,7 @@
                             <h3>Call Us</h3>
                             <p>+1 5589 55488 55</p>
                         </div>
-                    </div><!-- End Info Item -->
+                    </div>
 
                     <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
                         <i class="bi bi-envelope flex-shrink-0"></i>
@@ -554,9 +550,8 @@
                             <h3>Email Us</h3>
                             <p>info@example.com</p>
                         </div>
-                    </div><!-- End Info Item -->
-
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus" frameborder="0" style="border:0; width: 100%; height: 270px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <iframe src="http://www.google.com/maps/place/Politeknik+Balekambang/@-6.7222896,110.775183,17z/data=!4m14!1m7!3m6!1s0x2e70dd4a51453157:0xb3c2ba4e447cc93f!2sPoliteknik+Balekambang!8m2!3d-6.7222949!4d110.7777633!16s%2Fg%2F11hdlmb02z!3m5!1s0x2e70dd4a51453157:0xb3c2ba4e447cc93f!8m2!3d-6.7222949!4d110.7777633!16s%2Fg%2F11hdlmb02z?entry=ttu&g_ep=EgoyMDI0MTExMy4xIKXMDSoASAFQAw%3D%3D" frameborder="0" style="border:0; width: 100%; height: 270px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
 
@@ -594,13 +589,13 @@
 
                     </div>
                 </form>
-            </div><!-- End Contact Form -->
+            </div>
 
         </div>
 
     </div>
 
-</section><!-- /Contact Section -->
+</section> -->
 @endsection
 
 <script>

@@ -7,6 +7,7 @@ use App\Models\m_dashboard;
 use App\Models\M_news;
 use App\Models\m_panduan;
 use App\Models\M_Pengelola;
+use App\Models\M_tentang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -19,42 +20,48 @@ class ViewsController extends Controller
 {
     public function tampilan()
     {
+        $pagetitle = 'Panduan P3M';
         $dash = m_dashboard::all();
         $berita = M_news::orderBy('created_at', 'desc')->get();
         $pengelola = M_Pengelola::all();
         $categories = M_categories::all();
-        return view('tampilan.index',  compact('dash', 'pengelola', 'categories', 'berita'));
+        $tentang = M_tentang::all();
+        return view('tampilan.index',  compact('pagetitle', 'dash', 'pengelola', 'categories', 'berita', 'tentang'));
     }
 
     public function berita()
     {
+        $pagetitle = 'Panduan P3M';
         $berita = M_news::orderBy('created_at', 'desc')->get();
         $categories = M_categories::all();
-        return view('tampilan.berita', compact('berita', 'categories'));
+        return view('tampilan.berita', compact('pagetitle', 'berita', 'categories'));
     }
 
     public function show($id): ViewView
     {
+        $pagetitle = 'Panduan P3M';
         $berita = M_news::find($id);
         $categories = M_categories::all();
         $data = M_news::orderBy('created_at', 'desc')->take(5)->get();
-        return view('tampilan.detail', compact('berita', 'categories', 'data'));
+        return view('tampilan.detail', compact('pagetitle', 'berita', 'categories', 'data'));
     }
 
     public function showPortfolioDetails($id)
     {
+        $pagetitle = 'Panduan P3M';
         $dat = M_news::find($id);
         $dat = M_news::orderBy('created_at', 'desc')->take(5)->get(); // Mengambil 3 berita terbaru
-        return view('tampilan.detail', compact('dat', 'recentNews'));
+        return view('tampilan.detail', compact('pagetitle', 'dat', 'recentNews'));
     }
 
     public function struktur()
     {
         // $dash = m_dashboard::all();
         // $berita = M_news::orderBy('created_at', 'desc')->get();
+        $pagetitle = 'Panduan P3M';
         $pengelola = M_Pengelola::all();
         // $categories = M_categories::all();
-        return view('tampilan.struktur',  compact('pengelola'));
+        return view('tampilan.struktur',  compact('pengelola', 'pagetitle'));
     }
 
     public function panduan(Request $request)
@@ -80,5 +87,14 @@ class ViewsController extends Controller
         }
         Log::info("File found, preparing to download.");
         return response()->download($filePath, $panduan->original_name);
+    }
+
+    //tentang
+    public function tentang(Request $request)
+    {
+        $tentang = M_tentang::all();
+        $pagetitle = 'Informasi P3M';
+        $berita =  M_news::orderBy('created_at', 'desc')->take(5)->get();
+        return view('tampilan.tentang', compact('tentang', 'pagetitle', 'berita'));
     }
 }

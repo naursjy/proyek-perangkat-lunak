@@ -32,7 +32,7 @@
                 @method('put')
                 <div class="row">
                     <!-- left column -->
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
@@ -107,4 +107,11 @@
     <!-- /.content -->
 </div>
 
+<script>
+    // Inisialisasi CKEditor
+    CKEDITOR.replace('editor', {
+        filebrowserUploadUrl: 'photo-news/', // URL untuk meng-upload gambar
+        filebrowserUploadMethod: 'form'
+    });
+</script>
 @endsection

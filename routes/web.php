@@ -8,6 +8,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\PengelolaController;
+use App\Http\Controllers\TentangController;
 use App\Http\Controllers\ViewsController;
 use Illuminate\Routing\ViewController;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,7 @@ Route::get('/berita', [ViewsController::class, 'berita'])->name('tampilan.berita
 Route::get('/tampilan/deber/detail/{id}', [ViewsController::class, 'show'])->name('tampilan.detail');
 Route::get('/struktur', [ViewsController::class, 'struktur'])->name('tampilan.struktur');
 Route::get('/panduanp3m', [ViewsController::class, 'panduan'])->name('tampilan.panduan');
+Route::get('/tentang', [ViewsController::class, 'tentang'])->name('tampilan.tentang');
 
 //proses login
 Route::get('/login', [AuthController::class, 'index'])->name('login');
@@ -138,5 +140,11 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
 
     //tentang p3m
-
+    Route::prefix('tentang')->group(function () {
+        Route::get('/index', [TentangController::class, 'index'])->name('tentang.index');
+        Route::get('/create', [TentangController::class, 'create'])->name('tentang.create');
+        Route::post('/store', [TentangController::class, 'store'])->name('tentang.store');
+        Route::get('/edit/{id}', [TentangController::class, 'edit'])->name('tentang.edit');
+        Route::match(['get', 'PUT'], '/update/{id}', [TentangController::class, 'update'])->name('tentang.update');
+    });
 });

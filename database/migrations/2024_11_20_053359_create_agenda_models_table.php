@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('m_tentangs', function (Blueprint $table) {
+        Schema::create('agenda_models', function (Blueprint $table) {
             $table->id();
-            $table->string('visi');
-            $table->string('misi');
-            $table->string('ourbout');
-            $table->text('isi');
-
             $table->timestamps();
         });
     }
@@ -27,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('m_tentangs');
+        Schema::dropIfExists('agenda_models');
     }
 };

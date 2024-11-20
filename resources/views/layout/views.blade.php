@@ -61,7 +61,7 @@
                     </li>
                     <li class="dropdown"><a href="#"><span>Sekilas P3M</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
-                            <li><a href="#">Visi Misi</a></li>
+                            <li><a href="{{ route('tampilan.tentang') }}">Visi Misi</a></li>
                             <li><a href="{{ route('tampilan.struktur') }}">Struktur Organisasi</a></li>
                         </ul>
                     </li>
