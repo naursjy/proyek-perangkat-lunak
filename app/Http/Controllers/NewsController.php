@@ -170,37 +170,68 @@ class NewsController extends Controller
         $data['date']        = date('Y-m-d', strtotime($request->date));
         $data['user_id']     = Auth::user()->id;
 
-        // $htmlContent = $request->input('content');
+        // Mengambil konten dari textarea
+        $htmlContent = $request->input('content');
 
-        // $dom = new \DOMDocument();
-        // @$dom->loadHTML($htmlContent);
-        // $images = $dom->getElementsByTagName('img');
+        // mengambil HTML untuk memproses gambar
+        $dom = new \DOMDocument();
+        @$dom->loadHTML($htmlContent);
+        $images = $dom->getElementsByTagName('img');
 
-        // foreach ($images as $img) {
-        //     if ($img instanceof \DOMElement) {
-        //         $src = $img->getAttribute('src'); // Mengambil atribut src
+        // Hapus gambar yang ada di dalam konten HTML sebelumnya
+        $previousDom = new \DOMDocument();
+        @$previousDom->loadHTML($find->content);
+        $previousImages = $previousDom->getElementsByTagName('img');
 
-        //         // Cek jika src adalah base64
-        //         if (strpos($src, 'data:image') === 0) {
-        //             list($type, $data) = explode(';', $src);
-        //             list(, $data) = explode(',', $data);
-        //             $data = base64_decode($data);
+        // Cek apakah ada gambar baru
+        $hasNewImages = false;
 
-        //             // Dapatkan ekstensi gambar
-        //             $extension = explode('/', $type)[1];
-        //             $filename = date('d-m-Y-H-i-s') . '-' . uniqid() . '.' . $extension;
-        //             $path = 'photo-news/' . $filename;
+        // Proses gambar baru dari textarea
+        foreach ($images as $img) {
+            if ($img instanceof \DOMElement) {
+                $src = $img->getAttribute('src');
 
-        //             // Simpan gambar ke storage
-        //             Storage::disk('public')->put($path, $data);
+                // Cek jika src adalah base64
+                if (strpos($src, 'data:image') === 0) {
+                    $hasNewImages = true; // Menandai bahwa ada gambar baru
 
-        //             // Ganti src dengan path yang baru
-        //             $img->setAttribute('src', Storage::url($path));
-        //         }
-        //     }
-        // }
+                    list($type, $data) = explode(';', $src);
+                    list(, $data) = explode(',', $data);
+                    $data = base64_decode($data);
 
+                    // Dapatkan ekstensi gambar
+                    $extension = explode('/', $type)[1];
+                    $filename = date('d-m-Y-H-i-s') . '-' . uniqid() . '.' . $extension;
+                    $path = 'photo-agenda/' . $filename;
 
+                    // Simpan gambar ke storage
+                    Storage::disk('public')->put($path, $data);
+
+                    // Ganti src dengan path yang baru
+                    $img->setAttribute('src', Storage::url($path));
+                }
+            }
+        }
+
+        // Hapus gambar yang ada di storage jika ada gambar baru
+        if ($hasNewImages) {
+            foreach ($previousImages as $img) {
+                if ($img instanceof \DOMElement) {
+                    $src = $img->getAttribute('src');
+
+                    // Ambil nama file dari URL
+                    $filename = basename($src);
+                    $path = 'photo-agenda/' . $filename;
+
+                    // Hapus gambar dari storage jika ada
+                    if (Storage::disk('public')->exists($path)) {
+                        Storage::disk('public')->delete($path);
+                    }
+                }
+            }
+        }
+
+        //menghapus gambar inputan
         $image = $request->file('image');
         if ($image) {
             $filename = date('d-m-Y') . $image->getClientOriginalName();
@@ -218,11 +249,36 @@ class NewsController extends Controller
 
     public function delete(Request $request, $id)
     {
-        $news = M_news::find($id);
-        if ($news) {
-            $news->delete();
+        $agenda = M_news::find($id);
+        if ($agenda) {
+            // Misalkan kolom 'keterangan' menyimpan HTML yang berisi gambar
+            $htmlContent = $agenda->content;
+
+            // Memuat HTML untuk memproses gambar
+            $dom = new \DOMDocument();
+            @$dom->loadHTML($htmlContent);
+            $images = $dom->getElementsByTagName('img');
+
+            // Hapus gambar dari server
+            foreach ($images as $img) {
+                if ($img instanceof \DOMElement) {
+                    $src = $img->getAttribute('src');
+
+                    // Ambil nama file dari URL
+                    $filename = basename($src);
+                    $path = public_path('photo-news/' . $filename);
+
+                    // Hapus gambar dari server jika ada
+                    if (file_exists($path)) {
+                        unlink($path);
+                    }
+                }
+            }
+
+            // Menghapus data dari database
+            $agenda->delete();
         }
-        return redirect()->route('news.index')->with('success', 'Data berhasil dihapus!');
+        return redirect()->route('agenda.index')->with('success', 'Data berhasil dihapus!');
     }
     public function read(Request $request, $id)
     {

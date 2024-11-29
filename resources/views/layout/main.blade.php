@@ -164,7 +164,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('news.index') }}" class="nav-link">
+                            <a href="{{ route('agenda.index') }}" class="nav-link">
                                 <i class="nav-icon far fa-calendar-alt"></i>
                                 <!-- <i class="fas fa-calendar-week"></i> -->
                                 <!-- <i class="nav-icon fas fa-th"></i> -->

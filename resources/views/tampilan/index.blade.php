@@ -85,63 +85,8 @@
 
 
 <!-- Clients Section -->
-<section id="clients" class="clients section light-background">
 
-    <div class="container" data-aos="zoom-in">
-
-        <div class="swiper init-swiper">
-            <script type="application/json" class="swiper-config">
-                {
-                    "loop": true,
-                    "speed": 600,
-                    "autoplay": {
-                        "delay": 5000
-                    },
-                    "slidesPerView": "auto",
-                    "pagination": {
-                        "el": ".swiper-pagination",
-                        "type": "bullets",
-                        "clickable": true
-                    },
-                    "breakpoints": {
-                        "320": {
-                            "slidesPerView": 2,
-                            "spaceBetween": 40
-                        },
-                        "480": {
-                            "slidesPerView": 3,
-                            "spaceBetween": 60
-                        },
-                        "640": {
-                            "slidesPerView": 4,
-                            "spaceBetween": 80
-                        },
-                        "992": {
-                            "slidesPerView": 5,
-                            "spaceBetween": 120
-                        },
-                        "1200": {
-                            "slidesPerView": 6,
-                            "spaceBetween": 120
-                        }
-                    }
-                }
-            </script>
-            <div class="swiper-wrapper align-items-center">
-                <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/balekambang.jpg') }}" class="img-fluid" alt=""></div>
-                <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/polibang.png') }}" class="img-fluid" alt=""></div>
-                <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/ponpes.jpg') }}" class="img-fluid" alt=""></div> -->
-                <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-4.png') }}" class="img-fluid" alt=""></div> -->
-                <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-5.png') }}" class="img-fluid" alt=""></div> -->
-                <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-6.png') }}" class="img-fluid" alt=""></div> -->
-                <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-7.png') }}" class="img-fluid" alt=""></div> -->
-                <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-8.png') }}" class="img-fluid" alt=""></div> -->
-            </div>
-        </div>
-
-    </div>
-
-</section><!-- /Clients Section -->
+<!-- /Clients Section -->
 
 <!-- About Section -->
 <section id="about" class="about section">
@@ -283,39 +228,13 @@
 
         <div class="row gy-4">
 
-            <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
-                <div class="service-item position-relative">
-                    <div class="icon"><i class="bi bi-activity icon"></i></div>
-                    <h4><a href="" class="stretched-link">Lorem Ipsum</a></h4>
-                    <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
-                    <p href="" class="" style="text-align: center;">Selengkapnya</p>
-                </div>
-            </div><!-- End Service Item -->
-
-            <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
-                <div class="service-item position-relative">
-                    <div class="icon"><i class="bi bi-bounding-box-circles icon"></i></div>
-                    <h4><a href="" class="stretched-link">Sed ut perspici</a></h4>
-                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-                </div>
-            </div><!-- End Service Item -->
-
             <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
                 <div class="service-item position-relative">
                     <div class="icon"><i class="bi bi-calendar4-week icon"></i></div>
                     <h4><a href="" class="stretched-link">Magni Dolores</a></h4>
                     <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
                 </div>
-            </div><!-- End Service Item -->
-
-            <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="400">
-                <div class="service-item position-relative">
-                    <div class="icon"><i class="bi bi-broadcast icon"></i></div>
-                    <h4><a href="" class="stretched-link">Nemo Enim</a></h4>
-                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-                </div>
-            </div><!-- End Service Item -->
-
+            </div>
         </div>
 
     </div>
@@ -351,7 +270,6 @@
                     </div>
                 </div>
             </div>
-
             @endforeach
             <div class="text-center mt-4" data-aos="zoom-in" data-aos-delay="100">
                 <a href="{{ route('tampilan.berita') }}" class="">Selengkapnya -></a> <!-- Ganti dengan route yang sesuai -->
@@ -432,7 +350,7 @@
             </div>
             @endforeach
             <div class="text-center mt-4" data-aos="zoom-in" data-aos-delay="100">
-                <a href="" class="">Selengkapnya -></a>
+                <a href="{{ route('tampilan.struktur') }}" class="">Selengkapnya -></a>
             </div>
         </div>
 
@@ -440,7 +358,63 @@
 
 </section><!-- /Team Section -->
 
+<section id="clients" class="clients section light-background">
 
+    <div class="container" data-aos="zoom-in">
+
+        <div class="swiper init-swiper">
+            <script type="application/json" class="swiper-config">
+                {
+                    "loop": true,
+                    "speed": 600,
+                    "autoplay": {
+                        "delay": 5000
+                    },
+                    "slidesPerView": "auto",
+                    "pagination": {
+                        "el": ".swiper-pagination",
+                        "type": "bullets",
+                        "clickable": true
+                    },
+                    "breakpoints": {
+                        "320": {
+                            "slidesPerView": 2,
+                            "spaceBetween": 40
+                        },
+                        "480": {
+                            "slidesPerView": 3,
+                            "spaceBetween": 60
+                        },
+                        "640": {
+                            "slidesPerView": 4,
+                            "spaceBetween": 80
+                        },
+                        "992": {
+                            "slidesPerView": 5,
+                            "spaceBetween": 120
+                        },
+                        "1200": {
+                            "slidesPerView": 6,
+                            "spaceBetween": 120
+                        }
+                    }
+                }
+            </script>
+            <div class="swiper-wrapper align-items-center">
+                <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/balekambang.jpg') }}" class="img-fluid" alt=""></div>
+                <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/polibang.png') }}" class="img-fluid" alt=""></div>
+                <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/ponpes.jpg') }}" class="img-fluid" alt=""></div>
+                <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-4.png') }}" class="img-fluid" alt=""></div> -->
+                <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-5.png') }}" class="img-fluid" alt=""></div> -->
+                <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-6.png') }}" class="img-fluid" alt=""></div> -->
+                <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-7.png') }}" class="img-fluid" alt=""></div> -->
+                <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-8.png') }}" class="img-fluid" alt=""></div> -->
+            </div>
+        </div>
+
+    </div>
+
+</section>
 
 <!-- Faq 2 Section -->
 <!-- <section id="faq-2" class="faq-2 section light-background">

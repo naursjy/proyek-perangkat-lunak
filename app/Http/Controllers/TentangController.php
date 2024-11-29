@@ -95,18 +95,31 @@ class TentangController extends Controller
 
         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
+        // Mengambil konten dari textarea
         $htmlContent = $request->input('ourbout');
 
+        // Memuat HTML untuk memproses gambar
         $dom = new \DOMDocument();
         @$dom->loadHTML($htmlContent);
         $images = $dom->getElementsByTagName('img');
 
+        // Hapus gambar yang ada di dalam konten HTML sebelumnya
+        $previousDom = new \DOMDocument();
+        @$previousDom->loadHTML($find->ourbout);
+        $previousImages = $previousDom->getElementsByTagName('img');
+
+        // Cek apakah ada gambar baru
+        $hasNewImages = false;
+
+        // Proses gambar baru dari textarea
         foreach ($images as $img) {
             if ($img instanceof \DOMElement) {
-                $src = $img->getAttribute('src'); // Mengambil atribut src
+                $src = $img->getAttribute('src');
 
                 // Cek jika src adalah base64
                 if (strpos($src, 'data:image') === 0) {
+                    $hasNewImages = true; // Menandai bahwa ada gambar baru
+
                     list($type, $data) = explode(';', $src);
                     list(, $data) = explode(',', $data);
                     $data = base64_decode($data);
@@ -124,8 +137,26 @@ class TentangController extends Controller
                 }
             }
         }
+
+        // Hapus gambar yang ada di storage jika ada gambar baru
+        if ($hasNewImages) {
+            foreach ($previousImages as $img) {
+                if ($img instanceof \DOMElement) {
+                    $src = $img->getAttribute('src');
+
+                    // Ambil nama file dari URL
+                    $filename = basename($src);
+                    $path = 'photo-tentang/' . $filename;
+
+                    // Hapus gambar dari storage jika ada
+                    if (Storage::disk('public')->exists($path)) {
+                        Storage::disk('public')->delete($path);
+                    }
+                }
+            }
+        }
         // $user = auth()->user();
-        // $data = [];
+        $data = [];
         $data['visi']       = $request->visi;
         $data['misi']       = $request->misi;
         $data['ourbout']       = $dom->saveHTML();

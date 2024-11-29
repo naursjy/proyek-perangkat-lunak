@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DataTableController;
@@ -146,5 +147,15 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::post('/store', [TentangController::class, 'store'])->name('tentang.store');
         Route::get('/edit/{id}', [TentangController::class, 'edit'])->name('tentang.edit');
         Route::match(['get', 'PUT'], '/update/{id}', [TentangController::class, 'update'])->name('tentang.update');
+    });
+
+    //agenda p3m
+    Route::prefix('agenda')->group(function () {
+        Route::get('/index', [AgendaController::class, 'index'])->name('agenda.index');
+        Route::get('/create', [AgendaController::class, 'create'])->name('agenda.create');
+        Route::post('/store', [AgendaController::class, 'store'])->name('agenda.store');
+        Route::get('/edit/{id}', [AgendaController::class, 'edit'])->name('agenda.edit');
+        Route::match(['get', 'PUT'], '/update/{id}', [AgendaController::class, 'update'])->name('agenda.update');
+        Route::get('/delete/{id}', [AgendaController::class, 'delete'])->name('agenda.delete');
     });
 });
