@@ -36,6 +36,8 @@ Route::get('/tampilan/deber/detail/{id}', [ViewsController::class, 'show'])->nam
 Route::get('/struktur', [ViewsController::class, 'struktur'])->name('tampilan.struktur');
 Route::get('/panduanp3m', [ViewsController::class, 'panduan'])->name('tampilan.panduan');
 Route::get('/tentang', [ViewsController::class, 'tentang'])->name('tampilan.tentang');
+Route::get('/agenda', [ViewsController::class, 'agenda'])->name('tampilan.agenda');
+Route::get('/detailagenda/{id}', [ViewsController::class, 'listagenda'])->name('tampilan.detailagenda');
 
 //proses login
 Route::get('/login', [AuthController::class, 'index'])->name('login');

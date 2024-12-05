@@ -52,10 +52,10 @@
             <nav id="navmenu" class="navmenu">
                 <ul>
                     <li><a href="{{ route('tampilan') }}" class="{{ request()->routeIs('tampilan') ? 'active' : '' }}">Beranda</a></li>
-                    <li class="dropdown"><a href="#"><span>Seputar P2M</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                    <li class="dropdown"><a href="#"><span>Seputar P3M</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
                             <li><a href="{{ route('tampilan.berita') }}" class="{{ request()->routeIs('tampilan.berita') ? 'active' : '' }}">Berita</a></li>
-                            <li><a href="#">Agenda</a></li>
+                            <li><a href="{{ route('tampilan.agenda') }}">Agenda</a></li>
                             <li><a href="{{ route('tampilan.panduan') }}">Panduan</a></li>
                         </ul>
                     </li>

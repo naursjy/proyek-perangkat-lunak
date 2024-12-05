@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AgendaModel;
 use App\Models\M_categories;
 use App\Models\m_dashboard;
 use App\Models\M_news;
@@ -18,6 +19,7 @@ use Illuminate\View\View as ViewView;
 
 class ViewsController extends Controller
 {
+    //home
     public function tampilan()
     {
         $pagetitle = 'Panduan P3M';
@@ -26,9 +28,11 @@ class ViewsController extends Controller
         $pengelola = M_Pengelola::all();
         $categories = M_categories::all();
         $tentang = M_tentang::all();
-        return view('tampilan.index',  compact('pagetitle', 'dash', 'pengelola', 'categories', 'berita', 'tentang'));
+        $agenda = AgendaModel::all();
+        return view('tampilan.index',  compact('pagetitle', 'dash', 'pengelola', 'categories', 'berita', 'tentang', 'agenda'));
     }
 
+    //laman berita p3m
     public function berita()
     {
         $pagetitle = 'Panduan P3M';
@@ -37,6 +41,7 @@ class ViewsController extends Controller
         return view('tampilan.berita', compact('pagetitle', 'berita', 'categories'));
     }
 
+    //list berita
     public function show($id): ViewView
     {
         $pagetitle = 'Panduan P3M';
@@ -46,6 +51,7 @@ class ViewsController extends Controller
         return view('tampilan.detail', compact('pagetitle', 'berita', 'categories', 'data'));
     }
 
+    //detail berita
     public function showPortfolioDetails($id)
     {
         $pagetitle = 'Panduan P3M';
@@ -54,6 +60,7 @@ class ViewsController extends Controller
         return view('tampilan.detail', compact('pagetitle', 'dat', 'recentNews'));
     }
 
+    //struktur P3M
     public function struktur()
     {
         // $dash = m_dashboard::all();
@@ -64,6 +71,7 @@ class ViewsController extends Controller
         return view('tampilan.struktur',  compact('pengelola', 'pagetitle'));
     }
 
+    //panduan
     public function panduan(Request $request)
     {
         $user = Auth::user();
@@ -72,6 +80,7 @@ class ViewsController extends Controller
         return view('tampilan.panduan', compact('panduan', 'pagetitle', 'user'));
     }
 
+    //unduh panduan
     public function unduh($id)
     {
         // Temukan file berdasarkan ID
@@ -96,5 +105,23 @@ class ViewsController extends Controller
         $pagetitle = 'Informasi P3M';
         $berita =  M_news::orderBy('created_at', 'desc')->take(5)->get();
         return view('tampilan.tentang', compact('tentang', 'pagetitle', 'berita'));
+    }
+
+    //agenda
+    public function agenda(Request $request)
+    {
+        $user = Auth::user();
+        $agenda = AgendaModel::all();
+        $kegiatan = AgendaModel::orderBy('created_at', 'desc')->take(5)->get();
+        $pagetitle = 'Agenda Kegiatan P3M';
+        return view('tampilan.agenda', compact('agenda', 'pagetitle', 'user', 'kegiatan'));
+    }
+    //list agenda
+    public function listagenda($id)
+    {
+        $pagetitle = 'Panduan P3M';
+        $agen = AgendaModel::find($id);
+        $agenda = AgendaModel::orderBy('created_at', 'desc')->take(5)->get();
+        return view('tampilan.detailagenda', compact('pagetitle', 'agen', 'agenda'));
     }
 }
