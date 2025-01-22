@@ -55,7 +55,7 @@
             <div class="container">
                 <nav class="breadcrumbs mt-5">
                     <ol>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="{{ route('tampilan') }}">Home</a></li>
                         <li class="current">{{ $pagetitle }}</li>
                     </ol>
                 </nav>
@@ -93,7 +93,7 @@
                                     <td>{{ $d->time }}</td>
                                     <td>{{ $d->lokasi }}</td>
                                     <td>{!! Str::words($d->keterangan, 20) !!}</td>
-                                    <td> <a href="{{ route ('tampilan.detailagenda', ['id' => $d->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a></td>
+                                    <td> <a href="{{ route ('tampilan.detailagenda', ['id' => $d->id]) }}" class="btn btn-warning"><i class="fas fa-eye"></i></a></td>
                                 </tr>
                                 @endforeach
                             </tbody>

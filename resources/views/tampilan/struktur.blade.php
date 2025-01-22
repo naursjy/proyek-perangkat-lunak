@@ -12,7 +12,7 @@
     <div class="container">
         <nav class="breadcrumbs mt-5">
             <ol>
-                <li><a href="#">Home</a></li>
+                <li><a href="{{ route('tampilan') }}">Home</a></li>
                 <li class="current">{{ $pagetitle }}</li>
             </ol>
         </nav>

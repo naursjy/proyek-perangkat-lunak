@@ -33,7 +33,7 @@
                                         <div class="btn-group" role="group">
                                             <a href="{{ route('tentang.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i></a>
                                             <a href="{{ route('tentang.edit',  ['id' => $bout->first()->id]) }}" class="btn btn-info"><i class="fas fa-pen"></i></a>
-                                            <a href="{{ route('tentang.edit',  ['id' => $bout->first()->id]) }}" class="btn btn-warning"><i class="fas fa-eye white"></i></a>
+                                            <!-- <a href="{{ route('tentang.edit',  ['id' => $bout->first()->id]) }}" class="btn btn-warning"><i class="fas fa-eye white"></i></a> -->
                                         </div>
                                     </div>
                                 </form>

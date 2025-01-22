@@ -167,7 +167,7 @@
     <div class="container">
         <nav class="breadcrumbs mt-5">
             <ol>
-                <li><a href="#">Home</a></li>
+                <li><a href="{{ route('tampilan') }}">Home</a></li>
                 <li class="current">{{ $pagetitle }}</li>
             </ol>
         </nav>
@@ -178,7 +178,7 @@
 <section id="team" class="team section">
     <div class="container">
         <div class="container section-title mt-5" data-aos="fade-up">
-            <h2>Berita P3M POLIBANG</h2>
+            <h2>Kegiatan P3M POLIBANG</h2>
         </div>
         <div class="content-wrapper mt-1 p-1">
             <!-- <ul class="cards">
@@ -231,6 +231,9 @@
                     </div>
                 </div>
                 @endforeach
+            </div>
+            <div class="d-flex justify-content-center mt-4">
+                {{ $berita->links('pagination::bootstrap-4') }}
             </div>
         </div>
     </div>

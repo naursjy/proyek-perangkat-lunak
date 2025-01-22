@@ -124,14 +124,14 @@
                 </div> -->
                 <!-- <p>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p> -->
                 <strong>Baca Lebih Banyak Mengenai Kami</strong> <br>
-                <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a> <br>
+                <a href="{{ route('tampilan.tentang') }}" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a> <br>
                 <div><br></div>
                 <!-- <a href="#" class="read-more"><span>Jurnal</span><i class="bi bi-arrow-right"></i></a> -->
                 <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
                     <!-- <p>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p> -->
                     <!-- <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a> <br> -->
                     <strong>Jurnal Penelitian dan Pengabdian</strong>
-                    <a href="#" class="read-more"><span>Jurnal</span><i class="bi bi-arrow-right"></i></a>
+                    <a href="https://www.polibang.ac.id/maktab" class="read-more"><span>Jurnal</span><i class="bi bi-arrow-right"></i></a>
                 </div>
             </div>
 
@@ -204,11 +204,11 @@
 
         <div class="row" data-aos="zoom-in" data-aos-delay="100">
             <div class="col-xl-9 text-center text-xl-start">
-                <h3>Call To Action</h3>
-                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                <h3>Cari Tau Yuk !!</h3>
+                <p>Cari tahu bagaimana P3M mendukung penelitian dan pengabdian masyarakat untuk dosen dan mahasiswa.</p>
             </div>
             <div class="col-xl-3 cta-btn-container text-center">
-                <a class="cta-btn align-middle" href="#">Call To Action</a>
+                <a class="cta-btn align-middle" href="{{ route('tampilan.panduan') }}">Pelajari Panduan</a>
             </div>
         </div>
 
@@ -220,8 +220,8 @@
 
     <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
-        <h2>Agenda</h2>
-        <p>Agenda Terbaru Kegiatan Penelitian dan Pengabdian Kepada Masyarakat</p>
+        <h2>Berita P3M</h2>
+        <p>Berita Pelaksanaan Kegiatan P3M di Politeknik Balekambang Jepara</p>
     </div><!-- End Section Title -->
 
     <div class="container">
@@ -250,8 +250,8 @@
 
     <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
-        <h2>BERITA P3M</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <h2>Kegiatan P3M</h2>
+        <p>Dokumentasi Kegiatan P3M Di Politeknik Balekambang Jepara</p>
     </div><!-- End Section Title -->
 
     <div class="container">
@@ -359,63 +359,7 @@
 
 </section><!-- /Team Section -->
 
-<section id="clients" class="clients section light-background">
 
-    <div class="container" data-aos="zoom-in">
-
-        <div class="swiper init-swiper">
-            <script type="application/json" class="swiper-config">
-                {
-                    "loop": true,
-                    "speed": 600,
-                    "autoplay": {
-                        "delay": 5000
-                    },
-                    "slidesPerView": "auto",
-                    "pagination": {
-                        "el": ".swiper-pagination",
-                        "type": "bullets",
-                        "clickable": true
-                    },
-                    "breakpoints": {
-                        "320": {
-                            "slidesPerView": 2,
-                            "spaceBetween": 40
-                        },
-                        "480": {
-                            "slidesPerView": 3,
-                            "spaceBetween": 60
-                        },
-                        "640": {
-                            "slidesPerView": 4,
-                            "spaceBetween": 80
-                        },
-                        "992": {
-                            "slidesPerView": 5,
-                            "spaceBetween": 120
-                        },
-                        "1200": {
-                            "slidesPerView": 6,
-                            "spaceBetween": 120
-                        }
-                    }
-                }
-            </script>
-            <div class="swiper-wrapper align-items-center">
-                <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/balekambang.jpg') }}" class="img-fluid" alt=""></div>
-                <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/polibang.png') }}" class="img-fluid" alt=""></div>
-                <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/ponpes.jpg') }}" class="img-fluid" alt=""></div>
-                <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-4.png') }}" class="img-fluid" alt=""></div> -->
-                <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-5.png') }}" class="img-fluid" alt=""></div> -->
-                <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-6.png') }}" class="img-fluid" alt=""></div> -->
-                <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-7.png') }}" class="img-fluid" alt=""></div> -->
-                <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-8.png') }}" class="img-fluid" alt=""></div> -->
-            </div>
-        </div>
-
-    </div>
-
-</section>
 
 <!-- Faq 2 Section -->
 <!-- <section id="faq-2" class="faq-2 section light-background">

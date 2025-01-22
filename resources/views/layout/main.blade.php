@@ -4,12 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>Admin P3M POLIBANG</title>
 
 
     <!-- //favicon -->
-    <link rel="shortcut icon" href="{{ 'asset(favicon/icon.png)' }}" type="image/x-icon">
-    <link rel="icon" href="{{ asset('favicon/icon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ 'asset(favicon/politbang.ico)' }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('favicon/politbang.ico') }}" type="image/x-icon">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
@@ -71,7 +71,7 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="index3.html" class="nav-link">Home</a>
+                    <a href="{{ route('dash.dashboard') }}" class="nav-link">Home</a>
                 </li>
                 <!-- <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Contact</a>
@@ -119,102 +119,144 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                        <li class="nav-header">Main View</li>
                         <li class="nav-item">
-                            <a href="{{ route('dash.dashboard') }}" class="nav-link">
-                                <!-- <i class="fa fa-home" aria-hidden="true"></i> -->
-                                <i class="nav-icon fas fa-clipboard-list"></i>
-                                <!-- <i class="nav-icon fas fa-th"></i> -->
+                            <a href="#" class="nav-link">
+                                <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
                                 <p>
-                                    Dashboard
-                                    <!-- <span class="right badge badge-danger">New</span> -->
+                                    Halaman Utama
+                                    <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('dash.dashboard') }}" class="nav-link">
+                                        <!-- <i class="fa fa-home" aria-hidden="true"></i> -->
+                                        <i class="nav-icon fas fa-clipboard-list"></i>
+                                        <!-- <i class="nav-icon fas fa-th"></i> -->
+                                        <p>
+                                            Dashboard
+                                            <!-- <span class="right badge badge-danger">New</span> -->
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('index') }}" class="nav-link">
+                                        <!-- <i class="fa fa-user"></i> -->
+                                        <i class="nav-icon fas fa-user"></i>
+                                        <!-- <i class="nav-icon fas fa-th"></i> -->
+                                        <p>
+                                            Admin
+                                            <!-- <span class="right badge badge-danger">New</span> -->
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('index') }}" class="nav-link">
-                                <!-- <i class="fa fa-user"></i> -->
-                                <i class="nav-icon fas fa-user"></i>
-                                <!-- <i class="nav-icon fas fa-th"></i> -->
+                            <a href="#" class="nav-link">
+                                <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
                                 <p>
-                                    Admin
-                                    <!-- <span class="right badge badge-danger">New</span> -->
+                                    Profil P3M
+                                    <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('pengelola.index') }}" class="nav-link">
+                                        <i class="nav-icon fas fa-users"></i>
+                                        <p>Pengelola P3M</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-address-card"></i>
+                                        <p>Tentang P3M</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('panduan.index') }}" class="nav-link">
+                                        <i class="nav-icon fas fa-book-reader"></i>
+                                        <p>Panduan P3M</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
-                        <li class="nav-header">Seputar P2M</li>
                         <li class="nav-item">
-                            <a href="{{ route('category.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-list-alt"></i>
-                                <!-- <i class="nav-icon fas fa-th"></i> -->
+                            <a href="#" class="nav-link">
                                 <p>
-                                    Kategori Berita
-                                    <!-- <span class="right badge badge-danger">New</span> -->
+                                    Seputar P3M
+                                    <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('category.index') }}" class="nav-link">
+                                        <i class="nav-icon fas fa-list-alt"></i>
+                                        <p>
+                                            Kategori Berita
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('news.index') }}" class="nav-link">
+                                        <i class="nav-icon fas fa-newspaper"></i>
+                                        <p>
+                                            Kegiatan P3M
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('agenda.index') }}" class="nav-link">
+                                        <i class="nav-icon far fa-calendar-alt"></i>
+                                        <p>
+                                            Berita P3M
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('news.index') }}" class="nav-link">
-                                <i class="nav-icon fas fa-newspaper"></i>
-                                <!-- <i class="nav-icon fas fa-th"></i> -->
-                                <p>
-                                    Berita
-                                    <!-- <span class="right badge badge-danger">New</span> -->
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('agenda.index') }}" class="nav-link">
-                                <i class="nav-icon far fa-calendar-alt"></i>
-                                <!-- <i class="fas fa-calendar-week"></i> -->
-                                <!-- <i class="nav-icon fas fa-th"></i> -->
-                                <p>
-                                    Agenda
-                                    <!-- <span class="right badge badge-danger">New</span> -->
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="{{ route('panduan.index') }}" class="nav-link">
-                                <!-- <i class="fas fa-newspaper"></i> -->
                                 <i class="nav-icon fas fa-book-reader"></i>
-                                <!-- <i class="nav-icon fas fa-th"></i> -->
                                 <p>
                                     Panduan
-                                    <!-- <span class="right badge badge-danger">New</span> -->
                                 </p>
                             </a>
-                        </li>
-                        <li class="nav-header">Pengelola</li>
+                        </li> -->
+                        <!-- <li class="nav-header">Pengelola</li>
                         <li class="nav-item">
                             <a href="{{ route('pengelola.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
                                     Struktur Organisasi
-                                    <!-- <span class="right badge badge-danger">New</span> -->
                                 </p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('tentang.index') }}" class="nav-link">
-                                <!-- <i class="nav-icon fas fa-users"></i> -->
                                 <i class="nav-icon fas fa-address-card"></i>
                                 <p>
                                     Tentang P3M
-                                    <!-- <span class="right badge badge-danger">New</span> -->
                                 </p>
                             </a>
-                        </li>
-                        <li class="nav-header">Akun</li>
+                        </li> -->
                         <li class="nav-item">
-                            <a href="{{ route('logout') }}" class="nav-link">
-                                <i class="nav-icon fas fa-sign-out-alt"></i>
-                                <!-- <i class="nav-icon fas fa-th"></i> -->
+                            <a href="#" class="nav-link">
                                 <p>
-                                    Logout
-                                    <!-- <span class="right badge badge-danger">New</span> -->
+                                    Logout Akun
+                                    <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('logout') }}" class="nav-link">
+                                        <i class="nav-icon fas fa-sign-out-alt"></i>
+                                        <p>
+                                            Logout
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </nav>
@@ -227,11 +269,11 @@
         @yield('content')
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-            All rights reserved.
-            <div class="float-right d-none d-sm-inline-block">
+            <!-- <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> -->
+            Pusat Penelitian dan Pengadbdian Kepada Masyarakat POLIBANG
+            <!-- <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 3.2.0
-            </div>
+            </div> -->
         </footer>
 
         <!-- Control Sidebar -->

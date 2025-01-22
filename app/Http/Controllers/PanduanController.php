@@ -58,7 +58,8 @@ class PanduanController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'original_name' => 'required|mimes:docx,pdf|max:2048'
+            'original_name' => 'required|mimes:docx,pdf|max:2048',
+            'namefile' => 'required',
         ]);
 
         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
@@ -67,6 +68,7 @@ class PanduanController extends Controller
         $docs->move(public_path('uplouds'), $nama_docs);
 
         $data = new m_panduan();
+        $data->namefile = $request->namefile;
         $data->original_name = $nama_docs;
         $data->generated_name = $nama_docs;
         $data->save();

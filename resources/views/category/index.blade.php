@@ -29,7 +29,7 @@
                     <a href="{{ route('category.create') }}" class="btn btn-primary mb-2">Tambah</a>
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Data Username Admin</h3>
+                            <h3 class="card-title">Kategori Kegiatan P3M</h3>
 
                             <div class="card-tools">
                                 <form action="{{ route('category.index') }}" method="get">
@@ -62,9 +62,8 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $d->name }}</td>
                                         <td>{{ $d->slug }}</td>
-                                        <td colspan="2">
-                                            <a href="{{ route ('category.edit', ['id' => $d->id]) }}" class="btn btn-primary custom-btn"><i class="fas fa-pen"></i> Edit</a>
-
+                                        <td>
+                                            <a href="{{ route ('category.edit', ['id' => $d->id]) }}" class="btn btn-primary custom-btn"><i class="fas fa-pen"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach

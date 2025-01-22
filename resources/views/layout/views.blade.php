@@ -4,13 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Proyek Perangkat Lunak</title>
+    <title>P3M POLIBANG</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
     <!-- Favicons -->
-    <!-- <link href="{{ asset ('mte/assets/img/favicon.png') }}" rel="icon"> -->
-    <!-- <link href="{{ asset ('mte/assets/img/favicon.png') }}" rel="apple-touch-icon"> -->
+    <link href="{{ asset ('mte/assets/img/politbang.ico') }}" rel="icon">
+    <link href="{{ asset ('mte/assets/img/politbang.ico') }}" rel="apple-touch-icon">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -52,21 +52,21 @@
             <nav id="navmenu" class="navmenu">
                 <ul>
                     <li><a href="{{ route('tampilan') }}" class="{{ request()->routeIs('tampilan') ? 'active' : '' }}">Beranda</a></li>
-                    <li class="dropdown"><a href="#"><span>Seputar P3M</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                    <li class="dropdown"><a href=""><span>Profil P3M</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
-                            <li><a href="{{ route('tampilan.berita') }}" class="{{ request()->routeIs('tampilan.berita') ? 'active' : '' }}">Berita</a></li>
-                            <li><a href="{{ route('tampilan.agenda') }}">Agenda</a></li>
-                            <li><a href="{{ route('tampilan.panduan') }}">Panduan</a></li>
+                            <li><a href="{{ route('tampilan.tentang') }}">> Tentang P3M</a></li>
+                            <li><a href="{{ route('tampilan.struktur') }}">> Struktur Organisasi P3M</a></li>
+                            <li><a href="{{ route('tampilan.panduan') }}">> Panduan P3M</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown"><a href="#"><span>Sekilas P3M</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                    <li class="dropdown"><a href="#"><span>Seputar P3M</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
-                            <li><a href="{{ route('tampilan.tentang') }}">Visi Misi</a></li>
-                            <li><a href="{{ route('tampilan.struktur') }}">Struktur Organisasi</a></li>
+                            <li><a href="{{ route('tampilan.berita') }}" class="{{ request()->routeIs('tampilan.berita') ? 'active' : '' }}">> Kegiatan P3M</a></li>
+                            <li><a href="{{ route('tampilan.agenda') }}">> Berita P3M</a></li>
                         </ul>
                     </li>
                     <!-- <li><a href="#about">HKI</a></li> -->
-                    <li><a href="https://www.polibang.ac.id/maktab">Jurnal</a></li>
+                    <li><a href="https://www.polibang.ac.id/maktab" target="_blank">Jurnal P3M</a></li>
                     <!-- <li><a href="#contact">Contact</a></li> -->
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -82,8 +82,64 @@
     </main>
 
     <footer id="footer" class="footer">
+        <section id="clients" class="clients section light-background">
 
-        <div class="footer-newsletter">
+            <div class="container" data-aos="zoom-in">
+
+                <div class="swiper init-swiper">
+                    <script type="application/json" class="swiper-config">
+                        {
+                            "loop": true,
+                            "speed": 600,
+                            "autoplay": {
+                                "delay": 5000
+                            },
+                            "slidesPerView": "auto",
+                            "pagination": {
+                                "el": ".swiper-pagination",
+                                "type": "bullets",
+                                "clickable": true
+                            },
+                            "breakpoints": {
+                                "320": {
+                                    "slidesPerView": 2,
+                                    "spaceBetween": 40
+                                },
+                                "480": {
+                                    "slidesPerView": 3,
+                                    "spaceBetween": 60
+                                },
+                                "640": {
+                                    "slidesPerView": 4,
+                                    "spaceBetween": 80
+                                },
+                                "992": {
+                                    "slidesPerView": 5,
+                                    "spaceBetween": 120
+                                },
+                                "1200": {
+                                    "slidesPerView": 6,
+                                    "spaceBetween": 120
+                                }
+                            }
+                        }
+                    </script>
+                    <div class="swiper-wrapper align-items-center">
+                        <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/balekambang.jpg') }}" class="img-fluid" alt=""></div>
+                        <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/polibang.png') }}" class="img-fluid" alt=""></div>
+                        <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/ponpes.jpg') }}" class="img-fluid" alt=""></div>
+                        <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-4.png') }}" class="img-fluid" alt=""></div> -->
+                        <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-5.png') }}" class="img-fluid" alt=""></div> -->
+                        <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-6.png') }}" class="img-fluid" alt=""></div> -->
+                        <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-7.png') }}" class="img-fluid" alt=""></div> -->
+                        <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-8.png') }}" class="img-fluid" alt=""></div> -->
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+        <!-- <div class="footer-newsletter">
             <div class="container">
                 <div class="row justify-content-center text-center">
                     <div class="col-lg-6">
@@ -98,7 +154,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="container footer-top">
             <div class="row gy-4">
@@ -115,33 +171,32 @@
                 </div>
 
                 <div class="col-lg-2 col-md-3 footer-links">
-                    <h4>Useful Links</h4>
+                    <h4>All About Us</h4>
                     <ul>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Berita P3M POLIBANG</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Kegiatan P3M POLIBANG</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Panduan P3M POLIBANG</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Tentang P3M POLIBANG</a></li>
                     </ul>
                 </div>
 
                 <div class="col-lg-2 col-md-3 footer-links">
-                    <h4>Our Services</h4>
+                    <h4>Kampus Kami</h4>
                     <ul>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="https://www.polibang.ac.id/" target="_blank">POLIBANG</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="https://pmb.polibang.ac.id/" target="_blank">PMB POLIBANG</a></li>
+
                     </ul>
                 </div>
 
                 <div class="col-lg-4 col-md-12">
                     <h4>Follow Us</h4>
-                    <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
+                    <p>Kenali kami juga melalui </p>
                     <div class="social-links d-flex">
-                        <a href=""><i class="bi bi-twitter-x"></i></a>
-                        <a href=""><i class="bi bi-facebook"></i></a>
-                        <a href=""><i class="bi bi-instagram"></i></a>
-                        <a href=""><i class="bi bi-linkedin"></i></a>
+                        <a href="" target="_blank"><i class="bi bi-twitter-x"></i></a>
+                        <!-- <a href=""><i class="bi bi-facebook"></i></a> -->
+                        <a href="" target="_blank"><i class="bi bi-instagram"></i></a>
+                        <!-- <a href=""><i class="bi bi-linkedin"></i></a> -->
                     </div>
                 </div>
 
@@ -149,7 +204,7 @@
         </div>
 
         <div class="container copyright text-center mt-4">
-            <p>© <span>Copyright</span> <strong class="px-1 sitename">P3M POLIBANG</strong> <span>All Rights Reserved</span></p>
+            <p>© <span>Copyright</span> <strong class="px-1 sitename">P3M</strong> <span>Politeknik Balekambang Jepara</span></p>
             <div class="credits">
                 <!-- All the links in the footer should remain intact. -->
                 <!-- You can delete the links only if you've purchased the pro version. -->

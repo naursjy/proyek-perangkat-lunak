@@ -29,7 +29,7 @@
                     <a href="{{ route('panduan.create') }}" class="btn btn-primary mb-2">Tambah</a>
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Data Username Admin</h3>
+                            <h3 class="card-title">Panduan P3M</h3>
 
                             <div class="card-tools">
                                 <form action="" method="get">
@@ -59,11 +59,14 @@
                                     @foreach ($pands as $d)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $d->original_name }}</td>
-                                        <td colspan="2">
+                                        <td>{{ $d->namefile }}</td>
+                                        <td>
                                             <!-- <a href="{{ $d->google_drive_link }}" class="btn btn-secondary custom-btn" target="_blank"><i class="fas fa-eye"></i> Buka di Google Drive</a> -->
-                                            <a href="{{ route('panduan.view', ['id' => $d->id]) }}" class="btn btn-info">View</a>
-                                            <a href="{{ asset('uplouds/' . $d->original_name) }}" class="btn btn-primary custom-btn"><i class="fas fa-download"></i> Download</a>
+                                            <div class="btn-group" role="group">
+                                                <a href="{{ route('panduan.view', ['id' => $d->id]) }}" class="btn btn-info"><i class="fas fa-eye white"></i></a>
+                                                <a href="{{ asset('uplouds/' . $d->original_name) }}" class="btn btn-primary custom-btn"><i class="fas fa-download"></i></a>
+                                            </div>
+
                                         </td>
                                     </tr>
                                     @endforeach

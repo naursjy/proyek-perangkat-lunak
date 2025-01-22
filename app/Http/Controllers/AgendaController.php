@@ -13,7 +13,7 @@ class AgendaController extends Controller
 {
     public function index(Request $request)
     {
-        $pagetitle = 'Agenda Terbaru';
+        $pagetitle = 'Berita Kegiatan Terbaru';
         $user = Auth::user();
         $data = AgendaModel::all();
         if ($request->get('search')) {

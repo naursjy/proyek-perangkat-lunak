@@ -47,16 +47,11 @@
                             <form style="align-content: center;">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <!-- <div class="form-group-prepend">
-                                            <label for="image">Upload</label>
-                                        </div>
-                                        <div class="btn btn-default btn-file">
-                                            <i class="fas fa-paperclip"></i> Attachment
-                                            <input type="file" name="original_name">
-                                            <label for="original_name"></label>
-                                        </div> -->
-
-                                        <!-- <p class="help-block">Max. 32MB</p> -->
+                                        <label for="namefiles">Nama File</label>
+                                        <input type="text" name="namefile" class="form-control" placeholder="nama file" value="{{ old('namefile') }}">
+                                        @error('namefile')
+                                        <small>{{ $message }}</small>
+                                        @enderror
                                     </div>
                                     <div class="form-group mb-3">
                                         <div class="form-group-prepend">

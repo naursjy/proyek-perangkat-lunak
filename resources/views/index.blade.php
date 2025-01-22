@@ -37,7 +37,7 @@
                     @endif
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Data Username Admin</h3>
+                            <h3 class="card-title">Admin P3M POLIBANG</h3>
                             <div class="card-tools">
                                 <form action="{{ route('index') }}" method="get">
                                     <div class="input-group input-group-sm" style="width: 150px;">
@@ -72,9 +72,12 @@
                                         <td>{{ $d->ktp->nik ?? '' }}</td>
                                         <td>{{ $d->name }}</td>
                                         <td>{{ $d->email }}</td>
-                                        <td><a href="{{ route ('update' , ['id' => $d->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i>Edit</a>
-                                            <a href="{{ route ('detail' , ['id' => $d->id]) }}" class="btn btn-info"><i class="fas fa-eye"></i>Detail</a>
-                                            <a href="{{ route ('delete' , ['id' => $d->id]) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i>Delete</a>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <a href="{{ route ('update' , ['id' => $d->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                                                <!-- <a href="{{ route ('detail' , ['id' => $d->id]) }}" class="btn btn-info"><i class="fas fa-eye"></i></a> -->
+                                                <a href="{{ route ('delete' , ['id' => $d->id]) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                            </div>
                                         </td>
                                     </tr>
                                     @endforeach

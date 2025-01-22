@@ -16,8 +16,8 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Client Side</li>
+                        <li class="breadcrumb-item"><a href="{{ route('dash.dashboard') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Kegiatan P3M</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -42,7 +42,7 @@
                     @endif
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Berita P3M POLIBANG </h3>
+                            <h3 class="card-title">Kegiatan P3M POLIBANG </h3>
                             <!-- <div class="card-tools">
                                 <form action="{{ route('news.index') }}" method="get">
                                     <div class="input-group input-group-sm" style="width: 150px;">

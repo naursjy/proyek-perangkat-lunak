@@ -29,7 +29,7 @@
                     <a href="{{ route('dash.create_dash') }}" class="btn btn-primary mb-2">Tambah</a>
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Dashboard Views</h3>
+                            <h3 class="card-title">Tampilan Dashboard</h3>
 
                             <div class="card-tools">
                                 <div class="input-group input-group-sm" style="width: 150px;">
@@ -62,9 +62,12 @@
                                         <td><img src="{{ asset('storage/photo-dash/'.$d->image) }}" alt="" width="100"></td>
                                         <td>{{ $d->title }}</td>
                                         <td><span class="tag tag-primary">{{ $d->instansi }}</span></td>
-                                        <td><a href="{{ route('dash.edit_dash' , ['id' => $d->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i>Edit</a>
-                                            <a href="#" class="btn btn-info"><i class="fas fa-eye"></i>Detail</a>
-                                            <a data-toggle="modal" data-target="#modal-hapus" href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i>Delete</a>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <a href="{{ route('dash.edit_dash' , ['id' => $d->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                                                <!-- <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a> -->
+                                                <a data-toggle="modal" data-target="#modal-hapus" href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                            </div>
                                         </td>
                                         @endforeach
                                     </tr>

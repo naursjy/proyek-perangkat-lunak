@@ -55,7 +55,7 @@
             <div class="container">
                 <nav class="breadcrumbs mt-5">
                     <ol>
-                        <li><a href="#">Home</a></li>
+                        <li><a href="{{ route('tampilan') }}">Home</a></li>
                         <li class="current">{{ $pagetitle }}</li>
                     </ol>
                 </nav>
@@ -84,9 +84,9 @@
                             @foreach ($panduan as $d)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $d->original_name }}</td>
+                                <td>{{ $d->namefile }}</td>
                                 <td>
-                                    <a href="{{ asset('uplouds/' . $d->original_name) }}"><i class="fas fa-download"></i> Download</a>
+                                    <a href="{{ asset('uplouds/' . $d->original_name) }}" target="_blank"><i class="fas fa-download"></i> Download</a>
                                 </td>
                             </tr>
                             @endforeach

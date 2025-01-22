@@ -35,9 +35,14 @@ class ViewsController extends Controller
     //laman berita p3m
     public function berita()
     {
-        $pagetitle = 'Panduan P3M';
-        $berita = M_news::orderBy('created_at', 'desc')->get();
+        $pagetitle = 'Kegiatan P3M';
+        $berita = M_news::orderBy('created_at', 'desc')->paginate(6);
+        // $newket = M_news::paginate(6);
         $categories = M_categories::all();
+        session()->put('previous_page', url()->previous());
+        if (session()->has('previous_page')) {
+            return view('tampilan.berita', compact('pagetitle', 'berita', 'categories'));
+        }
         return view('tampilan.berita', compact('pagetitle', 'berita', 'categories'));
     }
 
@@ -54,7 +59,7 @@ class ViewsController extends Controller
     //detail berita
     public function showPortfolioDetails($id)
     {
-        $pagetitle = 'Panduan P3M';
+        $pagetitle = 'Detail Kegiatan P3M';
         $dat = M_news::find($id);
         $dat = M_news::orderBy('created_at', 'desc')->take(5)->get(); // Mengambil 3 berita terbaru
         return view('tampilan.detail', compact('pagetitle', 'dat', 'recentNews'));
@@ -65,7 +70,7 @@ class ViewsController extends Controller
     {
         // $dash = m_dashboard::all();
         // $berita = M_news::orderBy('created_at', 'desc')->get();
-        $pagetitle = 'Panduan P3M';
+        $pagetitle = 'Struktur Organisasi P3M';
         $pengelola = M_Pengelola::all();
         // $categories = M_categories::all();
         return view('tampilan.struktur',  compact('pengelola', 'pagetitle'));
@@ -88,14 +93,14 @@ class ViewsController extends Controller
         $panduan = m_panduan::findOrFail($id);
 
         // Tentukan path file yang akan diunduh
-        $filePath = public_path('uplouds/' . $panduan->generated_name); // Sesuaikan dengan lokasi penyimpanan file Anda
+        $filePath = public_path('uplouds/' . $panduan->namefile); // Sesuaikan dengan lokasi penyimpanan file Anda
         // dd($filePath);
         Log::info("File path: " . $filePath);
         if (!file_exists($filePath)) {
             return redirect()->back()->with('error', 'File tidak ditemukan: ' . $filePath);
         }
         Log::info("File found, preparing to download.");
-        return response()->download($filePath, $panduan->original_name);
+        return response()->download($filePath, $panduan->namefile);
     }
 
     //tentang
@@ -119,7 +124,7 @@ class ViewsController extends Controller
     //list agenda
     public function listagenda($id)
     {
-        $pagetitle = 'Panduan P3M';
+        $pagetitle = 'Berita P3M';
         $agen = AgendaModel::find($id);
         $agenda = AgendaModel::orderBy('created_at', 'desc')->take(5)->get();
         return view('tampilan.detailagenda', compact('pagetitle', 'agen', 'agenda'));

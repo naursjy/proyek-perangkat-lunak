@@ -1,72 +1,28 @@
 @extends('layout.main')
 @section('css')
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
-<link rel="stylesheet" href="{{ asset('lte/../../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-<link rel="stylesheet" href="{{ asset('lte/../../plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-<link rel="stylesheet" href="{{ asset('lte/../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.css" />
 @endsection
 
 @section('content')
-<style>
-    /* table {
-        width: 250px;
-    }
-
-    table td {
-        word-wrap: break-word;
-        min-width: 10px;
-    } */
-    /* table td {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    } */
-    table {
-        table-layout: fixed;
-        width: 100%;
-    }
-
-    .custom-btn {
-        border-radius: 50px;
-    }
-
-    table td {
-        width: 200px;
-        max-width: 40px;
-        /* word-wrap: break-all;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis; */
-    }
-
-    .col-md-3 {
-        width: 25%;
-    }
-</style>
 
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0">{{ $pagetitle }}</h1>
-                </div><!-- /.col -->
+                </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('dash.dashboard') }}">Home</a></li>
                         <li class="breadcrumb-item active">{{ $pagetitle }}</li>
                     </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="col-12">
                     <a href="{{ route('pengelola.create') }}" class="btn btn-primary mb-2"><i class="fas fa-plus"></i> Tambah</a>
@@ -95,16 +51,16 @@
                             </div>
                         </div>
                         <div class="card-body table-responsive">
-                            <table id="example2" class="table table-bordered table-hover">
+                            <table class="table table-hover" id="clientside">
                                 <thead>
                                     <tr>
                                         <th>No</th>
                                         <th>Nama</th>
                                         <th>NIDN</th>
-                                        <th colspan="2">Gambar</th>
+                                        <th>Gambar</th>
                                         <th>Jabatan</th>
                                         <th>Email</th>
-                                        <th colspan="3">Action</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -113,12 +69,14 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $d->nama_pengelola }}</td>
                                         <td>{{ $d->NIDN }}</td>
-                                        <td colspan="2"><img src="{{ asset('storage/photo-pengelola/'. $d->image) }}" alt="" width="100"></td>
+                                        <td><img src="{{ asset('storage/photo-pengelola/'. $d->image) }}" alt="" width="100"></td>
                                         <td>{{ $d->jabatan_pengelola }}</td>
                                         <td>{{ $d->email_pengelola }}</td>
-                                        <td colspan="3">
-                                            <a href="{{ route ('pengelola.edit', ['id' => $d->id]) }}" class="btn btn-primary custom-btn"><i class="fas fa-pen"> </i>edit</a>
-                                            <a href="{{ route ('pengelola.delete', ['id' => $d->id]) }}" class="btn btn-danger custom-btn"><i class="fas fa-trash"> </i>delete</a>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <a href="{{ route ('pengelola.edit', ['id' => $d->id]) }}" class="btn btn-primary custom-btn"><i class="fas fa-pen"> </i></a>
+                                                <a href="{{ route ('pengelola.delete', ['id' => $d->id]) }}" class="btn btn-danger custom-btn"><i class="fas fa-trash"> </i></a>
+                                            </div>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -126,58 +84,19 @@
                             </table>
                         </div>
                     </div>
-                    <!-- /.card -->
                 </div>
             </div>
         </div>
-        <!-- /.card-body -->
     </section>
 </div>
 
 
 @endsection
 @section('scripts')
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<script src="{{ asset('lte/../../plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
-<script src="{{ asset('lte/../../plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
-<script src="{{ asset('lte/../../plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+<script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
 <script>
     $(document).ready(function() {
-        $('#example').DataTable();
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
-    });
-</script>
-
-<script>
-    $(function() {
-        $("#example1").DataTable({
-            "responsive": true,
-            "lengthChange": false,
-            "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
-        setTimeout(function() {
-            console.log("Hiding alert");
-            $('.alert').fadeOut('slow');
-        }, 5000); // 5000 ms = 5 detik
+        $('#clientside').DataTable();
     });
 </script>
 @endsection

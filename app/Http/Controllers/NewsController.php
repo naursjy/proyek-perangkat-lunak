@@ -23,7 +23,7 @@ class NewsController extends Controller
     public function index(Request $request)
     {
         // $data = new M_news();
-        $pagetitle = 'Berita Terkini';
+        $pagetitle = 'Seputar Kegiatan P3M Polibang';
         $user = Auth::user();
         $data = M_news::where('user_id', Auth::id())
             ->orWhereNull('user_id')
