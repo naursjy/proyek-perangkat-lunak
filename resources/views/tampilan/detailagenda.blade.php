@@ -56,10 +56,10 @@
                 <nav class="breadcrumbs mt-5">
                     <ol>
                         <li><a href="{{ route('tampilan') }}">Home</a></li>
-                        <li class="current">Detail Kegiatan</li>
+                        <li class="current">{{ $pagetitle }}</li>
                     </ol>
                 </nav>
-                <h1>Detail Kegiatan</h1>
+                <h1>{{ $pagetitle }}</h1>
             </div>
         </div><!-- End Page Title -->
 
@@ -71,12 +71,8 @@
                 <div class="row gy-4">
 
                     <div class="col-lg-8">
-                        <div class="portfolio-details-slider swiper init-swiper">
-                            <!-- <div class="swiper-pagination"></div> -->
-                        </div>
                         <div class="portfolio-description" data-aos="fade-up" data-aos-delay="300">
                             <h2>{{ $agen->title }}</h2>
-                            <!-- <h6><i class="far fa-calendar-alt" style="color: #4A628A;"></i> : {{ $agen->date }}</h6> -->
                             <p>
                                 <i class="far fa-calendar-alt" style="color: #4A628A;"></i> : {{ $agen->date }} <br>
                                 <i class="far fa-clock"></i> : {{ $agen->date }}
@@ -86,15 +82,15 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="portfolio-info" data-aos="fade-up" data-aos-delay="200">
-                            <h3>{{ $pagetitle }}</h3>
+                            <h3>Kegiatan terbaru</h3>
                             <ul>
                                 @foreach($agenda as $agen)
                                 <li>
                                     <h6>
                                         <i class="far fa-newspaper"></i>
-                                        <a href="{{ route('tampilan.agenda', ['id' => $agen->id]) }}" style="color: #133E87;">{{ $agen->title }}</a>
+                                        <a href="{{ route('tampilan.detail', ['id' => $agen->id]) }}" style="color: #133E87;">{{ $agen->title }}</a>
                                     </h6>
-                                    <p>{{ Str::words(strip_tags($agen->date), 10) }}</p>
+                                    <p>{{ Str::words(strip_tags($agen->content), 10) }}</p>
                                 </li>
                                 @endforeach
                             </ul>

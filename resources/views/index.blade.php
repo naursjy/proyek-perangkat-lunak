@@ -74,9 +74,12 @@
                                         <td>{{ $d->email }}</td>
                                         <td>
                                             <div class="btn-group" role="group">
-                                                <a href="{{ route ('update' , ['id' => $d->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                                                <!-- <a href="{{ route ('update' , ['id' => $d->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a> -->
                                                 <!-- <a href="{{ route ('detail' , ['id' => $d->id]) }}" class="btn btn-info"><i class="fas fa-eye"></i></a> -->
-                                                <a href="{{ route ('delete' , ['id' => $d->id]) }}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+
+                                                <a href="{{ route ('delete' , ['id' => $d->id]) }}" class="btn btn-danger"> <i class="fas fa-trash-alt"></i></a>
+                                                <!-- <button type="submit">Delete</button> -->
+
                                             </div>
                                         </td>
                                     </tr>

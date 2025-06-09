@@ -4,7 +4,10 @@ use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DataTableController;
+use App\Http\Controllers\DokumenController;
+use App\Http\Controllers\DosenController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\JurnalController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PanduanController;
@@ -35,7 +38,9 @@ Route::get('/berita', [ViewsController::class, 'berita'])->name('tampilan.berita
 Route::get('/tampilan/deber/detail/{id}', [ViewsController::class, 'show'])->name('tampilan.detail');
 Route::get('/struktur', [ViewsController::class, 'struktur'])->name('tampilan.struktur');
 Route::get('/panduanp3m', [ViewsController::class, 'panduan'])->name('tampilan.panduan');
-Route::get('/tentang', [ViewsController::class, 'tentang'])->name('tampilan.tentang');
+Route::get('/dokumen', [ViewsController::class, 'dokumen'])->name('tampilan.dokumen');
+Route::get('/jurnal', [ViewsController::class, 'jurnal'])->name('tampilan.jurnal');
+Route::get('/tentang', [ViewsController::class, 'tentangp3m'])->name('tampilan.tentangp3m');
 Route::get('/agenda', [ViewsController::class, 'agenda'])->name('tampilan.agenda');
 Route::get('/detailagenda/{id}', [ViewsController::class, 'listagenda'])->name('tampilan.detailagenda');
 
@@ -51,34 +56,34 @@ Route::post('/proses-register', [AuthController::class, 'proses_register'])->nam
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 //jika ingin menggunakan route group di letakkan pada route group tapi jika per raoute letakkan pada route yang akan di gunakan role
-Route::group(['middleware' => 'auth:sanctum'], function () {
+Route::group(['middleware' => 'auth:sanctum', 'role:admin'], function () {
     //ini menggunaakan laravel gate
     // Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard')->middleware('can:view_dashboard');
     // ini menggunakan role/ langsung memanggil permission
-    Route::prefix('dash')->group(function () {
+    Route::prefix('dash')->middleware('auth:sanctum', 'role:admin')->group(function () {
         Route::get('/dashboard', [MainController::class, 'index'])->name('dash.dashboard');
         Route::get('/create_dash', [MainController::class, 'create_dash'])->name('dash.create_dash');
         Route::post('/buat', [MainController::class, 'buat'])->name('dash.buat');
 
         Route::get('/edit_dash/{id}', [MainController::class, 'edit_dash'])->name('dash.edit_dash');
         Route::match(['get', 'PUT'], '/up_dash/{id}', [MainController::class, 'up_dash'])->name('dash.up_dash');
-        // ->middleware(['role:admin|write']);
+        // ;
     });
     Route::get('/user', [HomeController::class, 'index'])->name('index');
 
     Route::get('/create', [HomeController::class, 'create'])->name('create');
     Route::post('/store', [HomeController::class, 'store'])->name('store');
 
-    Route::get('/clientside', [DataTableController::class, 'clientside'])->name('clientside');
-    Route::get('/serverside', [DataTableController::class, 'serverside'])->name('serverside');
 
     Route::get('/update/{id}', [HomeController::class, 'update'])->name('update');
     Route::put('/edit/{id}', [HomeController::class, 'edit'])->name('edit');
     Route::get('/detail/{id}', [HomeController::class, 'detail'])->name('detail');
-    Route::delete('/delete/{id}', [HomeController::class, 'delete'])->name('delete');
+    Route::get('/delete/{id}', [HomeController::class, 'delete'])->name('delete')->withoutMiddleware('auth');
 
+    // Route::get('/clientside', [DataTableController::class, 'clientside'])->name('clientside');
+    // Route::get('/serverside', [DataTableController::class, 'serverside'])->name('serverside');
     //kategori
-    Route::prefix('category')->group(function () {
+    Route::prefix('category')->middleware('auth:sanctum', 'role:admin')->group(function () {
         Route::get('/index', [CategoryController::class, 'index'])->name('category.index');
 
         Route::get('/create', [CategoryController::class, 'create'])->name('category.create');
@@ -91,7 +96,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         // Add more routes here...
     });
     //berita
-    Route::prefix('news')->group(function () {
+    Route::prefix('news')->middleware('auth:sanctum', 'role:admin')->group(function () {
         Route::get('/pagetitle', 'NewsController@pagetitle')->name('news.pagetitle');
 
         Route::get('/index', [NewsController::class, 'index'])->name('news.index');
@@ -107,12 +112,13 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         //route detail data
         Route::get('/read/{id}', [NewsController::class, 'read'])->name('news.read');
     });
-    Route::prefix('panduan')->group(function () {
+    Route::prefix('panduan')->middleware('auth:sanctum', 'role:admin')->group(function () {
         Route::get('/index', [PanduanController::class, 'index'])->name('panduan.index');
         Route::get('/create', [PanduanController::class, 'create'])->name('panduan.create');
         Route::post('/store', [PanduanController::class, 'store'])->name('panduan.store');
         Route::get('/view/{id}', [PanduanController::class, 'view'])->name('panduan.view');
         Route::get('/download/{id}', [PanduanController::class, 'download'])->name('panduan.download');
+        Route::get('/delete/{id}', [PanduanController::class, 'delete'])->name('panduan.delete')->withoutMiddleware('auth');
         // Route::get('/view/{id}', [PanduanController::class, 'view'])->name('panduan.view');
 
         // Route::get('/download/{generated_name}', function ($filename) {
@@ -126,9 +132,28 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         // Route::get('/index', [PanduanController::class, 'index'])->name('panduan.index');
         // Route::get('/index', [PanduanController::class, 'index'])->name('panduan.index');
     });
+    //dokumen
+    Route::prefix('dokumen')->middleware('auth:sanctum', 'role:admin')->group(function () {
+        Route::get('/index', [DokumenController::class, 'index'])->name('dokumen.index');
+        Route::get('/create', [DokumenController::class, 'create'])->name('dokumen.create');
+        Route::post('/store', [DokumenController::class, 'store'])->name('dokumen.store');
+        Route::get('/view/{id}', [DokumenController::class, 'view'])->name('dokumen.view');
+        Route::get('/download/{id}', [DokumenController::class, 'download'])->name('dokumen.download');
+    });
+
+    //Jurnal
+    Route::prefix('jurnal')->middleware('auth:sanctum', 'role:admin')->group(function () {
+        Route::get('/index', [JurnalController::class, 'index'])->name('jurnal.index');
+        Route::get('/create', [JurnalController::class, 'create'])->name('jurnal.create');
+        Route::post('/store', [JurnalController::class, 'store'])->name('jurnal.store');
+        Route::get('/edit/{id}', [JurnalController::class, 'edit'])->name('jurnal.edit');
+        Route::put('/update/{id}', [JurnalController::class, 'update'])->name('jurnal.update');
+        // Route::get('/shiw/{id}', [JurnalController::class, 'view'])->name('jurnal.view');
+        Route::get('/delete/{id}', [JurnalController::class, 'delete'])->name('jurnal.delete')->withoutMiddleware('auth');
+    });
 
     //pengelola p3m
-    Route::prefix('pengelola')->group(function () {
+    Route::prefix('pengelola')->middleware('auth:sanctum', 'role:admin')->group(function () {
         Route::get('/index', [PengelolaController::class, 'index'])->name('pengelola.index');
         Route::get('/create', [PengelolaController::class, 'create'])->name('pengelola.create');
         Route::post('/store', [PengelolaController::class, 'store'])->name('pengelola.store');
@@ -143,7 +168,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
 
     //tentang p3m
-    Route::prefix('tentang')->group(function () {
+    Route::prefix('tentang')->middleware('auth:sanctum', 'role:admin')->group(function () {
         Route::get('/index', [TentangController::class, 'index'])->name('tentang.index');
         Route::get('/create', [TentangController::class, 'create'])->name('tentang.create');
         Route::post('/store', [TentangController::class, 'store'])->name('tentang.store');
@@ -152,12 +177,22 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     });
 
     //agenda p3m
-    Route::prefix('agenda')->group(function () {
+    Route::prefix('agenda')->middleware('auth:sanctum', 'role:admin')->group(function () {
         Route::get('/index', [AgendaController::class, 'index'])->name('agenda.index');
         Route::get('/create', [AgendaController::class, 'create'])->name('agenda.create');
         Route::post('/store', [AgendaController::class, 'store'])->name('agenda.store');
         Route::get('/edit/{id}', [AgendaController::class, 'edit'])->name('agenda.edit');
         Route::match(['get', 'PUT'], '/update/{id}', [AgendaController::class, 'update'])->name('agenda.update');
         Route::get('/delete/{id}', [AgendaController::class, 'delete'])->name('agenda.delete');
+    });
+});
+Route::group(['middleware' => 'auth:sanctum', 'role:dosen'], function () {
+    Route::prefix('dosdash')->middleware('auth:sanctum', 'role:dosen')->group(function () {
+        Route::get('/dash', [DosenController::class, 'dash'])->name('dosen.dash');
+        Route::get('/profil/{id}', [DosenController::class, 'update'])->name('dosen.profil');
+        Route::put('/edit/{id}', [DosenController::class, 'edit'])->name('edit');
+        Route::get('/penelitian', [DosenController::class, 'upp3m'])->name('dosen.upp3m');
+        Route::get('/datapenelitian', [DosenController::class, 'addp3m'])->name('dosen.addp3m');
+        Route::post('/storep3m', [DosenController::class, 'store'])->name('dosen.store');
     });
 });

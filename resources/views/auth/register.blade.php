@@ -21,10 +21,10 @@
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="{{ route('register') }}" class="h1"><b>Register </b>Page</a>
+                <a href="{{ route('register') }}" class="h1"><b>Register P3M</b></a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Register for Your Account</p>
+                <p class="login-box-msg">Buat Akun P3M</p>
 
                 <form action="{{ route('proses-register') }}" method="post">
                     @csrf
@@ -62,18 +62,9 @@
                     <small>{{ $message }}</small>
                     @enderror
                     <div class="row">
-                        <!-- <div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
-                                <label for="remember">
-                                    Remember Me
-                                </label>
-                            </div>
-                        </div> -->
-                        <!-- /.col -->
                         <div class="col-8">
                             <p class="mb-0">
-                                <a href="{{ route('login') }}" class="text-center">do you have account?</a>
+                                <a href="{{ route('login') }}" class="text-center"><u>Sudah Punya Akun? Klik Disini</u></a>
                             </p>
                         </div>
                         <div class="col-4">

@@ -56,10 +56,10 @@
                 <nav class="breadcrumbs mt-5">
                     <ol>
                         <li><a href="{{ route('tampilan') }}">Home</a></li>
-                        <li class="current">Portfolio Details</li>
+                        <li class="current">{{ $pagetitle }}</li>
                     </ol>
                 </nav>
-                <h1>Portfolio Details</h1>
+                <h1>{{ $pagetitle }}</h1>
             </div>
         </div><!-- End Page Title -->
 
@@ -105,7 +105,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="portfolio-info" data-aos="fade-up" data-aos-delay="200">
-                            <h3>Berita terbaru</h3>
+                            <h3>Kegiatan terbaru</h3>
                             <ul>
                                 @foreach($data as $news)
                                 <li>

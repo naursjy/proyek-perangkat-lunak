@@ -16,15 +16,21 @@
     <link rel="stylesheet" href="{{ asset('lte/dist/css/adminlte.min.css') }}">
 </head>
 
+<!-- <style>
+    .card-primary {
+        border-top: #FF268A;
+    }
+</style> -->
+
 <body class="hold-transition login-page">
     <div class="login-box">
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="{{ route('login') }}" class="h1"><b>Login</b>Page</a>
+                <a href="{{ route('login') }}" class="h1"><b>Login P3M</b></a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Login Your Account</p>
+                <p class="login-box-msg">Masuk Ke Laman Admin P3M</p>
 
                 <form action="{{ route('proses-login') }}" method="post">
                     @csrf
@@ -53,10 +59,10 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
-                                <label for="remember">
-                                    Remember Me
-                                </label>
+                                <!-- <input type="checkbox" id="remember"> -->
+                                <p class="mb-0">
+                                    <a href="{{ route('register') }}" class="text-center"><u>Belum Punya Akun?</u></a>
+                                </p>
                             </div>
                         </div>
                         <!-- /.col -->
@@ -80,9 +86,7 @@
                 <!-- <p class="mb-1">
                     <a href="forgot-password.html">I forgot my password</a>
                 </p> -->
-                <p class="mb-0">
-                    <a href="{{ route('register') }}" class="text-center">Don't have an account?</a>
-                </p>
+
             </div>
             <!-- /.card-body -->
         </div>

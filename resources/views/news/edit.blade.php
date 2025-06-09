@@ -1,8 +1,21 @@
 @extends('layout.main')
 @section('content')
-
+<link rel="stylesheet" href="{{ asset('lte/../../plugins/summernote/summernote-bs4.min.css') }}">
 <style>
+    .img-preview {
+        /* max-width: 250px;
+        max-height: 250px;
+        object-fit: contain;
+        display: block; */
 
+        max-width: 200px;
+        height: auto;
+        object-fit: contain;
+        margin: 0 auto;
+        display: block;
+
+        /* width="100px" height="120px" */
+    }
 </style>
 
 <div class="content-wrapper">
@@ -43,7 +56,7 @@
                             <form class="">
                                 <div class="card-body">
                                     @if($news->image)
-                                    <img src="{{ asset('storage/photo-news/'.$news->image) }}" alt="preview-image" width="100px" height="120px" id="preview-image">
+                                    <img src="{{ asset('storage/photo-news/'.$news->image) }}" class="img-preview" alt="preview-image" id="preview-image">
                                     @endif
                                     <div class="form-group mb-3">
                                         <div class="form-group-prepend">
@@ -52,7 +65,7 @@
                                         <div class="custom-file">
                                             <input type="file" name="image" class="custom-file-input" id="image">
                                             <label class="custom-file-label" for="image">Choose file</label>
-                                            <small>pilih gambar jika ingin diganti / biarkan</small>
+                                            <small> <u>*pilih gambar jika ingin diganti/biarkan</u></small>
                                         </div>
                                         @error('image')
                                         <small>{{ $message }}</small>
@@ -73,24 +86,24 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Konten</label>
-                                        <textarea name="content" class="form-control" id="editor">{{ $news->content }}</textarea>
+                                        <label for="exampleInputEmail1">Isi Berita</label>
+                                        <textarea name="content" class="form-control" id="compose-textarea">{{ $news->content }}</textarea>
                                         @error('content')
                                         <small>{{ $message }}</small>
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputPassword1">Kategory</label>
-                                        <select name="category_id" id="category_id">
+                                        <label for="category_id">Kategori : </label>
+                                        <select class="custom-select form-control-border" id="exampleSelectBorder" name="category_id">
                                             @foreach($categories as $d)
                                             <option value="{{ $d->id }}" {{ $news->category_id == $d->id ? 'selected' : ''}}>{{ $d->name }}</option>
                                             @endforeach
-                                        </select>
-                                        <!-- <input type="text" name="category_id" class="form-control" id="exampleInputPassword1" placeholder="Category" value="{{ $news->category_id }}"> -->
+                                        </select> <br><br>
                                         @error('category_id')
                                         <small>{{ $message }}</small>
                                         @enderror
                                     </div>
+
                                 </div>
                                 <!-- /.card-body -->
 
@@ -106,12 +119,31 @@
     </section>
     <!-- /.content -->
 </div>
-
-<script>
+<script src="{{ asset('lte/../../plugins/summernote/summernote-bs4.min.js') }}"></script>
+<!-- <script>
     // Inisialisasi CKEditor
     CKEDITOR.replace('editor', {
         filebrowserUploadUrl: 'photo-news/', // URL untuk meng-upload gambar
         filebrowserUploadMethod: 'form'
+    });
+</script> -->
+<script>
+    $(function() {
+        //Add text editor 
+        $('#compose-textarea').summernote()
+    })
+</script>
+
+
+<script>
+    $('#summernote').summernote({
+        placeholder: 'Hello Bootstrap 5',
+        tabsize: 2,
+        height: 100
+    });
+
+    $('#reservationdate').datetimepicker({
+        format: 'L'
     });
 </script>
 @endsection

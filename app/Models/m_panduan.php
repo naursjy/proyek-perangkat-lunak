@@ -10,6 +10,7 @@ class m_panduan extends Model
     use HasFactory;
     protected $fillable = [
         'original_name',
-        'generated_name'
+        'generated_name',
+        'namefile'
     ];
 }

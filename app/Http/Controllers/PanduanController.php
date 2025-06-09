@@ -120,4 +120,12 @@ class PanduanController extends Controller
         // Mengembalikan tampilan dengan data PDF
         return view('panduan.view', compact('panduan', 'user', 'pagetitle'));
     }
+
+    //DELETE DATA
+    public function delete($id)
+    {
+        $panduan = m_panduan::findOrFail($id);
+        $panduan->delete();
+        return redirect()->route('panduan.index');
+    }
 }

@@ -260,6 +260,21 @@ class NewsController extends Controller
             $images = $dom->getElementsByTagName('img');
 
             // Hapus gambar dari server
+            // foreach ($images as $img) {
+            //     if ($img instanceof \DOMElement) {
+            //         $src = $img->getAttribute('src');
+
+            //         // Ambil nama file dari URL
+            //         $filename = basename($src);
+            //         $path = public_path('photo-news/' . $filename);
+
+            //         // Hapus gambar dari server jika ada
+            //         if (file_exists($path)) {
+            //             unlink($path);
+            //         }
+            //     }
+            // }
+
             foreach ($images as $img) {
                 if ($img instanceof \DOMElement) {
                     $src = $img->getAttribute('src');
@@ -267,18 +282,27 @@ class NewsController extends Controller
                     // Ambil nama file dari URL
                     $filename = basename($src);
                     $path = public_path('photo-news/' . $filename);
+                    dd($path);
+                    // Debugging
+                    echo "Trying to delete: " . $path . "<br>";
 
-                    // Hapus gambar dari server jika ada
                     if (file_exists($path)) {
-                        unlink($path);
+                        if (unlink($path)) {
+                            echo "Successfully deleted: " . $filename . "<br>";
+                        } else {
+                            echo "Failed to delete: " . $filename . "<br>";
+                        }
+                    } else {
+                        echo "File not found: " . $filename . "<br>";
                     }
                 }
             }
 
+
             // Menghapus data dari database
             $agenda->delete();
         }
-        return redirect()->route('agenda.index')->with('success', 'Data berhasil dihapus!');
+        return redirect()->route('news.index')->with('success', 'Data berhasil dihapus!');
     }
     public function read(Request $request, $id)
     {

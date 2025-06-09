@@ -12,10 +12,12 @@ class UserSeeder extends Seeder
 
     public function run(): void
     {
-        User::create([
-            'name' => 'Sujianim',
-            'email' => 'sujia@gmail.com',
-            'password' => Hash::make('11111111'), // hash make unutk enkripsi
-        ]);
+        // User::create([
+        //     'name' => 'Sujianim',
+        //     'email' => 'sujia@gmail.com',
+        //     'password' => Hash::make('11111111'), // hash make unutk enkripsi
+        // ]);
+
+
     }
 }

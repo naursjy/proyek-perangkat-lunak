@@ -9,8 +9,8 @@
     <meta name="keywords" content="">
 
     <!-- Favicons -->
-    <link href="{{ asset ('mte/assets/img/politbang.ico') }}" rel="icon">
-    <link href="{{ asset ('mte/assets/img/politbang.ico') }}" rel="apple-touch-icon">
+    <link href="{{ asset ('mte/assets/img/icon_log.ico') }}" rel="icon">
+    <link href="{{ asset ('mte/assets/img/icon_log.ico') }}" rel="apple-touch-icon">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -45,8 +45,8 @@
 
             <a href="{{ route('tampilan') }}" class="logo d-flex align-items-center me-auto">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
-                <img src="{{ asset('mte/assets/img/Logo_Politbang.png') }}" alt="">
-                <h1 class="sitename">P3M</h1>
+                <img src="{{ asset('mte/assets/img/Pusat_Penelitian.png') }}" alt="">
+                <h1 class="sitename" style="font-size: 20px;">P3M <br>Polibang</br></h1>
             </a>
 
             <nav id="navmenu" class="navmenu">
@@ -54,25 +54,28 @@
                     <li><a href="{{ route('tampilan') }}" class="{{ request()->routeIs('tampilan') ? 'active' : '' }}">Beranda</a></li>
                     <li class="dropdown"><a href=""><span>Profil P3M</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
-                            <li><a href="{{ route('tampilan.tentang') }}">> Tentang P3M</a></li>
+                            <li><a href="{{ route('tampilan.tentangp3m') }}">> Tentang P3M</a></li>
                             <li><a href="{{ route('tampilan.struktur') }}">> Struktur Organisasi P3M</a></li>
                             <li><a href="{{ route('tampilan.panduan') }}">> Panduan P3M</a></li>
+
                         </ul>
                     </li>
                     <li class="dropdown"><a href="#"><span>Seputar P3M</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>
                             <li><a href="{{ route('tampilan.berita') }}" class="{{ request()->routeIs('tampilan.berita') ? 'active' : '' }}">> Kegiatan P3M</a></li>
                             <li><a href="{{ route('tampilan.agenda') }}">> Berita P3M</a></li>
+                            <li><a href="{{ route('tampilan.dokumen') }}">> Dokumen P3M</a></li>
                         </ul>
                     </li>
                     <!-- <li><a href="#about">HKI</a></li> -->
-                    <li><a href="https://www.polibang.ac.id/maktab" target="_blank">Jurnal P3M</a></li>
+                    <!-- https://www.polibang.ac.id/maktab -->
+                    <li><a href="{{ route('tampilan.jurnal') }}">Jurnal P3M</a></li>
                     <!-- <li><a href="#contact">Contact</a></li> -->
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
-            <a class="btn-getstarted" href="{{ route('login') }}">Login</a>
+            <!-- <a class="btn-getstarted" href="{{ route('login') }}">Login</a> -->
 
         </div>
     </header>
@@ -125,14 +128,9 @@
                         }
                     </script>
                     <div class="swiper-wrapper align-items-center">
-                        <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/balekambang.jpg') }}" class="img-fluid" alt=""></div>
                         <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/polibang.png') }}" class="img-fluid" alt=""></div>
                         <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/ponpes.jpg') }}" class="img-fluid" alt=""></div>
-                        <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-4.png') }}" class="img-fluid" alt=""></div> -->
-                        <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-5.png') }}" class="img-fluid" alt=""></div> -->
-                        <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-6.png') }}" class="img-fluid" alt=""></div> -->
-                        <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-7.png') }}" class="img-fluid" alt=""></div> -->
-                        <!-- <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/client-8.png') }}" class="img-fluid" alt=""></div> -->
+                        <div class="swiper-slide"><img src="{{ asset('mte/assets/img/clients/Pusat_Penelitian.png') }}" class="img-fluid" alt=""></div>
                     </div>
                 </div>
 
@@ -158,7 +156,7 @@
 
         <div class="container footer-top">
             <div class="row gy-4">
-                <div class="col-lg-4 col-md-6 footer-about">
+                <div class="col-lg-3 col-md-6 footer-about">
                     <a href="index.html" class="d-flex align-items-center">
                         <span class="sitename">P3M</span>
                     </a>
@@ -170,11 +168,11 @@
                     </div>
                 </div>
 
-                <div class="col-lg-2 col-md-3 footer-links">
+                <div class="col-lg-3 col-md-3 footer-links">
                     <h4>All About Us</h4>
                     <ul>
                         <li><i class="bi bi-chevron-right"></i> <a href="#">Berita P3M POLIBANG</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Kegiatan P3M POLIBANG</a></li>
+                        <li><i class="bi bi-chevron-right"></i> <a href="#">Kegiatan <span>P3M POLIBANG</span></a></li>
                         <li><i class="bi bi-chevron-right"></i> <a href="#">Panduan P3M POLIBANG</a></li>
                         <li><i class="bi bi-chevron-right"></i> <a href="#">Tentang P3M POLIBANG</a></li>
                     </ul>

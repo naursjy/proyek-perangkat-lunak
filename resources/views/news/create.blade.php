@@ -82,7 +82,7 @@
                                     <div class="form-group">
                                         <label for="textarea">Isi Berita</label>
                                         <!-- <textarea name="content" id="compose-textarea" class="form-control" style="height: 300px"></textarea> -->
-                                        <textarea name="content" id="compose-textarea" class="form-control"></textarea>
+                                        <textarea name="content" class="form-control" id="compose-textarea"></textarea>
                                         @error('content')
                                         <small>{{ $message }}</small>
                                         @enderror

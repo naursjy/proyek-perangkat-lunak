@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\AgendaModel;
+use App\Models\DokumenModel;
+use App\Models\JurnalModel;
 use App\Models\M_categories;
 use App\Models\m_dashboard;
 use App\Models\M_news;
@@ -49,7 +51,7 @@ class ViewsController extends Controller
     //list berita
     public function show($id): ViewView
     {
-        $pagetitle = 'Panduan P3M';
+        $pagetitle = 'Detail Kegiatan P3M';
         $berita = M_news::find($id);
         $categories = M_categories::all();
         $data = M_news::orderBy('created_at', 'desc')->take(5)->get();
@@ -103,13 +105,24 @@ class ViewsController extends Controller
         return response()->download($filePath, $panduan->namefile);
     }
 
+
+    //dokumen p3m
+    public function dokumen(Request $request)
+    {
+        $user = Auth::user();
+        $dok = DokumenModel::all();
+        $pagetitle = 'Dokumen P3M';
+        return view('tampilan.dokum', compact('dok', 'pagetitle', 'user'));
+    }
+
+
     //tentang
-    public function tentang(Request $request)
+    public function tentangp3m(Request $request)
     {
         $tentang = M_tentang::all();
         $pagetitle = 'Informasi P3M';
-        $berita =  M_news::orderBy('created_at', 'desc')->take(5)->get();
-        return view('tampilan.tentang', compact('tentang', 'pagetitle', 'berita'));
+        $berita =  M_news::orderBy('created_at', 'desc')->take(8)->get();
+        return view('tampilan.tentangp3m', compact('tentang', 'pagetitle', 'berita'));
     }
 
     //agenda
@@ -128,5 +141,14 @@ class ViewsController extends Controller
         $agen = AgendaModel::find($id);
         $agenda = AgendaModel::orderBy('created_at', 'desc')->take(5)->get();
         return view('tampilan.detailagenda', compact('pagetitle', 'agen', 'agenda'));
+    }
+
+    //jurnal p3m
+    public function jurnal(Request $request)
+    {
+        $user = Auth::user();
+        $dok = JurnalModel::all();
+        $pagetitle = 'Jurnal P3M';
+        return view('tampilan.jurnal', compact('dok', 'pagetitle', 'user'));
     }
 }

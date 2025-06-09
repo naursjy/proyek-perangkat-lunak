@@ -76,7 +76,7 @@
                                     @foreach ($data as $d)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $d->title }}</td>
+                                        <td>{!! Str::words($d->title, 8) !!}</td>
                                         <td>{{ $d->date }}</td>
                                         <td>{{ optional($d->user)->name }}</td>
                                         <td><img src="{{ asset('storage/photo-news/'.$d->image) }}" alt="" width="100"></td>

@@ -70,7 +70,7 @@
                 <h1>{{ $d->title }}</h1>
                 <p>{{ $d->instansi }}</p>
                 <div class="d-flex">
-                    <a href="#about" class="btn-get-started">Publikasi</a>
+                    <!-- <a href="#about" class="btn-get-started">Publikasi</a> -->
                     <!-- <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a> -->
                 </div>
             </div>
@@ -124,7 +124,7 @@
                 </div> -->
                 <!-- <p>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p> -->
                 <strong>Baca Lebih Banyak Mengenai Kami</strong> <br>
-                <a href="{{ route('tampilan.tentang') }}" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a> <br>
+                <a href="{{ route('tampilan.tentangp3m') }}" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a> <br>
                 <div><br></div>
                 <!-- <a href="#" class="read-more"><span>Jurnal</span><i class="bi bi-arrow-right"></i></a> -->
                 <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
@@ -222,7 +222,8 @@
     <div class="container section-title" data-aos="fade-up">
         <h2>Berita P3M</h2>
         <p>Berita Pelaksanaan Kegiatan P3M di Politeknik Balekambang Jepara</p>
-    </div><!-- End Section Title -->
+    </div>
+    <!-- End Section Title -->
 
     <div class="container">
 
@@ -262,7 +263,7 @@
                     <div class="card-body">
                         <img src="{{ asset('storage/photo-news/'.$d->image) }}" class="img-fluid animated" style="border-radius: 10px;" alt="">
 
-                        <h5 class="card-title mt-3">{{ $d->title }}</h5>
+                        <h5 class="card-title mt-3">{!! Str::words(strip_tags($d->title), 10) !!}</h5>
                         <hr>
                         <small><i class="fas fa-calendar-week"></i> {{ $d->date }}</small> <br>
                         <!-- <small class="mt-4" style="font-style: italic;">{{ optional($d->user)->name }}</small> -->
@@ -358,7 +359,6 @@
     </div>
 
 </section><!-- /Team Section -->
-
 
 
 <!-- Faq 2 Section -->

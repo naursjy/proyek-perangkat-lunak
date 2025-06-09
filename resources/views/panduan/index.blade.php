@@ -65,6 +65,7 @@
                                             <div class="btn-group" role="group">
                                                 <a href="{{ route('panduan.view', ['id' => $d->id]) }}" class="btn btn-info"><i class="fas fa-eye white"></i></a>
                                                 <a href="{{ asset('uplouds/' . $d->original_name) }}" class="btn btn-primary custom-btn"><i class="fas fa-download"></i></a>
+                                                <a href="{{ route ('panduan.delete', ['id' => $d->id]) }}" class="btn btn-danger custom-btn"><i class="fas fa-trash"> </i></a>
                                             </div>
 
                                         </td>

@@ -15,21 +15,6 @@ class HomeController extends Controller
 {
 
 
-    public function __construct()
-    {
-        //atau menggunakan role
-        // $this->middleware(['role:admin']);
-
-        //jika ingin memanggil bisa menggunakan ini
-        $this->middleware(['permission:view_dashboard']);
-
-        //atau bisa menggunakan permission
-        // $this->middleware(['permission:view_dashboard']);
-
-        //jika dibuat seperti ini tidak akan bisa
-        // $this->middleware(['role:admin|write', 'permission:view_dashboard']);
-    }
-
     public function index(Request $request)
     {
         $data = new User;
@@ -103,6 +88,10 @@ class HomeController extends Controller
 
         $find = User::find($id);
 
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Unauthorized action.');
+        }
+
         $data['email']      = $request->email;
         $data['name']       = $request->name;
         $user = Auth::user();
@@ -130,18 +119,20 @@ class HomeController extends Controller
         }
         $find->update($data);
 
-        return redirect()->route('index', compact('user'));
+        return redirect()->route('user.index', compact('user'));
     }
 
     public function delete(Request $request, $id)
     {
-        $user = Auth::user();
-        $data = User::find($id);
-        if ($data) {
-            $data->delete();
+        // $user = Auth::user();
+        $user = User::find($id);
+        if ($user) {
+            $user->delete();
         }
         return redirect()->route('index', compact('user'))->with('success', 'Data berhasil dihapus!');
+        // dd(request()->method('delete'));
     }
+
     public function detail(Request $request, $id)
     {
         $user = Auth::user();

@@ -8,8 +8,8 @@
 
 
     <!-- //favicon -->
-    <link rel="shortcut icon" href="{{ 'asset(favicon/politbang.ico)' }}" type="image/x-icon">
-    <link rel="icon" href="{{ asset('favicon/politbang.ico') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ 'asset(favicon/icon_log.ico)' }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('favicon/icon_log.ico') }}" type="image/x-icon">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
@@ -168,7 +168,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{ route('tentang.index') }}" class="nav-link">
                                         <i class="nav-icon fas fa-address-card"></i>
                                         <p>Tentang P3M</p>
                                     </a>
@@ -179,6 +179,7 @@
                                         <p>Panduan P3M</p>
                                     </a>
                                 </li>
+
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -210,6 +211,21 @@
                                         <i class="nav-icon far fa-calendar-alt"></i>
                                         <p>
                                             Berita P3M
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('dokumen.index') }}" class="nav-link">
+                                        <!-- <i class=" fas fa-book-reader"></i> -->
+                                        <i class="nav-icon fas fa-folder"></i>
+                                        <p>Dokumen P3M</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('jurnal.index') }}" class="nav-link">
+                                        <i class="nav-icon fas fa-journal-whills"></i>
+                                        <p>
+                                            Jurnal P3M
                                         </p>
                                     </a>
                                 </li>

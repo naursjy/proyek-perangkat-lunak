@@ -22,7 +22,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'image'
+        'image',
+        'role',
     ];
 
     /**
@@ -43,14 +44,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function ktp()
-    {
-        return $this->hasOne(M_ktp::class);
-    }
+    // public function ktp()
+    // {return $this->hasOne(M_ktp::class);}
 
     public function news()
     {
         return $this->hasMany(M_news::class, 'user_id');
+    }
+    public function p3m()
+    {
+        return $this->hasMany(p3mModel::class);
     }
 }

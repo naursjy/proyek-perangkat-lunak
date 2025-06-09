@@ -15,44 +15,43 @@ class PermassionSeeder extends Seeder
      */
     public function run(): void
     {
-        $role_admin = Role::updateorcreate(
-            [
-                'name' => 'admin'
-            ],
-            ['name' => 'admin']
-        );
+        //     $role_admin = Role::updateorcreate(
+        //         [
+        //             'name' => 'admin'
+        //         ],
+        //         ['name' => 'admin']
+        //     );
 
-        $role_write = Role::updateorcreate(
-            [
-                'name' => 'write'
-            ],
-            ['name' => 'write']
-        );
+        //     $role_write = Role::updateorcreate(
+        //         [
+        //             'name' => 'write'
+        //         ],
+        //         ['name' => 'write']
+        //     );
 
-        $role_guest = Role::updateorcreate(
-            [
-                'name' => 'guest'
-            ],
-            ['name' => 'guest']
-        );
-        $permission = Permission::updateorcreate(
-            ['name' => 'view_dashboard'],
-            ['name' => 'view_dashboard']
-        );
-        $permission_dash = Permission::updateorcreate(
-            ['name' => 'view_on_dashboard'],
-            ['name' => 'view_on_dashboard']
-        );
+        //     $role_guest = Role::updateorcreate(
+        //         [
+        //             'name' => 'guest'
+        //         ],
+        //         ['name' => 'guest']
+        //     );
+        //     $permission = Permission::updateorcreate(
+        //         ['name' => 'view_dashboard'],
+        //         ['name' => 'view_dashboard']
+        //     );
+        //     $permission_dash = Permission::updateorcreate(
+        //         ['name' => 'view_on_dashboard'],
+        //         ['name' => 'view_on_dashboard']
+        //     );
 
-        $role_admin->givePermissionTo($permission);
-        $role_admin->givePermissionTo($permission_dash);
-        $role_write->givePermissionTo($permission_dash);
+        //     $role_admin->givePermissionTo($permission);
+        //     $role_admin->givePermissionTo($permission_dash);
+        //     $role_write->givePermissionTo($permission_dash);
 
-
-        //make for user
-        $user = User::find(504);
-        $user1 = User::find(7);
-        $user->assignRole(['admin']);
-        $user1->assignRole(['write']);
+        //     $user = User::find(504);
+        //     $user1 = User::find(505);
+        //     $user->assignRole(['admin']);
+        //     $user1->assignRole(['write']);
+        // }
     }
 }
