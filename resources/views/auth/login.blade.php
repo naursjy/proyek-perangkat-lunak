@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Log in (v2)</title>
+    <title>Pengelola P3M dan Dosen Polibang</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -14,6 +14,10 @@
     <link rel="stylesheet" href="{{ asset('lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('lte/dist/css/adminlte.min.css') }}">
+
+    <!-- //favicon -->
+    <link rel="shortcut icon" href="{{ 'asset(favicon/icon_log.ico)' }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('favicon/icon_log.ico') }}" type="image/x-icon">
 </head>
 
 <!-- <style>
@@ -30,12 +34,12 @@
                 <a href="{{ route('login') }}" class="h1"><b>Login P3M</b></a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Masuk Ke Laman Admin P3M</p>
+                <p class="login-box-msg">Masuk Ke Laman Pengelola / Dosen P3M</p>
 
                 <form action="{{ route('proses-login') }}" method="post">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="name" name="name" class="form-control" placeholder="name">
+                        <input type="name" name="name" class="form-control" placeholder="username">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -62,6 +66,8 @@
                                 <!-- <input type="checkbox" id="remember"> -->
                                 <p class="mb-0">
                                     <a href="{{ route('register') }}" class="text-center"><u>Belum Punya Akun?</u></a>
+                                    <br>
+                                    <span><small>*untuk dosen polibang</small></span>
                                 </p>
                             </div>
                         </div>

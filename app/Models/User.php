@@ -55,4 +55,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(p3mModel::class);
     }
+    public function kum_penelitian()
+    {
+        return $this->hasMany(kum_penelitianModel::class);
+    }
+    public function kum_pengabdian()
+    {
+        return $this->hasMany(kum_pengabdianModel::class);
+    }
+    public function ajuan_penelitian()
+    {
+        return $this->hasMany(ajuan_penelitianModel::class);
+    }
 }

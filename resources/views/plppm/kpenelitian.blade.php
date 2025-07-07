@@ -1,4 +1,4 @@
-@extends('layout.doslayout')
+@extends('layout.main')
 @section('css')
 <link rel="stylesheet" href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.css" />
 @endsection
@@ -14,7 +14,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('plppm.kpenelitian') }}">Home</a></li>
                         <li class="breadcrumb-item active">{{ $pagetitle }}</li>
                     </ol>
                 </div><!-- /.col -->
@@ -29,14 +29,14 @@
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="col-12">
-                    <a href="{{ route('dosen.add_kumnpeneliti') }}" class="btn btn-primary"> <b>+</b></a>
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title p-1">{{ $pagetitle }}</h3> <span></span>
+                            <h3 class="card-title">{{ $pagetitle }}</h3>
                             <div class="card-tools">
                                 <form action="" method="get">
                                     <div class="input-group input-group-sm" style="width: 100px;">
                                         <div class="input-group-append p-1">
+
                                         </div>
                                     </div>
                                 </form>
@@ -79,9 +79,9 @@
                                         <!-- <td><a href="{{ asset('storage/uppdf/' . $d->uppdf) }}" target="_blank">Lihat File</a></td> -->
                                         <td>
                                             <div class="btn-group" role="group">
-                                                <a href="{{ route('detail.detailk', ['tipe' => 'kpeneliti', 'id' => $d->id]) }}" class="btn btn-info text-white rounded-circle m-1"><i class="fas fa-eye white"></i></a>
-                                                <a href="{{ route('dosen.edit_kpenliti',['id' => $d->id]) }}" class="btn btn-primary rounded-circle m-1"><i class="fas fa-pen"></i></a>
-                                                <a href="{{ route ('dosen.delete', ['id' => $d->id]) }}" class="btn btn-danger rounded-circle m-1"><i class="fas fa-trash"></i></a>
+                                                <a href="{{ route('detail.detailk', ['tipe' => 'kpeneliti', 'id' => $d->id]) }}" class="btn btn-info text-white"><i class="fas fa-eye white"></i></a>
+                                                <!-- <a href="{{ route('dosen.edit_kpenliti',['id' => $d->id]) }}" class="btn btn-primary rounded-circle m-1"><i class="fas fa-pen"></i></a> -->
+                                                <!-- <a href="#" class="btn btn-danger rounded-circle m-1"><i class="fas fa-trash"></i></a> -->
                                             </div>
                                         </td>
                                     </tr>

@@ -8,11 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class p3mModel extends Model
 {
     use HasFactory;
-    protected $table = 'p3m_models';
+    protected $table = 'ajupengabdian';
     protected $fillable = [
         'judul',
         'bidang',
         'ketua',
+        'jeniskategori',
         'jeniskelamin',
         'nidn',
         'jabatan',
@@ -23,14 +24,13 @@ class p3mModel extends Model
         'lamapenelitian',
         'biaya',
         'uppdf', // untuk file PDF
-        'foto', // untuk foto
-        'kategori_id',
+        // 'foto', // untuk foto
         'user_id', // untuk user
     ];
 
     public function anggotap3m()
     {
-        return $this->hasMany(anggotap3mModel::class, 'p3m_model_id');
+        return $this->hasMany(anggotap3mModel::class, 'ajupengab_model_id', 'id');
     }
 
     public function user()

@@ -31,7 +31,7 @@
     <!-- /.content-header -->
     <section class="content">
         <div class="container-fluid">
-            <form action="{{ route('dosen.updatekumpulanp3m' , ['id' => $penelitian->id]) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('dosen.updatep3m' , ['id' => $penelitian->id]) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-12">
@@ -97,24 +97,9 @@
                                                     <div class="form-group mb-3">
                                                         <div class="custom-file">
                                                             <input type="file" name="uppdf" class="custom-file-input" id="uploadLaporan" value="{{ $penelitian->uppdf }}">
-                                                            <label class="custom-file-label" for="uppdf">{{ $penelitian->uppdf ?? 'Unggah File' }}</label>
+                                                            <label class="custom-file-label" for="uploadLaporan">{{ $penelitian->uppdf ?? 'Unggah File' }}</label>
                                                         </div>
                                                         @error('uppdf')
-                                                        <small>{{ $message }}</small>
-                                                        @enderror
-                                                    </div>
-                                                    <div class="form-group mb-3">
-                                                        @if($penelitian->foto)
-                                                        <img src="{{ asset('storage/photo-upp3m/'.$penelitian->foto) }}" alt="preview-image" style="width: 100px; height: 100px; object-fit: cover; border-radius: 10px;" id="preview-image">
-                                                        @endif
-                                                        <div class="form-group-prepend">
-                                                            <small for="image">Unggah Gambar/Foto</small>
-                                                        </div>
-                                                        <div class="custom-file">
-                                                            <input type="file" name="foto" class="custom-file-input" id="foto">
-                                                            <label class="custom-file-label" for="foto">{{ $penelitian->foto ?? 'Unggah File' }}</label>
-                                                        </div>
-                                                        @error('foto')
                                                         <small>{{ $message }}</small>
                                                         @enderror
                                                     </div>
@@ -181,9 +166,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <label class="col-form-label" for="">Anggota Penelitian</label>
                                             <div class="form-group mb-3">
-                                                <button type="button" onclick="addAnggota()" class="btn btn-success"> <b>+</b> </button>
+                                                <label class="col-form-label" for="">Anggota Penelitian</label>
+                                                <button type="button" onclick="addAnggota()" class="btn btn-success"> <b>+</b> </button> <br>
                                                 <div id="anggota-wrapper">
                                                     @foreach($penelitian->anggotap3m as $i => $anggota)
                                                     <div class="anggota-row border p-2 mb-2">
@@ -244,9 +229,8 @@
     function addAnggota() {
         const wrapper = document.getElementById('anggota-wrapper');
         const html = `
-            <div class="anggota-row border p-2 mb-2">
-            <label class="col-form-label" for="">Anggota Penelitian</label> 
-            <button type="button" class="btn btn-danger btn-sm remove-anggota mt-2 float-end">&times;</button>
+            <div class="anggota-row">
+            <label class="col-form-label" for="">Anggota Penelitian</label> <button type="button" class="btn btn-danger btn-sm remove-anggota mt-2 float-end">&times;</button>
             <div class="form-group">
                 <small>Nama :</small>
                 <input type="text" class="form-control" name="anggota[${count}][nama]" placeholder="Nama">
@@ -286,35 +270,6 @@
             e.target.nextElementSibling.innerText = fileName;
         })
     });
-</script>
-<script>
-    const inputFile = document.getElementById('foto');
-    const fileLabel = document.querySelector('.custom-file-label');
-
-    inputFile.addEventListener('change', (e) => {
-        if (file && file.type.startsWith('image/')) {
-            document.querySelector('.custom-file-label').textContent = file.name;
-            const fileName = e.target.files[0].name;
-            fileLabel.textContent = fileName;
-        }
-        reader.readAsDataURL(file);
-    });
-</script>
-
-<script>
-    // Function to preview image
-
-    function previewImage(event) {
-        var reader = new FileReader();
-        reader.onload = function() {
-            var output = document.getElementById('preview-image');
-            output.src = reader.result;
-        }
-        reader.readAsDataURL(event.target.files[0]);
-    }
-
-    // Add event listener to the image input
-    document.getElementById('foto').addEventListener('change', previewImage);
 </script>
 <!-- <script>
     function previewImage() {

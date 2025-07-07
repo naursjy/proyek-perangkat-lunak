@@ -11,7 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kum_penelitian_models', function (Blueprint $table) {
+        Schema::create('ajupengabdian', function (Blueprint $table) {
+
             $table->id();
             $table->string('judul');
             $table->string('bidang');
@@ -20,7 +21,7 @@ return new class extends Migration
             $table->enum('jeniskelamin', ['L', 'P']);
             $table->string('nidn')->nullable();
             $table->string('jabatan')->nullable();
-            $table->string('prodi')->nullable();
+            $table->enum('prodi', ['R', 'A', 'AK'])->nullable();
             $table->string('telp')->nullable();
             $table->text('alamat')->nullable();
 
@@ -29,11 +30,9 @@ return new class extends Migration
             $table->float('biaya')->nullable();
 
             $table->string('uppdf')->nullable(); // untuk file PDF
-            $table->string('foto')->nullable(); // untuk foto
-
+            //user
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -43,6 +42,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kum_penelitian_models');
+        Schema::dropIfExists('ajupengabdian');
     }
 };

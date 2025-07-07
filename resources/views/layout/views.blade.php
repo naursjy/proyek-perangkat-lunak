@@ -69,7 +69,14 @@
                     </li>
                     <!-- <li><a href="#about">HKI</a></li> -->
                     <!-- https://www.polibang.ac.id/maktab -->
-                    <li><a href="{{ route('tampilan.jurnal') }}">Jurnal P3M</a></li>
+
+                    <li class="dropdown"><a href="#"><span>Jurnal P3M</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+                        <ul>
+                            <li><a href="{{ route('tampilan.jurnal') }}">List Jurnal P3M</a></li>
+                            <li><a href="https://www.polibang.ac.id/maktab">> Jurnal Maktab</a></li>
+                        </ul>
+                    </li>
+
                     <!-- <li><a href="#contact">Contact</a></li> -->
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>

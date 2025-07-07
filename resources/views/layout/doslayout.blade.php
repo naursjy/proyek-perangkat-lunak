@@ -148,7 +148,7 @@
                             <a href="#" class="nav-link">
                                 <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
                                 <p>
-                                    Penelitian dan Pengabdian
+                                    Pengabdian Kepada Masyarakat
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -156,7 +156,40 @@
                                 <li class="nav-item">
                                     <a href="{{ route('dosen.upp3m') }}" class="nav-link">
                                         <i class="nav-icon fas fa-users"></i>
-                                        <p>Up Penelitian dan Pengabdian</p>
+                                        <p>Proposal Pengabdian</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('dosen.dash_kpengabdian') }}" class="nav-link">
+                                        <i class="nav-icon fas fa-users"></i>
+                                        <p>Laporan Pengabdian</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
+                                <p>
+                                    Penelitian Kepada Masyarakat
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('dosen.dash_ajuanpenelitian') }}" class="nav-link">
+                                        <i class="nav-icon fas fa-users"></i>
+                                        <p>Proposal Penelitian</p>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('dosen.dash_kpenelitian') }}" class="nav-link">
+                                        <i class="nav-icon fas fa-users"></i>
+                                        <p>Laporan Penelitian</p>
                                     </a>
                                 </li>
                             </ul>

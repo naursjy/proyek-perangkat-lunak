@@ -231,6 +231,47 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <p>
+                                    Pengumpulan Data dan Laporan P3M
+                                    <i class="right fas fa-angle-left"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('plppm.lpengabdian') }}" class="nav-link">
+                                        <i class="nav-icon far fa-file"></i>
+                                        <p>
+                                            Proposal Pengabdian
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('plppm.lpeneleitian') }}" class="nav-link">
+                                        <i class="nav-icon far fa-file"></i>
+                                        <p>
+                                            Proposal Penelitian
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('plppm.kpengabdian') }}" class="nav-link">
+                                        <i class="nav-icon fas fa-folder"></i>
+                                        <p>
+                                            Laporan Pengabdian
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('plppm.kpenelitian') }}" class="nav-link">
+                                        <!-- <i class=" fas fa-book-reader"></i> -->
+                                        <i class="nav-icon fas fa-folder"></i>
+                                        <p>Laporan Penelitian</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         <!-- <li class="nav-item">
                             <a href="{{ route('panduan.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-book-reader"></i>

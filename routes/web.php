@@ -13,6 +13,7 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\PengelolaController;
 use App\Http\Controllers\TentangController;
+use App\Http\Controllers\ViewlprnController;
 use App\Http\Controllers\ViewsController;
 use Illuminate\Routing\ViewController;
 use Illuminate\Support\Facades\Route;
@@ -185,14 +186,64 @@ Route::group(['middleware' => 'auth:sanctum', 'role:admin'], function () {
         Route::match(['get', 'PUT'], '/update/{id}', [AgendaController::class, 'update'])->name('agenda.update');
         Route::get('/delete/{id}', [AgendaController::class, 'delete'])->name('agenda.delete');
     });
+
+    //data proposal dan laporan pengabdian dan penelitian kepada masyarakat
+    Route::prefix('plppm')->middleware('auth:sanctum', 'role:admin')->group(function () {
+        Route::get('/ppengabdian', [ViewlprnController::class, 'upp3m'])->name('plppm.lpengabdian');
+        Route::get('/lpengabdian', [ViewlprnController::class, 'kpengabdianp3m'])->name('plppm.kpengabdian');
+        Route::get('/ppenelitian', [ViewlprnController::class, 'ajuanpeneliti'])->name('plppm.lpeneleitian');
+        Route::get('/lpenelitian', [ViewlprnController::class, 'kpeneliti'])->name('plppm.kpenelitian');
+        //detail data
+
+    });
 });
+Route::middleware(['auth'])->get('/Propengabdian/{tipe}/{id}', [ViewlprnController::class, 'dajupeneliti'])->name('detail.detail');
+Route::middleware(['auth'])->get('/Lappengabdian/{tipe}/{id}', [ViewlprnController::class, 'kumpengneli'])->name('detail.detailk');
+Route::middleware(['auth'])->get('/Propengabdian/{tipe}/{id}', [ViewlprnController::class, 'dajupeneliti'])->name('detail.detail');
+Route::middleware(['auth'])->get('/Lappengabdian/{tipe}/{id}', [ViewlprnController::class, 'kumpengneli'])->name('detail.detailk');
+
 Route::group(['middleware' => 'auth:sanctum', 'role:dosen'], function () {
     Route::prefix('dosdash')->middleware('auth:sanctum', 'role:dosen')->group(function () {
         Route::get('/dash', [DosenController::class, 'dash'])->name('dosen.dash');
+        //profil
         Route::get('/profil/{id}', [DosenController::class, 'update'])->name('dosen.profil');
         Route::put('/edit/{id}', [DosenController::class, 'edit'])->name('edit');
-        Route::get('/penelitian', [DosenController::class, 'upp3m'])->name('dosen.upp3m');
-        Route::get('/datapenelitian', [DosenController::class, 'addp3m'])->name('dosen.addp3m');
-        Route::post('/storep3m', [DosenController::class, 'store'])->name('dosen.store');
+
+        //ajuan pengabdian
+        Route::get('/ajupengabdi', [DosenController::class, 'upp3m'])->name('dosen.upp3m');
+        Route::get('/datapengabdian', [DosenController::class, 'addp3m'])->name('dosen.addp3m');
+        Route::post('/storep3m', [DosenController::class, 'storep3m'])->name('dosen.storep3m');
+        Route::get('/editproposal/{id}', [DosenController::class, 'editp3m'])->name('dosen.edit_ajupengab');
+        Route::post('/updatep3m/{id}', [DosenController::class, 'updatep3m'])->name('dosen.updatep3m');
+        // Route::get('/dajupengab/{tipe}/{id}', [DosenController::class, 'dajupeneliti'])->name('detail.detail');
+        Route::get('/propengdelete/{id}', [DosenController::class, 'deletep3m'])->name('dosen.deletep3m')->withoutMiddleware('auth');
+        // //route edit
+
+        //pengumpulan laporan pengabdian
+        Route::get('/kpengabdian', [DosenController::class, 'kpengabdianp3m'])->name('dosen.dash_kpengabdian');
+        Route::get('/addkpengabdian', [DosenController::class, 'addkumpulanp3m'])->name('dosen.addkpengabdian');
+        Route::post('/storepengabdian', [DosenController::class, 'storekumpulanp3m'])->name('dosen.storekumpulanp3m');
+        Route::get('/editkpengabdian/{id}', [DosenController::class, 'editkumpulanp3m'])->name('dosen.edit_kpengabdian');
+        Route::post('/updatekpengabdian/{id}', [DosenController::class, 'updatekumpulanp3m'])->name('dosen.updatekumpulanp3m');
+        // Route::get('/kdpenelitian/{tipe}/{id}', [DosenController::class, 'kumpengneli'])->name('detail.detailk');
+        Route::get('/deletekpeng/{id}', [DosenController::class, 'deletekpeng'])->name('dosen.deletekpeng')->withoutMiddleware('auth');
+
+        //ajuan penelitian
+        Route::get('/ajupeneliti', [DosenController::class, 'ajuanpeneliti'])->name('dosen.dash_ajuanpenelitian');
+        Route::get('/tambahpenelitian', [DosenController::class, 'tambahpenelitian'])->name('dosen.add_ajuanpenelitian');
+        Route::post('/storepenelitian', [DosenController::class, 'storepenelitian'])->name('dosen.storepenelitian');
+        Route::get('/editpropenelitian/{id}', [DosenController::class, 'editpenelitian'])->name('dosen.edit_ajuanpenelitian');
+        Route::post('/updatepropenelitian/{id}', [DosenController::class, 'updatepenelitian'])->name('dosen.updatepenelitian');
+        // Route::get('/dpenelitian/{tipe}/{id}', [DosenController::class, 'dajupeneliti'])->name('detail.detail');
+        Route::get('/deletepropen/{id}', [DosenController::class, 'deletepropen'])->name('dosen.deletepropen')->withoutMiddleware('auth');
+
+        //pengumpulan laporan penelitian
+        Route::get('/datakpenelitian', [DosenController::class, 'kpeneliti'])->name('dosen.dash_kpenelitian');
+        Route::get('/kpenelitian', [DosenController::class, 'tambahkumpulanpenelitian'])->name('dosen.add_kumnpeneliti');
+        Route::post('/storekpenelitian', [DosenController::class, 'storekumpulanpenelitian'])->name('dosen.storekumpulanpenelitian');
+        Route::get('/editkpenelitian/{id}', [DosenController::class, 'editkumpulanpenelitian'])->name('dosen.edit_kpenliti');
+        Route::post('/updatekpenelitian/{id}', [DosenController::class, 'updatekumpulanpenelitian'])->name('dosen.updatekumpulanpenelitian');
+        // Route::get('/kddpenelitian/{tipe}/{id}', [DosenController::class, 'kumpengneli'])->name('detail.detailk');
+        Route::get('/deletekpen/{id}', [DosenController::class, 'deletekpen'])->name('dosen.delete')->withoutMiddleware('auth');
     });
 });

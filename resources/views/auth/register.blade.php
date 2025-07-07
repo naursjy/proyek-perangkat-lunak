@@ -14,6 +14,10 @@
     <link rel="stylesheet" href="{{ asset('lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('lte/dist/css/adminlte.min.css') }}">
+
+    <!-- //favicon -->
+    <link rel="shortcut icon" href="{{ 'asset(favicon/icon_log.ico)' }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('favicon/icon_log.ico') }}" type="image/x-icon">
 </head>
 
 <body class="hold-transition login-page">
@@ -24,12 +28,12 @@
                 <a href="{{ route('register') }}" class="h1"><b>Register P3M</b></a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Buat Akun P3M</p>
+                <p class="login-box-msg">Buat Akun P3M sebagai Dosen Politeknik Balekambang Jepara</p>
 
                 <form action="{{ route('proses-register') }}" method="post">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="text" name="name" class="form-control" placeholder="Enter Your Name" value="{{ old ('name') }}">
+                        <input type="text" name="name" class="form-control" placeholder="username" value="{{ old ('name') }}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>

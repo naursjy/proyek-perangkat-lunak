@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kum_penelitian_models', function (Blueprint $table) {
-            $table->id();
-            $table->string('judul');
+        Schema::table('kum_pengabdian_models', function (Blueprint $table) {
+            //
+            $table->string('judul')->after('id');
             $table->string('bidang');
             $table->string('jeniskategori');
             $table->string('ketua');
@@ -33,8 +33,6 @@ return new class extends Migration
 
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
-            $table->timestamps();
         });
     }
 
@@ -43,6 +41,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kum_penelitian_models');
+        Schema::table('kum_pengabdian_models', function (Blueprint $table) {
+            //
+        });
     }
 };
