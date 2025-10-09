@@ -12,6 +12,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\PengelolaController;
+use App\Http\Controllers\suratcontroller;
 use App\Http\Controllers\TentangController;
 use App\Http\Controllers\ViewlprnController;
 use App\Http\Controllers\ViewsController;
@@ -62,6 +63,7 @@ Route::group(['middleware' => 'auth:sanctum', 'role:admin'], function () {
     // Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard')->middleware('can:view_dashboard');
     // ini menggunakan role/ langsung memanggil permission
     Route::prefix('dash')->middleware('auth:sanctum', 'role:admin')->group(function () {
+        Route::get('/', [MainController::class, 'dashadmin'])->name('dash.dashadmin');
         Route::get('/dashboard', [MainController::class, 'index'])->name('dash.dashboard');
         Route::get('/create_dash', [MainController::class, 'create_dash'])->name('dash.create_dash');
         Route::post('/buat', [MainController::class, 'buat'])->name('dash.buat');
@@ -190,23 +192,36 @@ Route::group(['middleware' => 'auth:sanctum', 'role:admin'], function () {
     //data proposal dan laporan pengabdian dan penelitian kepada masyarakat
     Route::prefix('plppm')->middleware('auth:sanctum', 'role:admin')->group(function () {
         Route::get('/ppengabdian', [ViewlprnController::class, 'upp3m'])->name('plppm.lpengabdian');
+        Route::patch('/ppengabdian/{id}/status', [ViewlprnController::class, 'updateStatus'])
+            ->name('plppm.ppengabdian.status');
         Route::get('/lpengabdian', [ViewlprnController::class, 'kpengabdianp3m'])->name('plppm.kpengabdian');
         Route::get('/ppenelitian', [ViewlprnController::class, 'ajuanpeneliti'])->name('plppm.lpeneleitian');
+        Route::patch('/ppnelitian/{id}/status', [ViewlprnController::class, 'updateStatusPen'])
+            ->name('plppm.ppenelitian.status');
         Route::get('/lpenelitian', [ViewlprnController::class, 'kpeneliti'])->name('plppm.kpenelitian');
+
+        Route::patch('/kumpul/{tipe}/{id}/status', [ViewlprnController::class, 'updateStatuskump'])
+            ->name('plppm.kumpulan.status');
         //detail data
 
     });
 });
+//수랏 투가스
+Route::get('/p3m/surat-tugas/download/{id}', [suratcontroller::class, 'downloadSuratTugas'])
+    ->name('p3m.surat-tugas.download');
+
 Route::middleware(['auth'])->get('/Propengabdian/{tipe}/{id}', [ViewlprnController::class, 'dajupeneliti'])->name('detail.detail');
 Route::middleware(['auth'])->get('/Lappengabdian/{tipe}/{id}', [ViewlprnController::class, 'kumpengneli'])->name('detail.detailk');
 Route::middleware(['auth'])->get('/Propengabdian/{tipe}/{id}', [ViewlprnController::class, 'dajupeneliti'])->name('detail.detail');
 Route::middleware(['auth'])->get('/Lappengabdian/{tipe}/{id}', [ViewlprnController::class, 'kumpengneli'])->name('detail.detailk');
+//profil
+Route::middleware(['auth'])->get('/profil/{id}', [DosenController::class, 'update'])->name('dosen.profil');
 
 Route::group(['middleware' => 'auth:sanctum', 'role:dosen'], function () {
     Route::prefix('dosdash')->middleware('auth:sanctum', 'role:dosen')->group(function () {
         Route::get('/dash', [DosenController::class, 'dash'])->name('dosen.dash');
         //profil
-        Route::get('/profil/{id}', [DosenController::class, 'update'])->name('dosen.profil');
+
         Route::put('/edit/{id}', [DosenController::class, 'edit'])->name('edit');
 
         //ajuan pengabdian

@@ -25,7 +25,8 @@ class ajuan_penelitianModel extends Model
         'biaya',
         'uppdf', // untuk file PDF
         // 'foto', // untuk foto
-        'user_id', // untuk user
+        'user_id',
+        'status' // untuk user
     ];
     public function anggotap3m()
     {

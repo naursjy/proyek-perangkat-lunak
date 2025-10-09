@@ -71,7 +71,7 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ route('dash.dashboard') }}" class="nav-link">Home</a>
+                    <a href="{{ route('dash.dashadmin') }}" class="nav-link">Home</a>
                 </li>
                 <!-- <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Contact</a>
@@ -98,7 +98,7 @@
                         @endif
                     </div>
                     <div class="info">
-                        <a href="{{ route('dash.dashboard') }}" class="d-block">{{ $user->name }}</a>
+                        <a href="{{ route('dosen.profil', ['id' => Auth::user()->id]) }}" class="d-block">{{ $user->name }}</a>
                     </div>
                 </div>
 
@@ -243,7 +243,7 @@
                                     <a href="{{ route('plppm.lpengabdian') }}" class="nav-link">
                                         <i class="nav-icon far fa-file"></i>
                                         <p>
-                                            Proposal Pengabdian
+                                            Pengajuan Pengabdian
                                         </p>
                                     </a>
                                 </li>
@@ -251,7 +251,7 @@
                                     <a href="{{ route('plppm.lpeneleitian') }}" class="nav-link">
                                         <i class="nav-icon far fa-file"></i>
                                         <p>
-                                            Proposal Penelitian
+                                            Pengajuan Penelitian
                                         </p>
                                     </a>
                                 </li>
@@ -372,9 +372,9 @@
     <!-- AdminLTE App -->
     <script src="{{ asset ('lte/dist/js/adminlte.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset ('lte/dist/js/demo.js') }}"></script>
+    <!-- <script src="{{ asset ('lte/dist/js/demo.js') }}"></script> -->
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="{{ asset ('lte/dist/js/pages/dashboard.js') }}"></script>
+    <!-- <script src="{{ asset ('lte/dist/js/pages/dashboard.js') }}"></script> -->
 
     <!-- ckeditor -->
     <script>

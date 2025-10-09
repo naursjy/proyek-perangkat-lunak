@@ -4,6 +4,8 @@
  @endsection
  @section('content')
 
+
+
  <div class="content-wrapper">
      <!-- Content Header (Page header) -->
      <div class="content-header">
@@ -138,8 +140,54 @@
                                          <td>
                                              <div class="btn-group" role="group">
                                                  <a href="{{ route('detail.detail', ['tipe' => 'ajupengab', 'id' => $d->id]) }}" class="btn btn-info text-white"><i class="fas fa-eye white"></i></a>
-                                                 <!-- <a href="{{ route('dosen.edit_ajupengab',['id' => $d->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a> -->
-                                                 <!-- <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a> -->
+                                                 <!-- approval p3m -->
+
+                                             </div>
+                                             @php
+                                             // Atur class button sesuai status
+                                             $btnClass = match($d->status) {
+                                             'approve' => 'btn-success', // hijau
+                                             'proses' => 'btn-warning', // kuning
+                                             'non-approve' => 'btn-danger', // merah
+                                             default => 'btn-secondary', // default
+                                             };
+                                             @endphp
+                                             <div class="btn-group">
+                                                 <button type="button" class="btn {{ $btnClass }} btn-sm dropdown-toggle"
+                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                     {{ ucfirst($d->status) }}
+                                                 </button>
+                                                 <div class="dropdown-menu">
+                                                     <!-- Approve -->
+                                                     <form action="{{ route('plppm.ppengabdian.status', $d->id) }}" method="POST" class="px-3 py-1">
+                                                         @csrf
+                                                         @method('PATCH')
+                                                         <input type="hidden" name="status" value="approve">
+                                                         <button type="submit" class="dropdown-item" onclick="return confirm('Yakin ingin approve pengajuan ini?')">
+                                                             ✅ Approve
+                                                         </button>
+                                                     </form>
+
+                                                     <!-- Proses -->
+                                                     <form action="{{ route('plppm.ppengabdian.status', $d->id) }}" method="POST" class="px-3 py-1">
+                                                         @csrf
+                                                         @method('PATCH')
+                                                         <input type="hidden" name="status" value="proses">
+                                                         <button type="submit" class="dropdown-item" onclick="return confirm('Set status jadi proses?')">
+                                                             ⏳ Proses
+                                                         </button>
+                                                     </form>
+
+                                                     <!-- Non-approve -->
+                                                     <form action="{{ route('plppm.ppengabdian.status', $d->id) }}" method="POST" class="px-3 py-1">
+                                                         @csrf
+                                                         @method('PATCH')
+                                                         <input type="hidden" name="status" value="non-approve">
+                                                         <button type="submit" class="dropdown-item text-danger" onclick="return confirm('Tolak pengajuan ini?')">
+                                                             ❌ Non-approve
+                                                         </button>
+                                                     </form>
+                                                 </div>
                                              </div>
                                          </td>
                                      </tr>

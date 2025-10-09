@@ -49,18 +49,18 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Judul</th>
+                                        <th style="width: 20px;">Judul</th>
                                         <th>Bidang Ilmu</th>
                                         <th>Kategori</th>
                                         <th>Ketua Peneliti</th>
-                                        <th>Aksi</th>
+                                        <th style="width: 120px;">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($penelitians as $d)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{!! Str::words($d->judul, 10) !!}</td>
+                                        <td>{!! Str::words($d->judul, 7) !!}</td>
                                         <td>{!! $d->bidang !!}</td>
                                         <td>{!! $d->jeniskategori !!}</td>
 
@@ -77,11 +77,58 @@
                                          </td> -->
                                         <!-- <td><img src="{{ asset('storage/photo-upp3m/' . $d->foto) }}" alt="image" width="100px" height="120px"></td> -->
                                         <!-- <td><a href="{{ asset('storage/uppdf/' . $d->uppdf) }}" target="_blank">Lihat File</a></td> -->
-                                        <td>
+                                        <td style="white-space: nowrap;">
                                             <div class="btn-group" role="group">
                                                 <a href="{{ route('detail.detailk', ['tipe' => 'kpeneliti', 'id' => $d->id]) }}" class="btn btn-info text-white"><i class="fas fa-eye white"></i></a>
                                                 <!-- <a href="{{ route('dosen.edit_kpenliti',['id' => $d->id]) }}" class="btn btn-primary rounded-circle m-1"><i class="fas fa-pen"></i></a> -->
                                                 <!-- <a href="#" class="btn btn-danger rounded-circle m-1"><i class="fas fa-trash"></i></a> -->
+                                            </div>
+
+                                            @php
+                                            // Atur class button sesuai status
+                                            $btnClass = match($d->status) {
+                                            'approve' => 'btn-success', // hijau
+                                            'proses' => 'btn-warning', // kuning
+                                            'non-approve' => 'btn-danger', // merah
+                                            default => 'btn-secondary', // default
+                                            };
+                                            @endphp
+                                            <div class="btn-group">
+                                                <button type="button" class="btn {{ $btnClass }} btn-sm dropdown-toggle"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    {{ ucfirst($d->status) }}
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <!-- Approve -->
+                                                    <form action="{{ route('plppm.kumpulan.status', ['tipe' => 'kum_penelitian', $d->id]) }}" method="POST" class="px-3 py-1">
+                                                        @csrf
+                                                        @method('patch')
+                                                        <input type="hidden" name="status" value="approve">
+                                                        <button type="submit" class="dropdown-item" onclick="return confirm('Yakin ingin approve pengajuan ini?')">
+                                                            ✅ Approve
+                                                        </button>
+                                                    </form>
+
+                                                    <!-- Proses -->
+                                                    <form action="{{ route('plppm.kumpulan.status', ['tipe' => 'kum_penelitian', $d->id]) }}" method="POST" class="px-3 py-1">
+                                                        @csrf
+                                                        @method('patch')
+                                                        <input type="hidden" name="status" value="proses">
+                                                        <button type="submit" class="dropdown-item" onclick="return confirm('Set status jadi proses?')">
+                                                            ⏳ Proses
+                                                        </button>
+                                                    </form>
+
+                                                    <!-- Non-approve -->
+                                                    <form action="{{ route('plppm.kumpulan.status', ['tipe' => 'kum_penelitian', $d->id]) }}" method="POST" class="px-3 py-1">
+                                                        @csrf
+                                                        @method('patch')
+                                                        <input type="hidden" name="status" value="non-approve">
+                                                        <button type="submit" class="dropdown-item text-danger" onclick="return confirm('Tolak pengajuan ini?')">
+                                                            ❌ Non-approve
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </td>
                                     </tr>

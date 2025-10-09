@@ -26,6 +26,9 @@ class p3mModel extends Model
         'uppdf', // untuk file PDF
         // 'foto', // untuk foto
         'user_id', // untuk user
+        'status',
+        'tanggal_mulai',
+        'tanggal_selesai',
     ];
 
     public function anggotap3m()

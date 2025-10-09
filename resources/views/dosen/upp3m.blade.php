@@ -1,6 +1,11 @@
 @extends('layout.doslayout')
 @section('css')
 <link rel="stylesheet" href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+
 @endsection
 @section('content')
 
@@ -113,6 +118,7 @@
                                         <th>Kategori</th>
                                         <th>Ketua Peneliti</th>
                                         <th>Aksi</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -143,6 +149,28 @@
                                                 <a href="{{ route ('dosen.deletep3m', ['id' => $d->id]) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                                             </div>
                                         </td>
+                                        <td>@if($d->status === 'approve')
+                                            <span class="badge bg-success">
+                                                ✅ Disetujui
+                                            </span>
+                                            <small class="text-primary ms-1"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                title="Silahkan konfirmasi dengan Ketua P3M"
+                                                style="cursor: pointer; text-decoration: underline;">
+                                                <i class="fa-solid fa-circle-info"></i>
+                                            </small>
+                                            <a href="{{ route('p3m.surat-tugas.download', $d->id) }}"
+                                                class="btn btn-success btn-sm">
+                                                <i class="fa-solid fa-file-pdf"></i> Download Surat
+                                            </a>
+
+                                            @elseif($d->status === 'proses')
+                                            <span class="badge badge-warning">⏳ Proses</span>
+                                            @else
+                                            <span class="badge badge-danger">❌ Non-approve</span>
+                                            @endif
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -166,5 +194,23 @@
     $(document).ready(function() {
         $('#clientside').DataTable();
     });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    })
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        tooltipTriggerList.map(function(tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    })
 </script>
 @endsection

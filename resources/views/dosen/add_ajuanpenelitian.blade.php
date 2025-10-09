@@ -63,7 +63,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <small>Kategori</small>
-                                                        <input type="text" class="form-control" value="Proposal Penelitian Masyarakat" name="jeniskategori" readonly>
+                                                        <input type="text" class="form-control" value="Surat Pengajuan Penelitian" name="jeniskategori" readonly>
                                                         <!-- <input type=" hidden" name="jeniskategori" value="Proposal Pengabdian"> -->
                                                     </div>
                                                     <div class="form-group ">

@@ -1,4 +1,9 @@
 @extends('layout.main')
+
+@section('css')
+<link rel="stylesheet" href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.css" />
+@endsection
+
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -45,7 +50,7 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive">
-                            <table class="table table-hover text-nowrap">
+                            <table class="table table-hover" id="clientside">
                                 <thead>
                                     <tr>
                                         <th>No</th>
@@ -88,4 +93,13 @@
     </section>
     <!-- /.content -->
 </div>
+@endsection
+
+@section('scripts')
+<script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#clientside').DataTable();
+    });
+</script>
 @endsection

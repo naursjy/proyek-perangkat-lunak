@@ -24,6 +24,17 @@ class MainController extends Controller
         return abort(403);
     }
 
+    public function dashadmin()
+    {
+        // $dash = m_dashboard::all();
+        $user = Auth::user();
+        // View::share('dash');
+        // dd($dash);
+        return view('dashadmin', compact('dash', 'user'));
+        // }
+        return abort(403);
+    }
+
     public function create_dash()
     {
         $user = Auth::user();

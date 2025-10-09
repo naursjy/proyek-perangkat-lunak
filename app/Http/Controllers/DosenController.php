@@ -39,7 +39,9 @@ class DosenController extends Controller
         $data = User::find($id);
         $user = Auth::user();
 
-        return view('dosen.profildos', compact('data', 'user'));
+        $layout = $request->get('layout') ?? (($user->role === 'admin') ? 'layout.main' : 'layout.doslayout');
+
+        return view('dosen.profildos', compact('data', 'user', 'layout'));
     }
 
     public function edit(Request $request, $id)
@@ -53,7 +55,8 @@ class DosenController extends Controller
 
         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
-        $find = User::find($id);
+        $find = User::findOrFail($id);
+        $currentUser = Auth::user();
 
         $data['email']      = $request->email;
         $data['name']       = $request->name;
@@ -81,6 +84,8 @@ class DosenController extends Controller
             $data['image'] = $filename;
         }
         $find->update($data);
+
+
 
         return redirect()->route('dosen.profil', ['id' => Auth::id()]);
     }
@@ -246,9 +251,11 @@ class DosenController extends Controller
             'bidang' => 'required',
             'jeniskategori' => 'required',
             'lokasi' => 'required',
-            'lamapenelitian' => 'required',
+            'lamapenelitian' => 'nullable',
             'biaya' => 'required',
             'uppdf' => 'required|mimes:pdf|max:20480',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
             //untuk profil
             'ketua' => 'required',
             'jabatan' => 'required',
@@ -292,6 +299,8 @@ class DosenController extends Controller
             'lamapenelitian' => $request->lamapenelitian,
             'biaya' => $request->biaya,
             'uppdf' => $filenamepdf,
+            'tanggal_mulai' => $request->tanggal_mulai,
+            'tanggal_selesai' => $request->tanggal_selesai,
             //untuk profil
             'ketua' => $request->ketua,
             'jabatan' => $request->jabatan,
@@ -335,7 +344,9 @@ class DosenController extends Controller
             'bidang' => 'required',
             'jeniskategori' => 'required',
             'lokasi' => 'required',
-            'lamapenelitian' => 'required',
+            'lamapenelitian' => 'nullable',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
             'biaya' => 'required',
             'uppdf' => 'nullable|mimes:pdf|max:20480',
             //untuk profil
@@ -375,6 +386,8 @@ class DosenController extends Controller
             'jeniskategori' => $request->jeniskategori,
             'lokasi' => $request->lokasi,
             'lamapenelitian' => $request->lamapenelitian,
+            'tanggal_mulai' => $request->tanggal_mulai,
+            'tanggal_selesai' => $request->tanggal_selesai,
             'biaya' => $request->biaya,
             //untuk profil
             'ketua' => $request->ketua,

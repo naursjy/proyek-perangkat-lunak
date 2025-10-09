@@ -156,7 +156,7 @@
                                 <li class="nav-item">
                                     <a href="{{ route('dosen.upp3m') }}" class="nav-link">
                                         <i class="nav-icon fas fa-users"></i>
-                                        <p>Proposal Pengabdian</p>
+                                        <p>Pengajuan Pengabdian</p>
                                     </a>
                                 </li>
                             </ul>
@@ -173,7 +173,7 @@
                             <a href="#" class="nav-link">
                                 <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
                                 <p>
-                                    Penelitian Kepada Masyarakat
+                                    Penelitian
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
@@ -181,7 +181,7 @@
                                 <li class="nav-item">
                                     <a href="{{ route('dosen.dash_ajuanpenelitian') }}" class="nav-link">
                                         <i class="nav-icon fas fa-users"></i>
-                                        <p>Proposal Penelitian</p>
+                                        <p>Pengajuan Penelitian</p>
                                     </a>
                                 </li>
                             </ul>
@@ -269,9 +269,9 @@
     <!-- AdminLTE App -->
     <script src="{{ asset ('lte/dist/js/adminlte.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset ('lte/dist/js/demo.js') }}"></script>
+    <!-- <script src="{{ asset ('lte/dist/js/demo.js') }}"></script> -->
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="{{ asset ('lte/dist/js/pages/dashboard.js') }}"></script>
+    <!-- <script src="{{ asset ('lte/dist/js/pages/dashboard.js') }}"></script> -->
 
     <!-- ckeditor -->
     <script>

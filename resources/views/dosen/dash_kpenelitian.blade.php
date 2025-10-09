@@ -54,6 +54,7 @@
                                         <th>Kategori</th>
                                         <th>Ketua Peneliti</th>
                                         <th>Aksi</th>
+                                        <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -83,6 +84,24 @@
                                                 <a href="{{ route('dosen.edit_kpenliti',['id' => $d->id]) }}" class="btn btn-primary rounded-circle m-1"><i class="fas fa-pen"></i></a>
                                                 <a href="{{ route ('dosen.delete', ['id' => $d->id]) }}" class="btn btn-danger rounded-circle m-1"><i class="fas fa-trash"></i></a>
                                             </div>
+                                        </td>
+                                        <td>@if($d->status === 'approve')
+                                            <span class="badge bg-success">
+                                                ✅ Disetujui
+                                            </span>
+                                            <small class="text-primary ms-1"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                title="Silahkan konfirmasi dengan Ketua P3M"
+                                                style="cursor: pointer; text-decoration: underline;">
+                                                <i class="fa-solid fa-circle-info"></i>
+                                            </small>
+
+                                            @elseif($d->status === 'proses')
+                                            <span class="badge badge-warning">⏳ Proses</span>
+                                            @else
+                                            <span class="badge badge-danger">❌ Non-approve</span>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach

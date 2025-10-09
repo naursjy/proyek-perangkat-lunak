@@ -104,7 +104,73 @@ class ViewlprnController extends Controller
         return view('plppm.kpenelitian', compact('user', 'data', 'penelitians', 'pagetitle'));
     }
 
-    public function dajupeneliti($tipe, $id, $request)
+
+    //UPDATE STATUS P3M 
+    //PEGABDIAN
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:approve,proses,non-approve'
+        ]);
+
+        $pengajuan = p3mModel::findOrFail($id);
+        $pengajuan->status = $request->status;
+        $pengajuan->save();
+
+        // dd($request->all());
+        return redirect()->route('plppm.lpengabdian')->with('success', 'Status updated');
+        // return redirect()->back()->with('success', 'Status berhasil diubah ke ' . $request->status);
+    }
+
+
+    //PENELITIAN
+    public function updateStatusPen(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:approve,proses,non-approve'
+        ]);
+
+        $pengajuan = ajuan_penelitianModel::findOrFail($id);
+        $pengajuan->status = $request->status;
+        $pengajuan->save();
+
+        // dd($request->all());
+        return redirect()->route('plppm.lpeneleitian')->with('success', 'Status updated');
+        // return redirect()->back()->with('success', 'Status berhasil diubah ke ' . $request->status);
+    }
+
+    //둘다
+    public function updateStatuskump(Request $request, $tipe, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:approve,proses,non-approve'
+        ]);
+
+        // Tentukan model berdasarkan tipe
+        switch ($tipe) {
+            case 'kum_penelitian':
+                $pengajuan = kum_penelitianModel::findOrFail($id);
+                $redirect = 'plppm.kpenelitian';
+                break;
+
+            case 'kum_pengabdian':
+                $pengajuan = kum_pengabdianModel::findOrFail($id);
+                $redirect = 'plppm.kpengabdian';
+                break;
+
+            default:
+                return redirect()->back()->with('error', 'Tipe tidak valid');
+        }
+
+        // Update status
+        $pengajuan->status = $request->status;
+        $pengajuan->save();
+
+        return redirect()->route($redirect)->with('success', 'Status berhasil diubah ke ' . $request->status);
+    }
+
+
+    public function dajupeneliti($tipe, $id, Request $request)
     {
         $user = Auth::user();
         $pagetitle = 'Detail Data Proposal';

@@ -18,7 +18,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $data = new User;
-        $pagetitle = 'Users';
+        $pagetitle = 'User P3M Polibang Jepara';
         $user = Auth::user();
         if ($request->get('search')) {
             $data = User::where('name', 'like', '%' . $request->get('search') . '%')
@@ -124,6 +124,11 @@ class HomeController extends Controller
 
     public function delete(Request $request, $id)
     {
+        $auth = Auth::user();
+        if ($auth->role !== 'admin') {
+            abort(403, 'Kamu tidak punya akses untuk menghapus data ini.');
+        }
+
         // $user = Auth::user();
         $user = User::find($id);
         if ($user) {
