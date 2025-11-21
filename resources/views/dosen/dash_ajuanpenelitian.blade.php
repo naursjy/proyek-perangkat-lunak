@@ -101,12 +101,17 @@
                                                 style="cursor: pointer; text-decoration: underline;">
                                                 <i class="fa-solid fa-circle-info"></i>
                                             </small>
+                                            <a href="{{ route('p3m.surat-tugaspen.download', $d->id) }}"
+                                                class="btn btn-success btn-sm">
+                                                <i class="fa-solid fa-file-pdf"></i> Download Surat
+                                            </a>
 
                                             @elseif($d->status === 'proses')
                                             <span class="badge badge-warning">⏳ Proses</span>
                                             @else
                                             <span class="badge badge-danger">❌ Non-approve</span>
                                             @endif
+
                                         </td>
                                     </tr>
                                     @endforeach

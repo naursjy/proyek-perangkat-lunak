@@ -76,12 +76,17 @@
                                                     <div class="form-group ">
                                                         <small>Lama Penelitian :</small>
                                                         <div class="input-group mb-3">
-                                                            <input type="text" class="form-control" name="lamapenelitian" placeholder="Enter ..." value="{{ old('lamapenelitian') }}">
+                                                            <!-- <input type="text" class="form-control" name="lamapenelitian" placeholder="Enter ..." value="{{ old('lamapenelitian') }}">
                                                             <div class="input-group-append">
                                                                 <span class="input-group-text">Hari</span>
+                                                            </div> -->
+                                                            <div class="d-flex">
+                                                                <input type="date" name="tanggal_mulai" class="form-control me-2" required>
+                                                                <span class="align-self-center">sampai</span>
+                                                                <input type="date" name="tanggal_selesai" class="form-control ms-2" required>
                                                             </div>
                                                         </div>
-                                                        @error('lamapenelitian')
+                                                        @error('tanggal_mulai' && 'tanggal_selesai')
                                                         <small>{{ $message }}</small>
                                                         @enderror
                                                     </div>

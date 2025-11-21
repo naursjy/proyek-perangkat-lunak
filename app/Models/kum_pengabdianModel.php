@@ -25,7 +25,9 @@ class kum_pengabdianModel extends Model
         'uppdf', // untuk file PDF
         'foto', // untuk foto
         'jeniskategori',
-        'user_id', // untuk user
+        'user_id',
+        'tanggal_mulai',
+        'tanggal_selesai', // untuk user
     ];
 
     public function anggotap3m()

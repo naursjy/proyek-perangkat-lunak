@@ -210,6 +210,9 @@ Route::group(['middleware' => 'auth:sanctum', 'role:admin'], function () {
 Route::get('/p3m/surat-tugas/download/{id}', [suratcontroller::class, 'downloadSuratTugas'])
     ->name('p3m.surat-tugas.download');
 
+Route::get('/p3m/surat-tugaspen/download/{id}', [suratcontroller::class, 'downsurtagpen'])
+    ->name('p3m.surat-tugaspen.download');
+
 Route::middleware(['auth'])->get('/Propengabdian/{tipe}/{id}', [ViewlprnController::class, 'dajupeneliti'])->name('detail.detail');
 Route::middleware(['auth'])->get('/Lappengabdian/{tipe}/{id}', [ViewlprnController::class, 'kumpengneli'])->name('detail.detailk');
 Route::middleware(['auth'])->get('/Propengabdian/{tipe}/{id}', [ViewlprnController::class, 'dajupeneliti'])->name('detail.detail');

@@ -38,7 +38,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                         {{ session('success') }}
-                    </div>
+                    </div> 
                     @endif
                     <div class="card">
                         <div class="card-header">

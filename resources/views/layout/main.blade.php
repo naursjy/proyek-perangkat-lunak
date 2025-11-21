@@ -234,7 +234,7 @@
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <p>
-                                    Pengumpulan Data dan Laporan P3M
+                                    Pengajuan dan Laporan P3M
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>

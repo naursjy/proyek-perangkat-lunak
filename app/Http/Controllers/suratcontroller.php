@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ajuan_penelitianModel;
 use App\Models\p3mModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -142,7 +143,7 @@ class suratcontroller extends Controller
 
         $pdf = new Fpdi();
         $pdf->AddPage();
-        $templatePath = storage_path('app/public/STPeng.pdf');
+        $templatePath = storage_path('app/public/STPG1.pdf');
         $pdf->setSourceFile($templatePath);
         $tplIdx = $pdf->importPage(1);
         $pdf->useTemplate($tplIdx, 0, 0, 210);
@@ -150,7 +151,7 @@ class suratcontroller extends Controller
         // $pdf->SetTitle('Surat Tugas Penelitian');
         // $pdf->SetAuthor('Politeknik Balekambang');
         $pdf->SetFont('Times', '', 12);
-        $pdf->SetXY(25, 75);
+        $pdf->SetXY(25, 70);
         $pdf->MultiCell(160, 8, "Ketua Pusat Penelitian dan Pengabdian kepada Masyarakat memberikan tugas kepada:", 0, 'L');
 
         // Tabel header
@@ -189,29 +190,139 @@ class suratcontroller extends Controller
 
         // Bagian bawah: judul penelitian
 
-        $pdf->Ln(5);
+        $pdf->Ln(3);
         $pdf->SetFont('Times', '', 12);
         $start_x = 25; // Define the starting X position
         $pdf->SetXY($start_x, $pdf->GetY(0));
         $pdf->MultiCell(0, 8, "Untuk melakukan Pengabdian dengan judul:", 0, 'L');
+
+        $currentY = $pdf->GetY();
+
         $pdf->SetFont('Times', 'B', 12);
         $start_x = 25; // Define the starting X position
-        $pdf->SetXY($start_x, $pdf->GetY(0));
+        $pdf->SetXY($start_x, $currentY - 1);
         $pdf->MultiCell(0, 8, $penelitian->judul, 0, 'L');
 
         // Tanggal
         $tglMulai = Carbon::parse($penelitian->tanggal_mulai)->locale('id')->translatedFormat('j F Y');
         $tglSelesai = Carbon::parse($penelitian->tanggal_selesai)->locale('id')->translatedFormat('j F Y');
 
-        $pdf->Ln(2);
+
+        $currentY = $pdf->GetY();
+        $pdf->Ln(1);
+
         $pdf->SetFont('Times', '', 12);
         $start_x = 25; // Define the starting X position
-        $pdf->SetXY($start_x, $pdf->GetY(0));
+        $pdf->SetXY($start_x, $currentY - 1);
         $pdf->MultiCell(0, 8, "Yang akan dilaksanakan pada tanggal " . $tglMulai . " - " . $tglSelesai . ".", 0, 'L');
+
+        $currentY = $pdf->GetY();
 
         $pdf->Ln(2);
         $start_x = 25; // Define the starting X position
+        $pdf->SetXY($start_x, $currentY - 1);
+        $pdf->MultiCell(0, 7, "Surat tugas ini dibuat untuk dilaksanakan dengan penuh tanggungjawab. Hal-hal yang terkait dengan prosedur pelaksanaan dapat dilihat pada SOP  Penelitian Politeknik Balekambang.", 0, 'L');
+
+
+        // Tanda tangan
+        $pdf->Ln(5);
+        $pdf->SetFont('Times', '', 12);
+        $pdf->Cell(0, 8, "Jepara, " . Carbon::now()->locale('id')->translatedFormat('d F Y'), 0, 1, 'R');
+        $pdf->Cell(0, 8, "Ketua P3M,", 0, 1, 'R');
+        $pdf->Ln(20);
+
+        $pdf->SetFont('Times', 'BU', 12);
+        $pdf->Cell(0, 6, "Sofia Ulfah, M.Kom.", 0, 1, 'R');
+        $pdf->SetFont('Times', 'B', 12);
+        $pdf->Cell(0, 6, "NIDN : 0619099004", 0, 1, 'R');
+        $pdf->Output('I', 'Surat_Tugas_Penelitian.pdf');
+    }
+
+    public function downsurtagpen($id)
+    {
+        $penelitian = ajuan_penelitianModel::with('anggotap3m')->findOrFail($id);
+        $anggota = json_decode($penelitian->anggota, true);
+
+        $pdf = new Fpdi();
+        $pdf->AddPage();
+        $templatePath = storage_path('app/public/STPG1.pdf');
+        $pdf->setSourceFile($templatePath);
+        $tplIdx = $pdf->importPage(1);
+        $pdf->useTemplate($tplIdx, 0, 0, 210);
+
+        // $pdf->SetTitle('Surat Tugas Penelitian');
+        // $pdf->SetAuthor('Politeknik Balekambang');
+        $pdf->SetFont('Times', '', 12);
+        $pdf->SetXY(25, 70);
+        $pdf->MultiCell(160, 8, "Ketua Pusat Penelitian dan Pengabdian kepada Masyarakat memberikan tugas kepada:", 0, 'L');
+
+        // Tabel header
+        $y = $pdf->GetY(); // kasih jarak kecil, misal 5 biar gak nempel banget
+        $pdf->SetY($y);
+        $pdf->SetX(25);
+        $pdf->SetFont('Times', 'B', 12);
+        $pdf->Cell(10, 10, 'NO', 1, 0, 'C');
+        $pdf->Cell(53, 10, 'NAMA', 1, 0, 'C');
+        $pdf->Cell(40, 10, 'NIDN/NIM', 1, 0, 'C');
+        $pdf->Cell(55, 10, 'PROGRAM STUDI', 1, 0, 'C');
+        $pdf->Cell(20, 10, 'Jabatan', 1, 1, 'C');
+
+        // Ketua
+        $start_x = 25; // Define the starting X position
         $pdf->SetXY($start_x, $pdf->GetY(0));
+        $pdf->SetFont('Times', '', 12);
+        $pdf->Cell(10, 10, '1', 1, 0, 'C');
+        $pdf->Cell(53, 10, $penelitian->ketua, 1);
+        $pdf->Cell(40, 10, '-', 1);
+        $pdf->Cell(55, 10, '-', 1);
+        $pdf->Cell(20, 10, 'Ketua', 1, 1, 'C');
+
+        // Anggota
+
+        $no = 2;
+        foreach ($penelitian->anggotap3m as $row) {
+            $start_x = 25; // Define the starting X position
+            $pdf->SetXY($start_x, $pdf->GetY(0));
+            $pdf->Cell(10, 10, $no++, 1, 0, 'C');
+            $pdf->Cell(53, 10, $row['nama'], 1);
+            $pdf->Cell(40, 10, $row['prodi'], 1);
+            $pdf->Cell(55, 10, $row['jabatan'], 1);
+            $pdf->Cell(20, 10, 'Anggota', 1, 1, 'C');
+        }
+
+        // Bagian bawah: judul penelitian
+
+        $pdf->Ln(3);
+        $pdf->SetFont('Times', '', 12);
+        $start_x = 25; // Define the starting X position
+        $pdf->SetXY($start_x, $pdf->GetY(0));
+        $pdf->MultiCell(0, 8, "Untuk melakukan Pengabdian dengan judul:", 0, 'L');
+
+        $currentY = $pdf->GetY();
+
+        $pdf->SetFont('Times', 'B', 12);
+        $start_x = 25; // Define the starting X position
+        $pdf->SetXY($start_x, $currentY - 1);
+        $pdf->MultiCell(0, 8, $penelitian->judul, 0, 'L');
+
+        // Tanggal
+        $tglMulai = Carbon::parse($penelitian->tanggal_mulai)->locale('id')->translatedFormat('j F Y');
+        $tglSelesai = Carbon::parse($penelitian->tanggal_selesai)->locale('id')->translatedFormat('j F Y');
+
+
+        $currentY = $pdf->GetY();
+        $pdf->Ln(1);
+
+        $pdf->SetFont('Times', '', 12);
+        $start_x = 25; // Define the starting X position
+        $pdf->SetXY($start_x, $currentY - 1);
+        $pdf->MultiCell(0, 8, "Yang akan dilaksanakan pada tanggal " . $tglMulai . " - " . $tglSelesai . ".", 0, 'L');
+
+        $currentY = $pdf->GetY();
+
+        $pdf->Ln(2);
+        $start_x = 25; // Define the starting X position
+        $pdf->SetXY($start_x, $currentY - 1);
         $pdf->MultiCell(0, 7, "Surat tugas ini dibuat untuk dilaksanakan dengan penuh tanggungjawab. Hal-hal yang terkait dengan prosedur pelaksanaan dapat dilihat pada SOP  Penelitian Politeknik Balekambang.", 0, 'L');
 
 
