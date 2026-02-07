@@ -76,12 +76,17 @@
                                                     <div class="form-group ">
                                                         <small>Lama Penelitian :</small>
                                                         <div class="input-group mb-3">
-                                                            <input type="text" class="form-control" name="lamapenelitian" placeholder="Enter ..." value="{{ old('lamapenelitian') }}">
+                                                            <!-- <input type="text" class="form-control" name="lamapenelitian" placeholder="Enter ..." value="{{ old('lamapenelitian') }}">
                                                             <div class="input-group-append">
                                                                 <span class="input-group-text">Hari</span>
+                                                            </div> -->
+                                                            <div class="d-flex">
+                                                                <input type="date" name="tanggal_mulai" class="form-control me-2" required>
+                                                                <span class="align-self-center">sampai</span>
+                                                                <input type="date" name="tanggal_selesai" class="form-control ms-2" required>
                                                             </div>
                                                         </div>
-                                                        @error('lamapenelitian')
+                                                        @error('tanggal_mulai' && 'tanggal_selesai')
                                                         <small>{{ $message }}</small>
                                                         @enderror
                                                     </div>
@@ -98,6 +103,7 @@
                                                         <div class="custom-file">
                                                             <input type="file" name="uppdf" class="custom-file-input" id="uploadLaporan" value="{{ old('uppdf') }}">
                                                             <label class="custom-file-label" for="uploadLaporan">Unggah File</label>
+                                                            <sup>*maks file 2 mb</sup>
                                                         </div>
                                                         @error('uppdf')
                                                         <small>{{ $message }}</small>
@@ -132,8 +138,8 @@
                                                         <select class="custom-select form-control-border" id="exampleSelectBorder" name="jeniskelamin">
 
                                                             <option value="">---Pilih---</option>
-                                                            <option value="L">Laki - Laki</option>
-                                                            <option value="P">Perempuan</option>
+                                                            <option value="L" {{ old('jeniskelamin') == 'L' ? 'selected' : '' }}>Laki - Laki</option>
+                                                            <option value="P" {{ old('jeniskelamin') == 'P' ? 'selected' : '' }}>Perempuan</option>
 
                                                         </select>
                                                     </div>
@@ -146,7 +152,16 @@
                                                     </div>
                                                     <div class="form-group ">
                                                         <small>Jabatan Fungsional :</small>
-                                                        <input type="text" name="jabatan" class="form-control" placeholder="Enter ..." value="{{ old('jabatan') }}">
+                                                        <!-- <input type="text" name="jabatan" class="form-control" placeholder="Enter ..." value="{{ old('jabatan') }}"> -->
+                                                        <select class="custom-select form-control-border" id="exampleSelectBorder" name="jabatan">
+
+                                                            <option value="">---Pilih---</option>
+                                                            <option value="DR" {{ old('jabatan') == 'DR' ? 'selected' : '' }}>Direktur</option>
+                                                            <option value="LT" {{ old('jabatan') == 'LT' ? 'selected' : '' }}>Wakil Direktur</option>
+                                                            <option value="KP" {{ old('jabatan') == 'KP' ? 'selected' : '' }}>Ketua Program Studi</option>
+                                                            <option value="DS" {{ old('jabatan') == 'DS' ? 'selected' : '' }}>Dosen Polibang</option>
+
+                                                        </select>
                                                         @error('jabatan')
                                                         <small>{{ $message }}</small>
                                                         @enderror
@@ -156,9 +171,11 @@
                                                         <select class="custom-select form-control-border" id="exampleSelectBorder" name="prodi">
 
                                                             <option value="">---Pilih---</option>
-                                                            <option value="R">Rekayasa Perangkat Lunak</option>
-                                                            <option value="A">Administrasi Bisnis Internasional</option>
-                                                            <option value="AK">Akutansi Keuangan Publik</option>
+                                                            <option value="R" {{ old('prodi') == 'R' ? 'selected' : '' }}>Rekayasa Perangkat Lunak</option>
+                                                            <option value="A" {{ old('prodi') == 'A' ? 'selected' : '' }}>Administrasi Bisnis Internasional</option>
+                                                            <option value="AK" {{ old('prodi') == 'AK' ? 'selected' : '' }}>Akutansi Keuangan Publik</option>
+                                                            <option value="AB" {{ old('prodi') == 'AB' ? 'selected' : '' }}>Bisnis Digital</option>
+                                                            <option value="AP" {{ old('prodi') == 'AP' ? 'selected' : '' }}>Agribisnis Perternakan</option>
 
                                                         </select>
                                                     </div>
@@ -201,14 +218,40 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <small>Program Studi :</small>
-                                                            <input type="text" class="form-control" name="anggota[0][prodi]" placeholder="Prodi" value="{{ old('prodi') }}">
+                                                            <!-- <input type="text" class="form-control" name="anggota[0][prodi]" placeholder="Prodi" value="{{ old('prodi') }}"> -->
+                                                            <select class="custom-select form-control-border"
+                                                                name="anggota[0][prodi]">
+
+                                                                <option value="">---Pilih---</option>
+                                                                <option value="R" {{ old('anggota.0.prodi') == 'R' ? 'selected' : '' }}>Rekayasa Perangkat Lunak</option>
+                                                                <option value="A" {{ old('anggota.0.prodi') == 'A' ? 'selected' : '' }}>Administrasi Bisnis Internasional</option>
+                                                                <option value="AK" {{ old('anggota.0.prodi') == 'AK' ? 'selected' : '' }}>Akutansi Keuangan Publik</option>
+                                                                <option value="AB" {{ old('anggota.0.prodi') == 'AB' ? 'selected' : '' }}>Bisnis Digital</option>
+                                                                <option value="AP" {{ old('anggota.0.prodi') == 'AP' ? 'selected' : '' }}>Agribisnis Perternakan</option>
+                                                            </select>
                                                             @error('prodi')
                                                             <small>{{ $message }}</small>
                                                             @enderror
                                                         </div>
                                                         <div class="form-group">
+                                                            <small>NIM / NIDN :</small>
+                                                            <input type="text" class="form-control" name="anggota[0][nim]" placeholder="NIM/NIDN" value="{{ old('nim') }}">
+                                                            @error('nim')
+                                                            <small>{{ $message }}</small>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="form-group">
                                                             <small>Jabatan :</small>
-                                                            <input type="text" class="form-control" name="anggota[0][jabatan]" placeholder="Jabatan" value="{{ old('jabatan') }}">
+                                                            <!-- <input type="text" class="form-control" name="anggota[0][jabatan]" placeholder="Jabatan" value="{{ old('jabatan') }}"> -->
+                                                            <select class="custom-select form-control-border"
+                                                                name="anggota[0][jabatan]">
+                                                                <option value="">---Pilih---</option>
+                                                                <option value="DR" {{ old('anggota.0.jabatan') == 'DR' ? 'selected' : '' }}>Direktur</option>
+                                                                <option value="LT" {{ old('anggota.0.jabatan') == 'LT' ? 'selected' : '' }}>Wakil Direktur</option>
+                                                                <option value="KP" {{ old('anggota.0.jabatan') == 'KP' ? 'selected' : '' }}>Ketua Program Studi</option>
+                                                                <option value="DS" {{ old('anggota.0.jabatan') == 'DS' ? 'selected' : '' }}>Dosen</option>
+                                                                <option value="MHS" {{ old('anggota.0.jabatan') == 'MHS' ? 'selected' : '' }}>Mahasiswa</option>
+                                                            </select>
                                                             @error('jabatan')
                                                             <small>{{ $message }}</small>
                                                             @enderror
@@ -245,18 +288,42 @@
                 <input type="text" class="form-control" name="anggota[${count}][nama]" placeholder="Nama">
             </div>
             <div class="form-group">
-                <small>Program Studi :</small>
-                <input type="text" class="form-control" name="anggota[${count}][prodi]" placeholder="Prodi">
+            <small>Program Studi :</small>
+            <select class="custom-select form-control-border" id="exampleSelectBorder" name="anggota[${count}][prodi]" required>
+                <option value="">---Pilih---</option>
+                <option value="R" {{ old('anggota.0.prodi') == 'R' ? 'selected' : '' }}>Rekayasa Perangkat Lunak</option>
+                <option value="A" {{ old('anggota.0.prodi') == 'A' ? 'selected' : '' }}>Administrasi Bisnis Internasional</option>
+                <option value="AK" {{ old('anggota.0.prodi') == 'AK' ? 'selected' : '' }}>Akutansi Keuangan Publik</option>
+                <option value="AB" {{ old('anggota.0.prodi') == 'AB' ? 'selected' : '' }}>Bisnis Digital</option>
+                <option value="AP" {{ old('anggota.0.prodi') == 'AP' ? 'selected' : '' }}>Agribisnis Perternakan</option>
+                                                                
+            </select>
             </div>
             <div class="form-group">
-                <small>Jabatan :</small>
-                <input type="text" class="form-control" name="anggota[${count}][jabatan]" placeholder="Jabatan">
+            <small>NIM / NIDN :</small>
+            <input type="text" class="form-control" name="anggota[${count}][nim]" placeholder="NIM/NIDN" value="{{ old('nim') }}">
+            </div>
+            <div class="form-group">
+            <small>Jabatan :</small>
+            <select class="custom-select form-control-border" id="exampleSelectBorder" name="anggota[${count}][jabatan]" required>
+                <option value="">---Pilih---</option>
+                <option value="DR" {{ old('anggota.0.jabatan') == 'DR' ? 'selected' : '' }}>Direktur</option>
+                <option value="LT" {{ old('anggota.0.jabatan') == 'LT' ? 'selected' : '' }}>Wakil Direktur</option>
+                <option value="KP" {{ old('anggota.0.jabatan') == 'KP' ? 'selected' : '' }}>Ketua Program Studi</option>
+                <option value="DS" {{ old('anggota.0.jabatan') == 'DS' ? 'selected' : '' }}>Dosen</option>
+                <option value="MHS" {{ old('anggota.0.jabatan') == 'MHS' ? 'selected' : '' }}>Mahasiswa</option>
+            </select>
             </div>
             </div>
         `;
         wrapper.insertAdjacentHTML('beforeend', html);
         count++;
     }
+    document.getElementById('anggota-wrapper').addEventListener('click', function(e) {
+        if (e.target.classList.contains('remove-anggota')) {
+            e.target.closest('.anggota-row').remove();
+        }
+    });
 </script>
 <script>
     document.querySelectorAll('.custom-file-input').forEach(function(input) {

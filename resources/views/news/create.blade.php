@@ -1,13 +1,12 @@
 @extends('layout.main')
 @section('content')
+<!-- summernote -->
+@section('css')
+<!-- Summernote -->
+<link rel="stylesheet" href="{{ asset('lte/plugins/summernote/summernote-bs4.min.css') }}">
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
+@endsection
 
-
-<!-- Bootstrap Color Picker -->
-<link rel="stylesheet" href="{{ asset('lte/../../plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css') }}">
-<link rel="stylesheet" href="{{ asset('lte/../../plugins/summernote/summernote-bs4.min.css') }}">
-<!-- daterange picker -->
-<link rel="stylesheet" href="{{ asset('lte/../../plugins/daterangepicker/daterangepicker.css') }}">
-<!-- <link rel="stylesheet" href="{{ asset('path/to/bootstrap-datetimepicker.css') }}"> -->
 <style>
     .custom-option {
         background-color: #fff;
@@ -82,7 +81,8 @@
                                     <div class="form-group">
                                         <label for="textarea">Isi Berita</label>
                                         <!-- <textarea name="content" id="compose-textarea" class="form-control" style="height: 300px"></textarea> -->
-                                        <textarea name="content" class="form-control" id="compose-textarea"></textarea>
+                                        <textarea id="summernote" class="form-control"></textarea>
+                                        <!-- <textarea name="content" class="form-control" id="summernote"></textarea> -->
                                         @error('content')
                                         <small>{{ $message }}</small>
                                         @enderror
@@ -111,36 +111,34 @@
     </section>
     <!-- /.content -->
 </div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="{{ asset('lte/../../plugins/summernote/summernote-bs4.min.js') }}"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
-<!-- date-range-picker -->
-<script src="{{ asset('lte/../../plugins/daterangepicker/daterangepicker.js') }}"></script>
-<!-- bootstrap color picker -->
-<script src="{{ asset('lte/../../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js') }}"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="path/to/moment.js"></script>
-<script src="path/to/bootstrap-datetimepicker.js"></script>
-<script>
-    $(function() {
-        //Add text editor 
-        $('#compose-textarea').summernote()
-    })
-</script>
+@section('scripts')
+<!-- jQuery -->
+<script src="{{ asset('lte/plugins/jquery/jquery.min.js') }}"></script>
 
+<!-- Bootstrap Bundle -->
+<script src="{{ asset('lte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-<script>
-    $('#summernote').summernote({
-        placeholder: 'Hello Bootstrap 5',
-        tabsize: 2,
-        height: 100
-    });
-
-    $('#reservationdate').datetimepicker({
-        format: 'L'
+<!-- Summernote -->
+<script src="{{ asset('lte/plugins/summernote/summernote-bs4.min.js') }}"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
+<script script>
+    $(document).ready(function() {
+        $('.konten').summernote();
     });
 </script>
+<script>
+    $(document).ready(function() {
+        console.log('jquery:', typeof $);
+        console.log('summernote:', typeof $.fn.summernote);
+
+        $('#summernote').summernote({
+            height: 300,
+            placeholder: 'Tulis isi berita di sini...'
+        });
+    });
+</script>
+@endsection
+
+
 
 @endsection

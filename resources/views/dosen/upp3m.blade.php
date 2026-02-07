@@ -1,11 +1,8 @@
 @extends('layout.doslayout')
 @section('css')
-<link rel="stylesheet" href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-
-
+<link rel="stylesheet" href="{{ asset('lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('lte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 @endsection
 @section('content')
 
@@ -37,101 +34,36 @@
                     <a href="{{ route('dosen.addp3m') }}" class="btn btn-primary mb-2">+</a>
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">{{ $pagetitle }} </h3>
-                            <!-- <div class="card-tools">
-                                <form action="" method="get">
-                                    <div class="input-group input-group-sm" style="width: 150px;">
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default">
-                                                <i class="fas fa-search"></i>
-                                            </button>
+                            <h3 class="card-title">{{ $pagetitle }}</h3>
 
-                                        </div>
-                                    </div>
-                                </form>
-                            </div> -->
                         </div>
                         <!-- /.card-header -->
 
-                        <div class="card-body table-responsive">
-                            <!-- <table class="table table-hover text-nowrap">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Judul</th>
-                                        <th>Bidang Ilmu</th>
-                                        <th>Kategori</th>
-                                        <th>Lokasi</th>
-                                        <th>Waktu Penelitian</th>
-                                        <th>Biaya</th>
-                                        <th>Ketua Peneliti</th>
-                                        <th>Jenis Kelamin</th>
-                                        <th>NIDN</th>
-                                        <th>Prodi</th>
-                                        <th>No. Telp</th>
-                                        <th>Alamat</th>
-                                        <th>Anggota</th>
-                                        <th>Foto</th>
-                                        <th>File Laporan</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($penelitians as $d)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{!! Str::words($d->judul, 10) !!}</td>
-                                        <td>{!! $d->bidang !!}</td>
-                                        <td>{!! $d->kategori?->name !!}</td>
-                                        <td>{!! $d->lokasi !!}</td>
-                                        <td>{!! $d->lamapenelitian !!}</td>
-                                        <td>{!! $d->biaya !!}</td>
-                                        <td>{!! $d->ketua !!}</td>
-                                        <td>{!! $d->jeniskelamin !!}</td>
-                                        <td>{!! $d->nidn !!}</td>
-                                        <td>{!! $d->prodi !!}</td>
-                                        <td>{!! $d->telp !!}</td>
-                                        <td>{!! $d->alamat !!}</td>
-                                        <td>
-                                            <ul>
-                                                @foreach($d->anggotap3m as $anggota)
-                                                <li>
-                                                    {!! $anggota->nama !!} - {!! $anggota->prodi !!} -{!! $anggota->jabatan !!}
-                                                </li>
-                                                @endforeach
-                                            </ul>
-                                        </td>
-                                        <td><img src="{{ asset('storage/photo-upp3m/' . $d->foto) }}" alt="image" width="100px" height="120px"></td>
-                                        <td><a href="{{ asset('storage/uppdf/' . $d->uppdf) }}" target="_blank">Lihat File</a></td>
+                        <div class="card-body ">
+                            <div class="table-responsive">
+                                <table id="example2" class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Judul</th>
+                                            <th>Bidang Ilmu</th>
+                                            <th>Kategori</th>
+                                            <th>Ketua Peneliti</th>
+                                            <th>Aksi</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($penelitians as $d)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{!! Str::words($d->judul, 10) !!}</td>
+                                            <td>{!! $d->bidang !!}</td>
+                                            <td>{!! $d->jeniskategori !!}</td>
 
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table> -->
+                                            <td>{!! $d->ketua !!}</td>
 
-                            <table class="table table-hover" id="clientside">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Judul</th>
-                                        <th>Bidang Ilmu</th>
-                                        <th>Kategori</th>
-                                        <th>Ketua Peneliti</th>
-                                        <th>Aksi</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($penelitians as $d)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{!! Str::words($d->judul, 10) !!}</td>
-                                        <td>{!! $d->bidang !!}</td>
-                                        <td>{!! $d->jeniskategori !!}</td>
-
-                                        <td>{!! $d->ketua !!}</td>
-
-                                        <!-- <td>
+                                            <!-- <td>
                                              <ul>
                                                  @foreach($d->anggotap3m as $anggota)
                                                  <li>
@@ -140,41 +72,42 @@
                                                  @endforeach
                                              </ul>
                                          </td> -->
-                                        <!-- <td><img src="{{ asset('storage/photo-upp3m/' . $d->foto) }}" alt="image" width="100px" height="120px"></td> -->
-                                        <!-- <td><a href="{{ asset('storage/uppdf/' . $d->uppdf) }}" target="_blank">Lihat File</a></td> -->
-                                        <td>
-                                            <div class="btn-group" role="group">
-                                                <a href="{{ route('detail.detail', ['tipe' => 'ajupengab', 'id' => $d->id]) }}" class="btn btn-info text-white"><i class="fas fa-eye white"></i></a>
-                                                <a href="{{ route('dosen.edit_ajupengab',['id' => $d->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
-                                                <a href="{{ route ('dosen.deletep3m', ['id' => $d->id]) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                                            </div>
-                                        </td>
-                                        <td>@if($d->status === 'approve')
-                                            <span class="badge bg-success">
-                                                ✅ Disetujui
-                                            </span>
-                                            <small class="text-primary ms-1"
-                                                data-bs-toggle="tooltip"
-                                                data-bs-placement="top"
-                                                title="Silahkan konfirmasi dengan Ketua P3M"
-                                                style="cursor: pointer; text-decoration: underline;">
-                                                <i class="fa-solid fa-circle-info"></i>
-                                            </small>
-                                            <a href="{{ route('p3m.surat-tugas.download', $d->id) }}"
-                                                class="btn btn-success btn-sm">
-                                                <i class="fa-solid fa-file-pdf"></i> Download Surat
-                                            </a>
+                                            <!-- <td><img src="{{ asset('storage/photo-upp3m/' . $d->foto) }}" alt="image" width="100px" height="120px"></td> -->
+                                            <!-- <td><a href="{{ asset('storage/uppdf/' . $d->uppdf) }}" target="_blank">Lihat File</a></td> -->
+                                            <td>
+                                                <div class="btn-group" role="group">
+                                                    <a href="{{ route('detail.detail', ['tipe' => 'ajupengab', 'id' => $d->id]) }}" class="btn btn-info text-white"><i class="fas fa-eye white"></i></a>
+                                                    <a href="{{ route('dosen.edit_ajupengab',['id' => $d->id]) }}" class="btn btn-primary"><i class="fas fa-pen"></i></a>
+                                                    <a href="{{ route ('dosen.deletep3m', ['id' => $d->id]) }}" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                                                </div>
+                                            </td>
+                                            <td>@if($d->status === 'approve')
+                                                <span class="badge bg-success">
+                                                    ✅ Disetujui
+                                                </span>
+                                                <small class="text-primary ms-1"
+                                                    data-bs-toggle="tooltip"
+                                                    data-bs-placement="top"
+                                                    title="Silahkan konfirmasi dengan Ketua P3M"
+                                                    style="cursor: pointer; text-decoration: underline;">
+                                                    <i class="fa-solid fa-circle-info"></i>
+                                                </small>
+                                                <a href="{{ route('p3m.surat-tugas.download', $d->id) }}"
+                                                    class="btn btn-success btn-sm">
+                                                    <i class="fa-solid fa-file-pdf"></i> Download Surat
+                                                </a>
 
-                                            @elseif($d->status === 'proses')
-                                            <span class="badge badge-warning">⏳ Proses</span>
-                                            @else
-                                            <span class="badge badge-danger">❌ Non-approve</span>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                                @elseif($d->status === 'proses')
+                                                <span class="badge badge-warning">⏳ Proses</span>
+                                                @else
+                                                <span class="badge badge-danger">❌ Non-approve</span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -189,10 +122,33 @@
 
 @endsection
 @section('scripts')
-<script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
+<!-- DataTables  & Plugins -->
+<!-- <script src="https://cdn.datatables.net/2.1.5/js/dataTables.min.js"></script> -->
+<script src="{{ asset('lte/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('lte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('lte/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('lte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('lte/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('lte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('lte/plugins/jszip/jszip.min.js') }}"></script>
+<script src="{{ asset('lte/plugins/pdfmake/pdfmake.min.js') }}"></script>
+<script src="{{ asset('lte/plugins/pdfmake/vfs_fonts.js') }}"></script>
+<script src="{{ asset('lte/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('lte/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+<script src="{{ asset('lte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 <script>
-    $(document).ready(function() {
-        $('#clientside').DataTable();
+    $(function() {
+
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "dom": '<"top"f>rt<"bottom"ip>',
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
     });
 </script>
 

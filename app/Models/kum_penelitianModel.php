@@ -28,6 +28,7 @@ class kum_penelitianModel extends Model
         'user_id',
         'tanggal_mulai',
         'tanggal_selesai', // untuk user
+        'read_at',
     ];
 
     public function anggotap3m()

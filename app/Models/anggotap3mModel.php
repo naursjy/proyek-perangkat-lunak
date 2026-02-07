@@ -9,7 +9,7 @@ class anggotap3mModel extends Model
 {
     use HasFactory;
     protected $table = 'anggotap3m_models';
-    protected $fillable = ['nama', 'prodi', 'jabatan', 'ajupengab_model_id', 'ajupenel_model_id', 'kpengab_model_id', 'kpenel_model_id'];
+    protected $fillable = ['nama', 'nim', 'prodi', 'jabatan', 'ajupengab_model_id', 'ajupenel_model_id', 'kpengab_model_id', 'kpenel_model_id'];
 
     public function p3m()
     {

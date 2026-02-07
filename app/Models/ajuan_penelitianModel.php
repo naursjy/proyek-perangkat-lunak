@@ -29,6 +29,7 @@ class ajuan_penelitianModel extends Model
         'status',
         'tanggal_mulai',
         'tanggal_selesai', // untuk user
+        'read_at',
 
     ];
     public function anggotap3m()

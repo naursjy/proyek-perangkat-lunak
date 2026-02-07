@@ -62,7 +62,7 @@ class AuthController extends Controller
             // };
             // dd($user);
             if ($user->role == 'admin') {
-                return redirect()->route('dash.dashboard');
+                return redirect()->route('dash.dashadmin');
             } elseif ($user->role == 'dosen') {
                 return redirect()->route('dosen.dash');
             } else {

@@ -19,7 +19,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('dashadmin') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('dash.dashadmin') }}">Home</a></li>
                         <li class="breadcrumb-item active">Pengelola P3M</li>
                     </ol>
                 </div><!-- /.col -->
@@ -33,6 +33,7 @@
             <div class="row" style="text-align: center; padding:170px;">
                 <h2>Selamat Datang Di Halaman Pengelola Website P3M Politeknik Balekambang Jepara</h2>
                 <h4>Mengelola Konten dan Data P3M</h4>
+
             </div>
         </div>
     </section>

@@ -22,18 +22,29 @@ class NewsController extends Controller
 
     public function index(Request $request)
     {
+        // dd('masuk gak?');
         // $data = new M_news();
         $pagetitle = 'Seputar Kegiatan P3M Polibang';
         $user = Auth::user();
-        $data = M_news::where('user_id', Auth::id())
-            ->orWhereNull('user_id')
-            ->orderBy('created_at', 'desc')
-            ->get();
-        if ($request->get('search')) {
-            $data = M_news::where('title', 'like', '%' . $request->get('search') . '%');
+
+        $query = M_news::where(function ($q) {
+            $q->where('user_id', Auth::id())
+                ->orWhereNull('user_id');
+        });
+        if ($request->filled('search')) {
+            $query->where('title', 'like', '%' . $request->search . '%');
         }
 
-        return view('news.index', compact('pagetitle', 'data', 'request', 'user'));
+        $data = $query->orderBy('created_at', 'desc')->get();
+
+        return view('news.index', compact('pagetitle', 'data', 'user'));
+        // $data = M_news::where('user_id', Auth::id())
+        //     ->orWhereNull('user_id')
+        //     ->orderBy('created_at', 'desc')
+        //     ->get();
+        // if ($request->get('search')) {
+        //     $data = M_news::where('title', 'like', '%' . $request->get('search') . '%');
+        // }
 
         // // $data = new M_news();
         // $user = Auth::user();
@@ -51,6 +62,7 @@ class NewsController extends Controller
 
     public function search(Request $request)
     {
+        dd('masuk');
         $search = $request->search;
         $pagetitle = 'Berita Terkini';
         $user = Auth::user();

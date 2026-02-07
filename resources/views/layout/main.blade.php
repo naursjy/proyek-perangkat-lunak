@@ -77,6 +77,36 @@
                     <a href="#" class="nav-link">Contact</a>
                 </li> -->
             </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="far fa-bell"></i>
+                        @if($totalNotif>0)
+                        <span class="badge badge-danger navbar-badge"
+                            style="width:10px;height:10px;border-radius:50%;padding:0;">
+                        </span>
+                        @endif
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <span class="dropdown-item dropdown-header">
+                            {{ $totalNotif ?? 0 }} Aktivitas Terbaru
+                        </span>
+
+                        <div class="dropdown-divider"></div>
+
+                        @forelse(($notifikasi ?? collect()) as $n)
+                        <a href="{{ route('notif.open', $n['tipe']) }}" class="dropdown-item">
+                            {{ $n['judul'] }}
+                        </a>
+                        @empty
+                        <span class=" dropdown-item text-muted text-center">
+                            Tidak ada aktivitas
+                        </span>
+                        @endforelse
+                    </div>
+                </li>
+
+            </ul>
         </nav>
         <!-- /.navbar -->
 
@@ -421,6 +451,29 @@
         // Add event listener to the image input
         document.getElementById('image').addEventListener('change', previewImage);
     </script>
+
+
+
+    <script>
+        document.querySelectorAll('.notif-table').forEach(el => {
+            el.addEventListener('click', function(e) {
+                e.preventDefault();
+                const tipe = this.dataset.tipe;
+                const link = this.dataset.link;
+
+                fetch('/notif/read-table/${tipe}', {
+                        method: 'POST',
+                        headers: {
+                            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                        }
+                    })
+                    .then(() => {
+                        window.location.href = link;
+                    });
+            });
+        });
+    </script>
+
     @yield('scripts')
 </body>
 

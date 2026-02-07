@@ -1,6 +1,8 @@
 @extends('layout.main')
 @section('css')
-<link rel="stylesheet" href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.css" />
+<link rel="stylesheet" href="{{ asset('lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+<link rel="stylesheet" href="{{ asset('lte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 @endsection
 @section('content')
 
@@ -33,10 +35,13 @@
                         <div class="card-header">
                             <h3 class="card-title">{{ $pagetitle }}</h3>
                             <div class="card-tools">
-                                <form action="" method="get">
-                                    <div class="input-group input-group-sm" style="width: 100px;">
-                                        <div class="input-group-append p-1">
-
+                                <form action="{{ route('plppm.kpenelitian') }}" method="GET">
+                                    <div class="input-group input-group-sm" style="width: 150px;">
+                                        <input type="text" name="search" class="form-control float-right" placeholder="Search">
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-default">
+                                                <i class="fas fa-search"></i>
+                                            </button>
                                         </div>
                                     </div>
                                 </form>
@@ -45,15 +50,16 @@
                         <!-- /.card-header -->
 
                         <div class="card-body table-responsive">
-                            <table class="table table-hover" id="clientside">
+                            <table id="example2" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th style="width: 20px;">Judul</th>
+                                        <th>Judul</th>
+                                        <th>Tanggal</th>
                                         <th>Bidang Ilmu</th>
                                         <th>Kategori</th>
                                         <th>Ketua Peneliti</th>
-                                        <th style="width: 120px;">Aksi</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -61,6 +67,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{!! Str::words($d->judul, 7) !!}</td>
+                                        <td>{!! $d->created_at->translatedFormat('d F Y') !!}</td>
                                         <td>{!! $d->bidang !!}</td>
                                         <td>{!! $d->jeniskategori !!}</td>
 
@@ -149,10 +156,36 @@
 
 @endsection
 @section('scripts')
-<script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="{{ asset('lte/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('lte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('lte/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{ asset('lte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('lte/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+<script src="{{ asset('lte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ asset('lte/plugins/jszip/jszip.min.js') }}"></script>
+<script src="{{ asset('lte/plugins/pdfmake/pdfmake.min.js') }}"></script>
+<script src="{{ asset('lte/plugins/pdfmake/vfs_fonts.js') }}"></script>
+<script src="{{ asset('lte/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+<script src="{{ asset('lte/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+<script src="{{ asset('lte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 <script>
-    $(document).ready(function() {
-        $('#clientside').DataTable();
+    $(function() {
+        $("#example1").DataTable({
+            "responsive": true,
+            "lengthChange": false,
+            "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
     });
 </script>
 @endsection

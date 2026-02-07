@@ -13,24 +13,26 @@ use Illuminate\Support\Facades\Auth;
 class ViewlprnController extends Controller
 {
 
-    public function upp3m(Request  $id)
+    public function upp3m(Request $request)
     {
         // $data = new M_news();
         $pagetitle = 'Proposal Pengabdian Masyarakat';
         $user = Auth::user();
-        $data = User::find($id);
+        // $data = User::find($id
         if ($user->role == 'admin') {
             // Kalau admin, ambil semua data
-            $penelitians = p3mModel::with('anggotap3m')
-                ->orderBy('created_at', 'desc')
-                ->get();
+            $query = p3mModel::with('anggotap3m');
         } else {
             // Kalau bukan admin, ambil yang sesuai user_id
-            $penelitians = p3mModel::where('user_id', $user->id)
-                ->with('anggotap3m')
-                ->orderBy('created_at', 'desc')
-                ->get();
+            $query = p3mModel::where('user_id', $user->id)
+                ->with('anggotap3m');
         }
+        if ($request->filled('search')) {
+            $query->where('judul', 'like', '%' . $request->search . '%');
+        }
+
+        $penelitians = $query->orderBy('created_at', 'desc')->get();
+
 
         // $penelitians = p3mModel::where('user_id', $user->id)
         //     // ->orWhereNull('user_id')
@@ -38,70 +40,73 @@ class ViewlprnController extends Controller
         //     ->with('anggotap3m')
         //     ->get();
         // dd($penelitians);
-        return view('plppm.lpengabdian', compact('user', 'data', 'penelitians', 'pagetitle'));
+        return view('plppm.lpengabdian', compact('user', 'penelitians', 'pagetitle'));
     }
 
-    public function ajuanpeneliti(Request  $id)
+    public function ajuanpeneliti(Request $request)
     {
         // $data = new M_news();
         $pagetitle = 'Proposal Penelitian Masyarakat';
         $user = Auth::user();
-        $data = User::find($id);
+        // $data = User::find($id);
         if ($user->role == 'admin') {
             // Kalau admin, ambil semua data
-            $penelitians = ajuan_penelitianModel::with('anggotap3m')
-                ->orderBy('created_at', 'desc')
-                ->get();
+            $query = ajuan_penelitianModel::with('anggotap3m');
         } else {
             // Kalau bukan admin, ambil yang sesuai user_id
-            $penelitians = ajuan_penelitianModel::where('user_id', $user->id)
-                ->with('anggotap3m')
-                ->orderBy('created_at', 'desc')
-                ->get();
+            $query = ajuan_penelitianModel::where('user_id', $user->id)
+                ->with('anggotap3m');
         }
+        if ($request->filled('search')) {
+            $query->where('judul', 'like', '%' . $request->search . '%');
+        }
+
+        $penelitians = $query->orderBy('created_at', 'desc')->get();
         // dd($penelitians);
-        return view('plppm.lpeneleitian', compact('user', 'data', 'penelitians', 'pagetitle'));
+        return view('plppm.lpeneleitian', compact('user', 'penelitians', 'pagetitle'));
     }
 
-    public function kpengabdianp3m()
+    public function kpengabdianp3m(Request $request)
     {
         $user = Auth::user();
         $pagetitle = 'Laporan Pengabdian Masyarakat';
         if ($user->role == 'admin') {
             // Kalau admin, ambil semua data
-            $penelitians = kum_pengabdianModel::with('anggotap3m')
-                ->orderBy('created_at', 'desc')
-                ->get();
+            $query = kum_pengabdianModel::with('anggotap3m');
         } else {
             // Kalau bukan admin, ambil yang sesuai user_id
-            $penelitians = kum_pengabdianModel::where('user_id', $user->id)
-                ->with('anggotap3m')
-                ->orderBy('created_at', 'desc')
-                ->get();
+            $query = kum_pengabdianModel::where('user_id', $user->id)
+                ->with('anggotap3m');
         }
+        if ($request->filled('search')) {
+            $query->where('judul', 'like', '%' . $request->search . '%');
+        }
+
+        $penelitians = $query->orderBy('created_at', 'desc')->get();
         return view('plppm.kpengabdian', compact('user', 'pagetitle', 'penelitians'));
     }
 
-    public function kpeneliti(Request  $id)
+    public function kpeneliti(Request $request)
     {
         // $data = new M_news();
         $pagetitle = 'Laporan Penelitian Masyarakat';
         $user = Auth::user();
-        $data = User::find($id);
+        // $data = User::find($id);
         if ($user->role == 'admin') {
             // Kalau admin, ambil semua data
-            $penelitians = kum_penelitianModel::with('anggotap3m')
-                ->orderBy('created_at', 'desc')
-                ->get();
+            $query = kum_penelitianModel::with('anggotap3m');
         } else {
             // Kalau bukan admin, ambil yang sesuai user_id
-            $penelitians = kum_penelitianModel::where('user_id', $user->id)
-                ->with('anggotap3m')
-                ->orderBy('created_at', 'desc')
-                ->get();
+            $query = kum_penelitianModel::where('user_id', $user->id)
+                ->with('anggotap3m');
         }
+        if ($request->filled('search')) {
+            $query->where('judul', 'like', '%' . $request->search . '%');
+        }
+
+        $penelitians = $query->orderBy('created_at', 'desc')->get();
         // dd($penelitians);
-        return view('plppm.kpenelitian', compact('user', 'data', 'penelitians', 'pagetitle'));
+        return view('plppm.kpenelitian', compact('user', 'penelitians', 'pagetitle'));
     }
 
 

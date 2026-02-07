@@ -19,7 +19,7 @@ class MainController extends Controller
         $user = Auth::user();
         View::share('dash', $dash);
         // dd($dash);
-        return view('dashboard', ['dash' => $dash], compact('dash', 'user'));
+        return view('dashadmin', ['dash' => $dash], compact('dash', 'user'));
         // }
         return abort(403);
     }
@@ -30,7 +30,7 @@ class MainController extends Controller
         $user = Auth::user();
         // View::share('dash');
         // dd($dash);
-        return view('dashadmin', compact('dash', 'user'));
+        return view('dashadmin', compact('user'));
         // }
         return abort(403);
     }

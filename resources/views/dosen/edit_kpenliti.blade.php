@@ -63,7 +63,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <small>Kategori</small>
-                                                        <input type="text" class="form-control" value="Proposal Pengabdian Masyarakat" name="jeniskategori" value="{{ $penelitian->jeniskategori }}" readonly>
+                                                        <input type="text" class="form-control" value="Laporan Penelitian" name="jeniskategori" value="{{ $penelitian->jeniskategori }}" readonly>
                                                         <!-- <input type=" hidden" name="jeniskategori" value="Proposal Pengabdian"> -->
                                                     </div>
                                                     <div class="form-group ">
@@ -75,13 +75,18 @@
                                                     </div>
                                                     <div class="form-group ">
                                                         <small>Lama Penelitian :</small>
-                                                        <div class="input-group mb-3">
+                                                        <!-- <div class="input-group mb-3">
                                                             <input type="text" class="form-control" name="lamapenelitian" placeholder="Enter ..." value="{{ $penelitian->lamapenelitian }}">
                                                             <div class="input-group-append">
                                                                 <span class="input-group-text">Hari</span>
                                                             </div>
+                                                        </div> -->
+                                                        <div class="d-flex">
+                                                            <input type="date" name="tanggal_mulai" class="form-control me-2" value="{{ $penelitian->tanggal_mulai }}" required>
+                                                            <span class="align-self-center">sampai</span>
+                                                            <input type="date" name="tanggal_selesai" class="form-control ms-2" value="{{ $penelitian->tanggal_selesai }}" required>
                                                         </div>
-                                                        @error('lamapenelitian')
+                                                        @error('tanggal_mulai' && 'tanggal_selesai')
                                                         <small>{{ $message }}</small>
                                                         @enderror
                                                     </div>
@@ -99,6 +104,7 @@
                                                             <input type="file" name="uppdf" class="custom-file-input" id="uploadLaporan" value="{{ $penelitian->uppdf }}">
                                                             <label class="custom-file-label" for="uppdf">{{ $penelitian->uppdf ?? 'Unggah File' }}</label>
                                                         </div>
+                                                        <small>Maks. 2 Mb</small>
                                                         @error('uppdf')
                                                         <small>{{ $message }}</small>
                                                         @enderror
@@ -149,7 +155,16 @@
                                                     </div>
                                                     <div class="form-group ">
                                                         <small>Jabatan Fungsional :</small>
-                                                        <input type="text" name="jabatan" class="form-control" placeholder="Enter ..." value="{{ $penelitian->jabatan }}">
+                                                        <!-- <input type="text" name="jabatan" class="form-control" placeholder="Enter ..." value="{{ $penelitian->jabatan }}"> -->
+                                                        <select class="custom-select form-control-border" id="exampleSelectBorder" name="jabatan">
+
+                                                            <option value="">---Pilih---</option>
+                                                            <option value="DR" {{ (isset($penelitian) && $penelitian->jabatan == 'DR') ? 'selected' : '' }}>Direktur</option>
+                                                            <option value="LT" {{ (isset($penelitian) && $penelitian->jabatan == 'LT') ? 'selected' : '' }}>Wakil Direktur</option>
+                                                            <option value="KP" {{ (isset($penelitian) && $penelitian->jabatan == 'KP') ? 'selected' : '' }}>Ketua Program Studi</option>
+                                                            <option value="DS" {{ (isset($penelitian) && $penelitian->jabatan == 'DS') ? 'selected' : '' }}>Dosen Polibang</option>
+
+                                                        </select>
                                                         @error('jabatan')
                                                         <small>{{ $message }}</small>
                                                         @enderror
@@ -162,7 +177,8 @@
                                                             <option value="R" {{ (isset($penelitian) && $penelitian->prodi == 'R') ? 'selected' : '' }}>Rekayasa Perangkat Lunak</option>
                                                             <option value="A" {{ (isset($penelitian) && $penelitian->prodi == 'A') ? 'selected' : '' }}>Administrasi Bisnis Internasional</option>
                                                             <option value="AK" {{ (isset($penelitian) && $penelitian->prodi == 'AK') ? 'selected' : '' }}>Akutansi Keuangan Publik</option>
-
+                                                            <option value="AB" {{ (isset($penelitian) && $penelitian->prodi == 'AB') ? 'selected' : '' }}>Bisnis Digital</option>
+                                                            <option value="AP" {{ (isset($penelitian) && $penelitian->prodi == 'AP') ? 'selected' : '' }}>Agri Bisnis Perternakan</option>
                                                         </select>
                                                     </div>
                                                     <div class="form-group ">
@@ -183,7 +199,8 @@
                                             </div>
                                             <label class="col-form-label" for="">Anggota Penelitian</label>
                                             <div class="form-group mb-3">
-                                                <button type="button" onclick="addAnggota()" class="btn btn-success"> <b>+</b> </button>
+                                                <label class="col-form-label" for="">Anggota Penelitian</label>
+                                                <button type="button" onclick="addAnggota()" class="btn btn-success"> <b>+</b> </button> <br>
                                                 <div id="anggota-wrapper">
                                                     @foreach($penelitian->anggotap3m as $i => $anggota)
                                                     <div class="anggota-row border p-2 mb-2">
@@ -206,14 +223,39 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <small>Program Studi :</small>
-                                                            <input type="text" class="form-control" name="anggota[{{ $i }}][prodi]" placeholder="Prodi" value="{{ $anggota->prodi }}">
+                                                            <!-- <input type="text" class="form-control" name="anggota[{{ $i }}][prodi]" placeholder="Prodi" value="{{ $anggota->prodi }}"> -->
+                                                            <select class="custom-select form-control-border" id="exampleSelectBorder" name="anggota[{{ $i }}][prodi]">
+
+                                                                <option value="">---Pilih---</option>
+                                                                <option value="R" {{ (isset($anggota) && $anggota->prodi == 'R') ? 'selected' : '' }}>Rekayasa Perangkat Lunak</option>
+                                                                <option value="A" {{ (isset($anggota) && $anggota->prodi == 'A') ? 'selected' : '' }}>Administrasi Bisnis Internasional</option>
+                                                                <option value="AK" {{ (isset($anggota) && $anggota->prodi == 'AK') ? 'selected' : '' }}>Akutansi Keuangan Publik</option>
+                                                                <option value="AB" {{ (isset($anggota) && $anggota->prodi == 'AB') ? 'selected' : '' }}>Bisnis Digital</option>
+                                                                <option value="AP" {{ (isset($anggota) && $anggota->prodi == 'AP') ? 'selected' : '' }}>Agri Bisnis Perternakan</option>
+                                                            </select>
                                                             @error('prodi')
                                                             <small>{{ $message }}</small>
                                                             @enderror
                                                         </div>
                                                         <div class="form-group">
+                                                            <small>NIM / NIDN :</small>
+                                                            <input type="text" class="form-control" name="anggota[{{ $i }}][nim]" placeholder="NIM/NIDn" value="{{ $anggota->nim }}">
+                                                            @error('nim')
+                                                            <small>{{ $message }}</small>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="form-group">
                                                             <small>Jabatan :</small>
-                                                            <input type="text" class="form-control" name="anggota[{{ $i }}][jabatan]" placeholder="Jabatan" value="{{ $anggota->jabatan }}">
+                                                            <!-- <input type="text" class="form-control" name="anggota[{{ $i }}][jabatan]" placeholder="Jabatan" value="{{ $anggota->jabatan }}"> -->
+                                                            <select class="custom-select form-control-border" id="exampleSelectBorder" name="anggota[{{ $i }}][jabatan]">
+
+                                                                <option value="">---Pilih---</option>
+                                                                <option value="DR" {{ (isset($anggota) && $anggota->jabatan == 'DR') ? 'selected' : '' }}>Direktur</option>
+                                                                <option value="LT" {{ (isset($anggota) && $anggota->jabatan == 'LT') ? 'selected' : '' }}>Wakil Direktur</option>
+                                                                <option value="KP" {{ (isset($anggota) && $anggota->jabatan == 'KP') ? 'selected' : '' }}>Ketua Program Studi</option>
+                                                                <option value="DS" {{ (isset($anggota) && $anggota->jabatan == 'DS') ? 'selected' : '' }}>Dosen Polibang</option>
+                                                                <option value="MHS" {{ (isset($anggota) && $anggota->jabatan == 'MHS') ? 'selected' : '' }}>Mahasiswa</option>
+                                                            </select>
                                                             @error('jabatan')
                                                             <small>{{ $message }}</small>
                                                             @enderror
@@ -245,37 +287,47 @@
         const wrapper = document.getElementById('anggota-wrapper');
         const html = `
             <div class="anggota-row border p-2 mb-2">
-            <label class="col-form-label" for="">Anggota Penelitian</label> 
-            <button type="button" class="btn btn-danger btn-sm remove-anggota mt-2 float-end">&times;</button>
+            <label class="col-form-label" for="">Identitas Anggota</label>
+            <button type="button" class="btn btn-danger btn-sm remove-anggota float-end mb-2">&times;</button>
             <div class="form-group">
                 <small>Nama :</small>
                 <input type="text" class="form-control" name="anggota[${count}][nama]" placeholder="Nama">
             </div>
             <div class="form-group">
-                <small>Program Studi :</small>
-                <input type="text" class="form-control" name="anggota[${count}][prodi]" placeholder="Prodi">
+            <small>Program Studi :</small>
+            <select class="custom-select form-control-border" id="exampleSelectBorder" name="anggota[${count}][prodi]" required>
+                <option value="">---Pilih---</option>
+                <option value="R" {{ (isset($anggota) && $anggota->prodi == 'R') ? 'selected' : '' }}>Rekayasa Perangkat Lunak</option>
+                <option value="A" {{ (isset($anggota) && $anggota->prodi == 'A') ? 'selected' : '' }}>Administrasi Bisnis Internasional</option>
+                <option value="AK" {{ (isset($anggota) && $anggota->prodi == 'AK') ? 'selected' : '' }}>Akutansi Keuangan Publik</option>
+                <option value="AB" {{ (isset($anggota) && $anggota->prodi == 'AB') ? 'selected' : '' }}>Bisnis Digital</option>
+                <option value="AP" {{ (isset($anggota) && $anggota->prodi == 'AP') ? 'selected' : '' }}>Agri Bisnis Perternakan</option>
+                                                                
+            </select>
             </div>
             <div class="form-group">
-                <small>Jabatan :</small>
-                <input type="text" class="form-control" name="anggota[${count}][jabatan]" placeholder="Jabatan">
+            <small>NIM / NIDN :</small>
+            <input type="text" class="form-control" name="anggota[${count}][nim]" placeholder="NIM/NIDN" value="{{ old('nim') }}">
             </div>
-            
-        </div>
+            <div class="form-group">
+            <small>Jabatan :</small>
+            <select class="custom-select form-control-border" id="exampleSelectBorder" name="anggota[${count}][jabatan]" required>
+                <option value="">---Pilih---</option>
+                <option value="DR" {{ (isset($anggota) && $anggota->jabatan == 'DR') ? 'selected' : '' }}>Direktur</option>
+                <option value="LT" {{ (isset($anggota) && $anggota->jabatan == 'LT') ? 'selected' : '' }}>Wakil Direktur</option>
+                <option value="KP" {{ (isset($anggota) && $anggota->jabatan == 'KP') ? 'selected' : '' }}>Ketua Program Studi</option>
+                <option value="DS" {{ (isset($anggota) && $anggota->jabatan == 'DS') ? 'selected' : '' }}>Dosen Polibang</option>
+                <option value="MHS" {{ (isset($anggota) && $anggota->jabatan == 'MHS') ? 'selected' : '' }}>Mahasiswa</option>
+            </select>
+            </div>
+            </div>
         `;
         wrapper.insertAdjacentHTML('beforeend', html);
         count++;
     }
-    document.addEventListener('click', function(e) {
+    document.getElementById('anggota-wrapper').addEventListener('click', function(e) {
         if (e.target.classList.contains('remove-anggota')) {
-            const anggotaRow = e.target.closest('.anggota-row');
-            const idInput = anggotaRow.querySelector('input[name*="[id]"]');
-
-            if (idInput) {
-                const id = idInput.value;
-                anggotaDihapus.push(id);
-                document.getElementById('anggota_dihapus').value = anggotaDihapus.join(',');
-            }
-            anggotaRow.remove();
+            e.target.closest('.anggota-row').remove();
         }
     });
 </script>

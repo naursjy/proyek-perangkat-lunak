@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class DosenController extends Controller
 {
@@ -90,19 +91,23 @@ class DosenController extends Controller
         return redirect()->route('dosen.profil', ['id' => Auth::id()]);
     }
     //PENGAJUAN PENELITIAN
-    public function upp3m(Request  $id)
+    public function upp3m(Request $request)
     {
         // $data = new M_news();
         $pagetitle = 'Proposal Pengabdian Masyarakat';
         $user = Auth::user();
-        $data = User::find($id);
         $penelitians = p3mModel::where('user_id', $user->id)
-            // ->orWhereNull('user_id')
-            ->orderBy('created_at', 'desc')
             ->with('anggotap3m')
+            ->when($request->search, function ($query) use ($request) {
+                $query->where(function ($q) use ($request) {
+                    $q->where('judul', 'like', '%' . $request->search . '%')
+                        ->orWhere('bidang', 'like', '%' . $request->search . '%')
+                        ->orWhere('jeniskategori', 'like', '%' . $request->search . '%');
+                });
+            })
+            ->orderBy('created_at', 'desc')
             ->get();
-        // dd($penelitians);
-        return view('dosen.upp3m', compact('user', 'data', 'penelitians', 'pagetitle'));
+        return view('dosen.upp3m', compact('user', 'penelitians', 'pagetitle'));
     }
 
     // public function kpengabdian(Request  $id)
@@ -258,16 +263,23 @@ class DosenController extends Controller
             'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
             //untuk profil
             'ketua' => 'required',
-            'jabatan' => 'required',
+            'jabatan' => 'required|in:DR,LT,KP,DS',
             'nidn' => 'required',
             'telp' => 'required',
             'alamat' => 'required',
             'jeniskelamin' => 'required|in:L,P',
-            'prodi' => 'required|in:R,A,AK',
+            'prodi' => 'required|in:R,A,AK,AB,AP',
             'anggota' => 'required|array',
             'anggota.*.nama' => 'required|string|max:100',
-            'anggota.*.prodi' => 'nullable|string|max:100',
-            'anggota.*.jabatan' => 'nullable|string|max:100',
+            'anggota.*.nim' => 'nullable|string|max:100',
+            'anggota.*.prodi' => [
+                'nullable',
+                Rule::in(['R', 'A', 'AK', 'AB', 'AP'])
+            ],
+            'anggota.*.jabatan' => [
+                'nullable',
+                Rule::in(['DR', 'LT', 'KP', 'DS', 'MHS'])
+            ],
         ], [], [
             'anggota.0.nama' => 'nama'
 
@@ -317,6 +329,7 @@ class DosenController extends Controller
             anggotap3mModel::create([
                 'ajupengab_model_id' => $penelitian->id,
                 'nama' => $anggota['nama'],
+                'nim' => $anggota['nim'],
                 'prodi' => $anggota['prodi'],
                 'jabatan' => $anggota['jabatan'],
             ]);
@@ -351,16 +364,23 @@ class DosenController extends Controller
             'uppdf' => 'nullable|mimes:pdf|max:20480',
             //untuk profil
             'ketua' => 'required',
-            'jabatan' => 'required',
+            'jabatan' => 'required|in:DR,LT,KP,DS',
             'nidn' => 'required',
             'telp' => 'required',
             'alamat' => 'required',
             'jeniskelamin' => 'required|in:L,P',
-            'prodi' => 'required|in:R,A,AK',
+            'prodi' => 'required|in:R,A,AK,AB,AP',
             'anggota' => 'required|array',
             'anggota.*.nama' => 'required|string|max:100',
-            'anggota.*.prodi' => 'nullable|string|max:100',
-            'anggota.*.jabatan' => 'nullable|string|max:100',
+            'anggota.*.nim' => 'nullable|string|max:100',
+            'anggota.*.prodi' => [
+                'nullable',
+                Rule::in(['R', 'A', 'AK', 'AB', 'AP'])
+            ],
+            'anggota.*.jabatan' => [
+                'nullable',
+                Rule::in(['DR', 'LT', 'KP', 'DS', 'MHS'])
+            ],
         ], [], [
             'anggota.0.nama' => 'nama'
 
@@ -430,6 +450,7 @@ class DosenController extends Controller
             anggotap3mModel::create([
                 'ajupengab_model_id' => $penelitian->id,
                 'nama' => $anggota['nama'],
+                'nim' => $anggota['nim'],
                 'prodi' => $anggota['prodi'],
                 'jabatan' => $anggota['jabatan'],
             ]);
@@ -468,19 +489,26 @@ class DosenController extends Controller
             'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
             //untuk profil
             'ketua' => 'required',
-            'jabatan' => 'required',
+            'jabatan' => 'required|in:DR,LT,KP,DS',
             'nidn' => 'required',
             'telp' => 'required',
             'alamat' => 'required',
             'jeniskelamin' => 'required|in:L,P',
-            'prodi' => 'required|in:R,A,AK',
+            'prodi' => 'required|in:R,A,AK, AB, AP',
             //untuk up gambar
             'foto' => 'required|mimes:png,jpg,jpeg|max:2048',
             //anggota
             'anggota' => 'required|array',
             'anggota.*.nama' => 'required|string|max:100',
-            'anggota.*.prodi' => 'nullable|string|max:100',
-            'anggota.*.jabatan' => 'nullable|string|max:100',
+            'anggota.*.nim' => 'nullable|string|max:100',
+            'anggota.*.prodi' => [
+                'nullable',
+                Rule::in(['R', 'A', 'AK', 'AB', 'AP'])
+            ],
+            'anggota.*.jabatan' => [
+                'nullable',
+                Rule::in(['DR', 'LT', 'KP', 'DS', 'MHS'])
+            ],
         ], [], [
             'anggota.0.nama' => 'nama'
 
@@ -529,13 +557,14 @@ class DosenController extends Controller
             //untuk up gambar
             'foto' => $filename,
         ]);
-
+        // dd($request->all());
         //input anggota
         foreach ($request->anggota as $anggota) {
             // dd($anggota);
             anggotap3mModel::create([
                 'kpengab_model_id' => $penelitian->id,
                 'nama' => $anggota['nama'],
+                'nim' => $anggota['nim'],
                 'prodi' => $anggota['prodi'],
                 'jabatan' => $anggota['jabatan'],
             ]);
@@ -562,24 +591,31 @@ class DosenController extends Controller
             'lokasi' => 'required',
             'lamapenelitian' => 'nullable',
             'biaya' => 'required',
-            'uppdf' => 'required|mimes:pdf|max:20480',
+            'uppdf' => 'nullable|mimes:pdf|max:20480',
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
             //untuk profil
             'ketua' => 'required',
-            'jabatan' => 'required',
+            'jabatan' => 'required|in:DR,LT,KP,DS',
             'nidn' => 'required',
             'telp' => 'required',
             'alamat' => 'required',
             'jeniskelamin' => 'required|in:L,P',
-            'prodi' => 'required|in:R,A,AK',
+            'prodi' => 'required|in:R,A,AK,AB,AP',
             //untuk up gambar
             'foto' => 'nullable|mimes:png,jpg,jpeg|max:2048',
             //anggota
             'anggota' => 'required|array',
             'anggota.*.nama' => 'required|string|max:100',
-            'anggota.*.prodi' => 'nullable|string|max:100',
-            'anggota.*.jabatan' => 'nullable|string|max:100',
+            'anggota.*.nim' => 'nullable|string|max:100',
+            'anggota.*.prodi' => [
+                'nullable',
+                Rule::in(['R', 'A', 'AK', 'AB', 'AP'])
+            ],
+            'anggota.*.jabatan' => [
+                'nullable',
+                Rule::in(['DR', 'LT', 'KP', 'DS', 'MHS'])
+            ],
         ], [], [
             'anggota.0.nama' => 'nama'
 
@@ -630,11 +666,8 @@ class DosenController extends Controller
             }
 
             $data['foto'] = $filename;
-        } else {
-            $filenamepdf = $request->old_foto; // pakai file lama
-        }
+        } elseif ($request->hasFile('uppdf')) {
 
-        if ($request->hasFile('uppdf')) {
             $uppdf = $request->file('uppdf');
             $filenamepdf = date('d-m-Y') . $uppdf->getClientOriginalName();
             $pathpdf = 'uppdf/' . $filenamepdf;
@@ -648,8 +681,10 @@ class DosenController extends Controller
 
             $data['uppdf'] = $filenamepdf;
         } else {
+            $filenamepdf = $request->old_foto; // pakai file lama
             $filenamepdf = $request->old_uppdf; // pakai file lama
         }
+
 
         // Update penelitian
         $penelitian->update($data);
@@ -660,6 +695,7 @@ class DosenController extends Controller
             anggotap3mModel::create([
                 'kpengab_model_id' => $penelitian->id,
                 'nama' => $anggota['nama'],
+                'nim' => $anggota['nim'],
                 'prodi' => $anggota['prodi'],
                 'jabatan' => $anggota['jabatan'],
             ]);
@@ -690,16 +726,23 @@ class DosenController extends Controller
             'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
             //untuk profil
             'ketua' => 'required',
-            'jabatan' => 'required',
+            'jabatan' => 'required|in:DR,LT,KP,DS',
             'nidn' => 'required',
             'telp' => 'required',
             'alamat' => 'required',
             'jeniskelamin' => 'required|in:L,P',
-            'prodi' => 'required|in:R,A,AK',
+            'prodi' => 'required|in:R,A,AK,AB,AP',
             'anggota' => 'required|array',
             'anggota.*.nama' => 'required|string|max:100',
-            'anggota.*.prodi' => 'nullable|string|max:100',
-            'anggota.*.jabatan' => 'nullable|string|max:100',
+            'anggota.*.nim' => 'nullable|string|max:100',
+            'anggota.*.prodi' => [
+                'nullable',
+                Rule::in(['R', 'A', 'AK', 'AB', 'AP'])
+            ],
+            'anggota.*.jabatan' => [
+                'nullable',
+                Rule::in(['DR', 'LT', 'KP', 'DS', 'MHS'])
+            ],
         ], [], [
             'anggota.0.nama' => 'nama'
 
@@ -743,12 +786,13 @@ class DosenController extends Controller
             'prodi' => $request->prodi,
 
         ]);
-
+        // dd($request->all());
         foreach ($request->anggota as $anggota) {
             // dd($anggota);
             anggotap3mModel::create([
                 'ajupenel_model_id' => $penelitian->id,
                 'nama' => $anggota['nama'],
+                'nim' => $anggota['nim'],
                 'prodi' => $anggota['prodi'],
                 'jabatan' => $anggota['jabatan'],
             ]);
@@ -777,21 +821,28 @@ class DosenController extends Controller
             'lokasi' => 'required',
             'lamapenelitian' => 'nullable',
             'biaya' => 'required',
-            'uppdf' => 'required|mimes:pdf|max:20480',
+            'uppdf' => 'nullable|mimes:pdf|max:20480',
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
             //untuk profil
             'ketua' => 'required',
-            'jabatan' => 'required',
+            'jabatan' => 'required|in:DR,LT,KP,DS',
             'nidn' => 'required',
             'telp' => 'required',
             'alamat' => 'required',
             'jeniskelamin' => 'required|in:L,P',
-            'prodi' => 'required|in:R,A,AK',
+            'prodi' => 'required|in:R,A,AK,AB,AP',
             'anggota' => 'required|array',
             'anggota.*.nama' => 'required|string|max:100',
-            'anggota.*.prodi' => 'nullable|string|max:100',
-            'anggota.*.jabatan' => 'nullable|string|max:100',
+            'anggota.*.nim' => 'nullable|string|max:100',
+            'anggota.*.prodi' => [
+                'nullable',
+                Rule::in(['R', 'A', 'AK', 'AB', 'AP'])
+            ],
+            'anggota.*.jabatan' => [
+                'nullable',
+                Rule::in(['DR', 'LT', 'KP', 'DS', 'MHS'])
+            ],
         ], [], [
             'anggota.0.nama' => 'nama'
 
@@ -861,6 +912,7 @@ class DosenController extends Controller
             anggotap3mModel::create([
                 'ajupenel_model_id' => $penelitian->id,
                 'nama' => $anggota['nama'],
+                'nim' => $anggota['nim'],
                 'prodi' => $anggota['prodi'],
                 'jabatan' => $anggota['jabatan'],
             ]);
@@ -889,19 +941,26 @@ class DosenController extends Controller
             'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
             //untuk profil
             'ketua' => 'required',
-            'jabatan' => 'required',
+            'jabatan' => 'required|in:DR,LT,KP,DS',
             'nidn' => 'required',
             'telp' => 'required',
             'alamat' => 'required',
             'jeniskelamin' => 'required|in:L,P',
-            'prodi' => 'required|in:R,A,AK',
+            'prodi' => 'required|in:R,A,AK,AB,AP',
             //untuk up gambar
             'foto' => 'required|mimes:png,jpg,jpeg|max:2048',
             //anggota
             'anggota' => 'required|array',
             'anggota.*.nama' => 'required|string|max:100',
-            'anggota.*.prodi' => 'nullable|string|max:100',
-            'anggota.*.jabatan' => 'nullable|string|max:100',
+            'anggota.*.nim' => 'nullable|string|max:100',
+            'anggota.*.prodi' => [
+                'nullable',
+                Rule::in(['R', 'A', 'AK', 'AB', 'AP'])
+            ],
+            'anggota.*.jabatan' => [
+                'nullable',
+                Rule::in(['DR', 'LT', 'KP', 'DS', 'MHS'])
+            ],
         ], [], [
             'anggota.0.nama' => 'nama'
 
@@ -950,13 +1009,14 @@ class DosenController extends Controller
             //untuk up gambar
             'foto' => $filename,
         ]);
-
+        // dd($request->anggota);
         //input anggota
         foreach ($request->anggota as $anggota) {
             // dd($anggota);
             anggotap3mModel::create([
                 'kpenel_model_id' => $penelitian->id,
                 'nama' => $anggota['nama'],
+                'nim' => $anggota['nim'],
                 'prodi' => $anggota['prodi'],
                 'jabatan' => $anggota['jabatan'],
             ]);
@@ -982,24 +1042,31 @@ class DosenController extends Controller
             'lokasi' => 'required',
             'lamapenelitian' => 'nullable',
             'biaya' => 'required',
-            'uppdf' => 'required|mimes:pdf|max:20480',
+            'uppdf' => 'nullable|mimes:pdf|max:20480',
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
             //untuk profil
             'ketua' => 'required',
-            'jabatan' => 'required',
+            'jabatan' => 'required|in:DR,LT,KP,DS',
             'nidn' => 'required',
             'telp' => 'required',
             'alamat' => 'required',
             'jeniskelamin' => 'required|in:L,P',
-            'prodi' => 'required|in:R,A,AK',
+            'prodi' => 'required|in:R,A,AK,AB,AP',
             //untuk up gambar
             'foto' => 'nullable|mimes:png,jpg,jpeg|max:2048',
             //anggota
             'anggota' => 'required|array',
             'anggota.*.nama' => 'required|string|max:100',
-            'anggota.*.prodi' => 'nullable|string|max:100',
-            'anggota.*.jabatan' => 'nullable|string|max:100',
+            'anggota.*.nim' => 'nullable|string|max:100',
+            'anggota.*.prodi' => [
+                'nullable',
+                Rule::in(['R', 'A', 'AK', 'AB', 'AP'])
+            ],
+            'anggota.*.jabatan' => [
+                'nullable',
+                Rule::in(['DR', 'LT', 'KP', 'DS', 'MHS'])
+            ],
         ], [], [
             'anggota.0.nama' => 'nama'
 
@@ -1080,6 +1147,7 @@ class DosenController extends Controller
             anggotap3mModel::create([
                 'kpenel_model_id' => $penelitian->id,
                 'nama' => $anggota['nama'],
+                'nim' => $anggota['nim'],
                 'prodi' => $anggota['prodi'],
                 'jabatan' => $anggota['jabatan'],
             ]);
@@ -1115,12 +1183,6 @@ class DosenController extends Controller
             case 'ajupenel':
                 $data = ajuan_penelitianModel::with('anggotap3m')->findOrFail($id);
                 break;
-            // case 'kpenel':
-            //     $data = kum_penelitianModel::with('anggotap3m')->findOrFail($id);
-            //     break;
-            // case 'kpengab':
-            //     $data = kum_pengabdianModel::with('anggotap3m')->findOrFail($id);
-            //     break;
             default:
                 abort(404);
         }
@@ -1218,7 +1280,7 @@ class DosenController extends Controller
     //hapus proposal penelitian
     public function deletepropen($id)
     {
-        $data = p3mModel::with('anggotap3m')->find($id);
+        $data = ajuan_penelitianModel::with('anggotap3m')->find($id);
 
         if (!$data) {
             return redirect()->back()->with('error', 'Data tidak ditemukan.');

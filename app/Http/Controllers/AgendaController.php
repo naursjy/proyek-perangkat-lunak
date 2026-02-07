@@ -15,12 +15,19 @@ class AgendaController extends Controller
     {
         $pagetitle = 'Berita Kegiatan Terbaru';
         $user = Auth::user();
-        $data = AgendaModel::all();
-        if ($request->get('search')) {
-            $data = AgendaModel::where('title', 'like', '%' . $request->get('search') . '%');
+        // $data = AgendaModel::all();
+        // if ($request->get('search')) {
+        //     $data = AgendaModel::where('title', 'like', '%' . $request->get('search') . '%');
+        // }
+        $query = AgendaModel::query();
+        if ($request->filled('search')) {
+            $query->where('title', 'like', '%' . $request->search . '%')
+                ->orWhere('keterangan', 'like', '%' . $request->search . '%');
         }
 
-        return view('agenda.index', compact('pagetitle', 'data', 'request', 'user'));
+        $data = $query->orderBy('created_at', 'desc')->get();
+
+        return view('agenda.index', compact('pagetitle', 'data', 'user'));
     }
 
     public function create()
@@ -207,5 +214,14 @@ class AgendaController extends Controller
             $agenda->delete();
         }
         return redirect()->route('agenda.index')->with('success', 'Data berhasil dihapus!');
+    }
+
+    public function read(Request $request, $id)
+    {
+        $user = Auth::user();
+        $data = AgendaModel::find($id);
+        // $categories = M_categories::all();
+        $pagetitle = 'Detail Data Kegiatan';
+        return view('agenda.read', compact('data', 'pagetitle', 'user'));
     }
 }

@@ -183,8 +183,8 @@ class suratcontroller extends Controller
             $pdf->SetXY($start_x, $pdf->GetY(0));
             $pdf->Cell(10, 10, $no++, 1, 0, 'C');
             $pdf->Cell(53, 10, $row['nama'], 1);
-            $pdf->Cell(40, 10, $row['prodi'], 1);
-            $pdf->Cell(55, 10, $row['jabatan'], 1);
+            $pdf->Cell(40, 10, $row['nim'], 1);
+            $pdf->Cell(55, 10, $row['prodi'], 1);
             $pdf->Cell(20, 10, 'Anggota', 1, 1, 'C');
         }
 
@@ -245,7 +245,7 @@ class suratcontroller extends Controller
 
         $pdf = new Fpdi();
         $pdf->AddPage();
-        $templatePath = storage_path('app/public/STPG1.pdf');
+        $templatePath = storage_path('app/public/STPN1.pdf');
         $pdf->setSourceFile($templatePath);
         $tplIdx = $pdf->importPage(1);
         $pdf->useTemplate($tplIdx, 0, 0, 210);
@@ -285,8 +285,8 @@ class suratcontroller extends Controller
             $pdf->SetXY($start_x, $pdf->GetY(0));
             $pdf->Cell(10, 10, $no++, 1, 0, 'C');
             $pdf->Cell(53, 10, $row['nama'], 1);
-            $pdf->Cell(40, 10, $row['prodi'], 1);
-            $pdf->Cell(55, 10, $row['jabatan'], 1);
+            $pdf->Cell(40, 10, $row['nim'], 1);
+            $pdf->Cell(55, 10, $row['prodi'], 1);
             $pdf->Cell(20, 10, 'Anggota', 1, 1, 'C');
         }
 

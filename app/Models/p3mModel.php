@@ -29,6 +29,7 @@ class p3mModel extends Model
         'status',
         'tanggal_mulai',
         'tanggal_selesai',
+        'read_at',
     ];
 
     public function anggotap3m()

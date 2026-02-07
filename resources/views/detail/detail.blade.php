@@ -89,7 +89,7 @@
                                             <!-- <span class="fw-bold me-2">{{ $penelitians->ketua }}</span> -->
                                             <!-- <span class="text-muted">- {{ $penelitians->jabatan }}</span> -->
                                             <h6 class="d-inline me-1">{{ $penelitians->ketua }}</h6>
-                                            <small class="border-start ps-2 ms-2 text-muted me-1">{{ $penelitians->jabatan }}</small>
+                                            <small class="border-start ps-2 ms-2 text-muted me-1">{{ $penelitians->jabatan === 'DR' ? 'Direktur' : ($penelitians->jabatan === 'LT' ? 'Wakil Derektur' : ($penelitians->jabatan === 'KP' ? 'Ketua Program Studi' : ($penelitians->jabatan ==='DS' ? 'Dosen' : '-'))) }}</small>
                                             <small class="border-start ps-2 ms-2 text-muted">NIDN : {{ $penelitians->nidn }}</small>
 
                                         </span>
@@ -97,7 +97,7 @@
                                         <i class="fas fa-user-circle me-1"></i> Jenis Kelamin : {{ $penelitians->jeniskelamin === 'P' ? 'Perempuan' : ($penelitians->jeniskelamin === 'L' ? 'Laki-laki' : '-') }} <br>
                                         <i class="fas fa-map-marker-alt me-2"></i> Alamat : {{ $penelitians->alamat }} <br>
                                         <i class="fas fa-phone-alt me-1"></i> No.Telp : {{ $penelitians->telp }} <br>
-                                        <i class="fas fa-graduation-cap "></i> Program Studi : {{ $penelitians->prodi === 'R' ? 'RPL' : ($penelitians->prodi === 'A' ? 'ABI' :  ($penelitians->prodi === 'AK' ? 'AKP' : '-')) }}
+                                        <i class="fas fa-graduation-cap "></i> Program Studi : {{ $penelitians->prodi === 'R' ? 'RPL' : ($penelitians->prodi === 'A' ? 'ABI' :  ($penelitians->prodi === 'AK' ? 'AKP' : ($penelitians->prodi === 'AB' ? 'Agre Bisnis Digital' : ($penelitians->prodi === 'AP' ? 'Agre Perternakan' : '-')) )) }}
                                         <!-- <span class="username ">
                                             <i class="fas fa-circle"></i>
                                             <span class="d-inline me-1">Jenis Kelamin :</span>{{ $penelitians->jeniskelamin }}
@@ -150,10 +150,13 @@
                                         <i class="fas fa-user-circle text-secondary"></i>
                                         <span class="fw-semibold">{{ $anggota->nama }}</span>
                                         @if ($anggota->prodi)
-                                        <span class="border-start ps-2 ms-2 text-muted">{{ $anggota->prodi }}</span>
+                                        <span class="border-start ps-2 ms-2 text-muted">{{ $anggota->prodi === 'R' ? 'RPL' : ($anggota->prodi === 'A' ? 'ABI' :  ($anggota->prodi === 'AK' ? 'AKP' : ($anggota->prodi === 'AB' ? 'Bisnis Digital' : ($aggota->prodi === 'AP' ? 'Agre Perternakan' : '-')) )) }}</span>
+                                        @endif
+                                        @if ($anggota->nim)
+                                        <span class="border-start ps-2 ms-2 text-muted">{{ $anggota->nim }}</span>
                                         @endif
                                         @if ($anggota->jabatan)
-                                        <span class="border-start ps-2 ms-2 text-muted">{{ $anggota->jabatan }}</span>
+                                        <span class="border-start ps-2 ms-2 text-muted">{{ $anggota->jabatan === 'DR' ? 'Direktur' : ($anggota->jabatan === 'LT' ? 'Wakil Derektur' : ($anggota->jabatan === 'KP' ? 'Ketua Program Studi' : ($anggota->jabatan ==='DS' ? 'Dosen' : '-')))  }}</span>
                                         @endif
                                     </div>
                                 </div>

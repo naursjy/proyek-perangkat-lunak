@@ -6,10 +6,13 @@ use App\Models\m_dashboard;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\View;
+// use Spatie\FlareClient\View;
 
 class HomeController extends Controller
 {
@@ -28,6 +31,108 @@ class HomeController extends Controller
         $data = $data->get();
 
         return view('index', compact('data', 'request', 'pagetitle', 'user'));
+    }
+
+    public function boot()
+    {
+        View::composer('*', function ($view) {
+            dd('COMPOSER JALAN');
+            $notifikasi = collect();
+
+            // contoh pengajuan pengabdian
+            $pengajuanPengabdian = DB::table('ajupengabdian')
+                ->leftJoin('users', 'ajupengabdian.user_id', '=', 'users.id')
+                ->select(
+                    'ajupengabdian.id',
+                    'users.name as nama_dosen',
+                    'ajupengabdian.judul',
+                    'ajupengabdian.created_at',
+                    DB::raw("'pengajuan_pengabdian' as tipe")
+                )
+                ->latest()
+                ->limit(5)
+                ->get();
+
+            $laporanPengabdian = DB::table('kum_pengabdian_models')
+                ->leftJoin('users', 'kum_pengabdian_models.user_id', '=', 'users.id')
+                ->select(
+                    'kum_pengabdian_models.id',
+                    'users.name as nama_dosen',
+                    'kum_pengabdian_models.judul',
+                    'kum_pengabdian_models.created_at',
+                    DB::raw("'laporan_pengabdian' as tipe")
+                )
+                ->latest()
+                ->limit(5)
+                ->get();
+
+            $pengajuanPenelitian = DB::table('ajuan_penelitian')
+                ->leftJoin('users', 'ajuan_penelitian.user_id', '=', 'users.id')
+                // ->leftJoin('users', 'ajupengabdian.user_id', '=', 'users.id')
+                ->select(
+                    'ajuan_penelitian.id',
+                    'users.name as nama_dosen',
+                    'ajuan_penelitian.judul',
+                    'ajuan_penelitian.created_at',
+                    DB::raw("'pengajuan_penelitian' as tipe")
+                )
+                ->latest()
+                ->limit(5)
+                ->get();
+
+            // contoh laporan penelitian
+            $laporanPenelitian = DB::table('kum_penelitian_models')
+                ->leftJoin('users', 'kum_penelitian_models.user_id', '=', 'users.id')
+                ->select(
+                    'kum_penelitian_models.id',
+                    'users.name as nama_dosen',
+                    'kum_penelitian_models.judul',
+                    'kum_penelitian_models.created_at',
+                    DB::raw("'laporan_penelitian' as tipe")
+                )
+                ->latest()
+                ->limit(5)
+                ->get();
+
+            $notifikasi = $notifikasi
+                ->merge($pengajuanPengabdian)
+                ->merge($laporanPenelitian)
+                ->marge
+                ->sortByDesc('created_at')
+                ->take(5)
+                ->values();
+
+            // 🔥 INI INTINYA
+            $notifikasi = $notifikasi->map(function ($n) {
+
+                switch ($n->tipe) {
+
+                    case 'pengajuan_pengabdian':
+                        $n->link = route('plppm.lpengabdian');
+                        break;
+
+                    case 'pengajuan_penelitian':
+                        $n->link = route('plppm.lpeneleitian');
+                        break;
+
+                    case 'laporan_pengabdian':
+                        $n->link = route('plppm.kpengabdian');
+                        break;
+
+                    case 'laporan_penelitian':
+                        $n->link = route('plppm.kpenelitian');
+                        break;
+                }
+
+                return $n;
+            });
+
+            $view->with([
+                'notifikasi' => $notifikasi,
+                'totalNotif' => $notifikasi->count()
+            ]);
+            // dd('COMPOSER JALAN');
+        });
     }
 
     public function create()

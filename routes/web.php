@@ -17,6 +17,7 @@ use App\Http\Controllers\TentangController;
 use App\Http\Controllers\ViewlprnController;
 use App\Http\Controllers\ViewsController;
 use Illuminate\Routing\ViewController;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -187,6 +188,7 @@ Route::group(['middleware' => 'auth:sanctum', 'role:admin'], function () {
         Route::get('/edit/{id}', [AgendaController::class, 'edit'])->name('agenda.edit');
         Route::match(['get', 'PUT'], '/update/{id}', [AgendaController::class, 'update'])->name('agenda.update');
         Route::get('/delete/{id}', [AgendaController::class, 'delete'])->name('agenda.delete');
+        Route::get('/read/{id}', [AgendaController::class, 'read'])->name('agenda.read');
     });
 
     //data proposal dan laporan pengabdian dan penelitian kepada masyarakat
@@ -206,6 +208,61 @@ Route::group(['middleware' => 'auth:sanctum', 'role:admin'], function () {
 
     });
 });
+
+// Route::post('/notif/opened', function () {
+//     session(['notif_opened' => true]);
+//     return response()->noContent();
+// })->name('notif.opened');
+
+//notif router
+// Route::post('/notif/opened', function () {
+//     session(['notif_last_seen' => now()]);
+//     return response()->json(['ok' => true]);
+// })->name('notif.opened');
+
+// Route::post('notif/read_all', function () {
+//     DB::table('ajupengabdian')->whereNull('read_at')->update(['read_at' => now()]);
+//     DB::table('ajuan_penelitian_models')->whereNull('read_at')->update(['read_at' => now()]);
+//     DB::table('kum_pengabdian_models')->whereNull('read_at')->update(['read_at' => now()]);
+//     DB::table('kum_penelitian_models')->whereNull('read_at')->update(['read_at' => now()]);
+
+//     return response()->json(['ok' => true]);
+// })->name('notif.readAll');
+
+Route::get('/notif/read-table/{tipe}', function ($tipe) {
+    // dd('masuk udah', $tipe);
+    $map = [
+        'pengajuan_pengabdian' => [
+            'table' => 'ajupengabdian',
+            'redirect' => route('plppm.lpengabdian')
+        ],
+        'pengajuan_penelitian' => [
+            'table' => 'ajuan_penelitian_models',
+            'redirect' => route('plppm.lpeneleitian')
+        ],
+        'laporan_pengabdian' => [
+            'table' => 'kum_pengabdian_models',
+            'redirect' => route('plppm.kpengabdian')
+        ],
+        'laporan_penelitian' => [
+            'table' => 'kum_penelitian_models',
+            'redirect' => route('plppm.kpenelitian')
+        ],
+    ];
+    if (!isset($map[$tipe])) {
+        abort(404);
+    }
+
+    DB::table($map[$tipe]['table'])
+        ->whereNull('read_at')
+        ->update([
+            'read_at' => now()
+        ]);
+
+    // dd('row update', $affected);
+    return redirect($map[$tipe]['redirect']);
+})->name('notif.open');
+
 //수랏 투가스
 Route::get('/p3m/surat-tugas/download/{id}', [suratcontroller::class, 'downloadSuratTugas'])
     ->name('p3m.surat-tugas.download');
